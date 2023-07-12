@@ -16,14 +16,15 @@ return new class extends Migration
             $table->id();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('username',100)->unique();
+            $table->string('username', 100)->unique()->nullable();
+            $table->string('name', 100)->unique()->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('banned')->default(0);
             $table->string('ban_reason')->nullable();
-            $table->string('newpass',34)->nullable();
-            $table->string('newpass_key',32)->nullable();
+            $table->string('newpass', 34)->nullable();
+            $table->string('newpass_key', 32)->nullable();
             $table->date('newpass_time')->nullable();
             $table->string('last_ip')->default('0.0.0.0');
             $table->date('last_login')->nullable();
@@ -40,7 +41,6 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

@@ -42,6 +42,7 @@ class User extends Authenticatable implements HasMedia
 
     const CUSTOMER = 'customer';
     const SELLER = 'seller';
+    const Admin = 'admin';
 
     protected $hidden = [
         'password',
