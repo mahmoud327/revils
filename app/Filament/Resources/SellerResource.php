@@ -60,17 +60,7 @@ class SellerResource extends Resource
                 RichEditor::make('bio')
                     ->label('bio')
                     ->required(),
-
-
-
-
                 Hidden::make('account_type')->default(1),
-
-
-
-
-
-
 
                 Fieldset::make('businessProfile')
                     ->relationship('businessProfile')
