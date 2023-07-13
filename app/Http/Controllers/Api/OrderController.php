@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Exceptions\OrderNotAllowException;
+use App\Exceptions\StockAvailabilityException;
 use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Order\ChangeStatusOrderRequest;
@@ -35,9 +36,8 @@ class OrderController extends Controller
             }
             $this->orderRepository->create(data: $request);
             return responseSuccess([], __('lang.orders.added'));
-        } catch (UnexpectedException $ex) {
-            Log::error($ex->getMessage());
-            return responseError('Something went wrong!', 402);
+        } catch (StockAvailabilityException $ex) {
+            throw new StockAvailabilityException();
         }
     }
 
@@ -61,7 +61,6 @@ class OrderController extends Controller
         try {
             $order = $this->orderRepository->changeStatus(request: $request, id: $id,);
             return responseSuccess(new OrderResource($order));
-            
         } catch (UnexpectedException $ex) {
             Log::error($ex->getMessage());
             return responseError('Something went wrong!', 402);

@@ -100,7 +100,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
         Route::post('order/{id}/change-status', [OrderController::class, 'changeStatus']);
     });
     ####### cart  #########
-    Route::group(['prefix' => 'cart', 'middleware' => ['ChangeLanguage', 'auth:sanctum', 'role:seller']], function () {
+    Route::group(['prefix' => 'cart', 'middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
         Route::get('all', [CartController::class, 'getUserCartItems']);
         Route::post('add', [CartController::class, 'addToCart']);
         Route::post('remove', [CartController::class, 'removeFromCart']);
