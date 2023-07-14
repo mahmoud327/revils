@@ -19,6 +19,8 @@ use App\Repositories\Product\Attribute\AttributeRepositoryInterface;
 use App\Repositories\Product\Image\ImageRepository;
 use App\Repositories\Product\Image\ImageRepositoryInterface;
 
+use App\Repositories\SocialNetwork\Post\PostRepository;
+use App\Repositories\SocialNetwork\Post\PostRepositoryInterface;
 use App\Repositories\User\Image\ImageRepository as ImageUserRepository;
 use App\Repositories\User\Image\ImageRepositoryInterface as ImageUserRepositoryInterface;
 use App\Repositories\Product\ProductRepository;
@@ -60,7 +62,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AttributeRepositoryInterface::class, AttributeRepository::class);
         $this->app->bind(ImageRepositoryInterface::class, ImageRepository::class);
         $this->app->bind(UserRepositoryInterface::class,UserRepository::class);
-        
+
         $this->app->bind(ImageUserRepositoryInterface::class, ImageUserRepository::class);
         $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
         $this->app->bind(CountryRepositoryInterface::class, CountryRepository::class);
@@ -75,5 +77,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AddressRepositoryInterface::class, AddressRepository::class);
         $this->app->bind(PaymentRepositoryInterface::class, PaymentRepository::class);
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
+        $this->app->bind(PostRepositoryInterface::class, PostRepository::class);
     }
 }

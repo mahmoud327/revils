@@ -28,7 +28,6 @@ class OrderRequest extends FormRequest
         return [
             'user_address_id' => ['required', 'integer', 'exists:user_addresses,id'],
             'payment_id' => ['required', 'integer', 'exists:payments,id'],
-
         ];
     }
 

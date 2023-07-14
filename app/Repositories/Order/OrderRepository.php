@@ -40,6 +40,7 @@ class OrderRepository extends BaisRepository implements OrderRepositoryInterface
     public function create($data): Model
     {
         try {
+            //should check for stock before create new order
             $order = $this->model->create([
                 'user_address_id' => $data->user_address_id,
                 'payment_id' => $data->payment_id,
@@ -100,7 +101,6 @@ class OrderRepository extends BaisRepository implements OrderRepositoryInterface
             $order->amount -= $coupon->discount($order->amount);
             $order->coupon_id = $coupon->id;
             $order->save();
-
             CouponUser::create([
                 'user_id' => auth()->id(),
                 'coupon_id' => $coupon->id

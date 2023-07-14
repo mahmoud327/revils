@@ -35,8 +35,8 @@ class CartService
             ]);
             return $shoppingCart;
         } else {
-            try {
 
+            try {
                 $product = Product::findOrFail($request->product_id);
 
                 if (!$product->quantity) {
@@ -91,7 +91,6 @@ class CartService
         if ($userCart->product->quantity > $productQuantityInCart) {
             return true;
         }
-
         return false;
     }
 

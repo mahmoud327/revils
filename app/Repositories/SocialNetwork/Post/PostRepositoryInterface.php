@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\SocialNetwork;
+namespace App\Repositories\SocialNetwork\Post;
 
 
 

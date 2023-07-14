@@ -11,9 +11,9 @@ use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\Api\Seller\ProductController as ProductSellerController;
 use App\Http\Controllers\Api\Product\ProductImageController;
 use App\Http\Controllers\Api\Product\RateController;
-use App\Http\Controllers\Api\Core\AddressController;
 use App\Http\Controllers\Api\Core\PaymentController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\SocialNetwork\PostController;
 use App\Http\Controllers\Api\User\ImageController;
 use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Http\Request;
@@ -73,7 +73,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
 
     ####### end product #########
 
-    ####### copoun  #########);
+    ####### coupon  #########);
     Route::post('verify-coupon', [CouponController::class, 'verifyCoupon']);
     ####### end copoun #########
 
@@ -81,8 +81,8 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
     Route::get('payments', [PaymentController::class, 'index']);
     ####### end payments #########
 
-    ####### rates  #########);
-    Route::apiResource('products.rates', RateController::class);
+    ####### rates  #########
+    Route::apiResource('products.rates', RateController::class)->only('store');
     ####### end rates #########
 
     ####### profile #########
@@ -107,6 +107,15 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
         Route::post('update', [CartController::class, 'updateCart']);
     });
     ####### end cart #########
+
+    /*
+     *
+     * Social Network
+     *
+     * */
+    ####### posts  #########
+    Route::apiResource('posts', PostController::class);
+    ####### end posts #########
 });
 Route::get('/sms', function () {
 
