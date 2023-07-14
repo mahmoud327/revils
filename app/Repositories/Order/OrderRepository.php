@@ -5,6 +5,7 @@ namespace App\Repositories\Order;
 
 use App\Exceptions\CartEmptyException;
 use App\Exceptions\OrderNotAllowException;
+use App\Exceptions\StockAvailabilityException;
 use App\Exceptions\UnexpectedException;
 use App\Models\Core\Coupon;
 use App\Models\Core\CouponUser;
@@ -40,21 +41,26 @@ class OrderRepository extends BaisRepository implements OrderRepositoryInterface
     public function create($data): Model
     {
         try {
-            //should check for stock before create new order
+
+            DB::beginTransaction();
             $order = $this->model->create([
                 'user_address_id' => $data->user_address_id,
                 'payment_id' => $data->payment_id,
                 'user_id' => auth()->id(),
                 'billing_address' => $data->billing_address,
             ]);
+
             $this->calculateOrderDetails(auth()->user()->cartItems, $order);
+
             if (isset($data->coupon_code)) {
                 $this->calculateCouponDiscount($data->coupon_code, $order);
             }
-            auth()->user()->cartItems()->delete();
 
+            auth()->user()->cartItems()->delete();
+            DB::commit();
             return $this->model;
         } catch (\Exception $e) {
+            DB::rollback();
             throw  new UnexpectedException($e->getMessage());
         }
     }
@@ -74,7 +80,11 @@ class OrderRepository extends BaisRepository implements OrderRepositoryInterface
         foreach ($cartItems as $cartItem) {
             $product = Product::findorfail($cartItem->product_id);
 
+            if ($cartItem->quantity > $product->quantity) {
+                throw new StockAvailabilityException('Not available in the stock');
+            }
             if (isset($product)) {
+
                 $subtotal += $product->price * $cartItem['quantity'];
                 if ($product->quantity > 0) {
                     $product->quantity -= $cartItem->quantity;
@@ -101,6 +111,7 @@ class OrderRepository extends BaisRepository implements OrderRepositoryInterface
             $order->amount -= $coupon->discount($order->amount);
             $order->coupon_id = $coupon->id;
             $order->save();
+
             CouponUser::create([
                 'user_id' => auth()->id(),
                 'coupon_id' => $coupon->id
