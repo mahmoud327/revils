@@ -4,17 +4,17 @@ namespace App\Models\Core;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class BusinessType extends Model
 {
 
     use HasFactory;
-    use \Astrotomic\Translatable\Translatable;
+    use HasTranslations;
+
+    public $translatable = ['name', 'description'];
 
 
-    protected $translationForeignKey = "business_type_id";
-    public $translatedAttributes = ['name'];
-    public $translationModel = 'App\Models\Core\Translation\BusinessType';
 
 
     protected $guarded = [];

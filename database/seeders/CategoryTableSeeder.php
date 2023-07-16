@@ -122,19 +122,13 @@ class CategoryTableSeeder extends Seeder
         foreach ($categories as $categoryData) {
             $category = new Category();
             $category->color = $categoryData['color'];
+            $category->description = $categoryData['description'];
+            $category->name = $categoryData['name'];
 
-
-            $category->save();
-
-            foreach ($categoryData['name'] as $locale => $name) {
-                $category->translateOrNew($locale)->name = $name;
-            }
-            foreach ($categoryData['description'] as $locale => $description) {
-                $category->translateOrNew($locale)->description = $description;
-            }
 
 
             $category->save();
+
         }
     }
 }

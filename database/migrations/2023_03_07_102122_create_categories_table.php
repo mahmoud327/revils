@@ -14,19 +14,9 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('parent_id')->nullable();
-            $table->string('color',45);
-            $table->timestamps();
-        });
-
-
-        Schema::create('category_translations', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->nullable();
-            $table->text('description')->nullable();
-            $table->string('locale')->nullable();
-            $table->foreignId('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');;
-
+            $table->json('name')->nullable();
+            $table->json('description')->nullable();
+            $table->string('color',45)->nullable();
             $table->timestamps();
         });
 
@@ -40,6 +30,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('categories');
-        Schema::dropIfExists('category_translations');
     }
 };

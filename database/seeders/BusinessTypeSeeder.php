@@ -103,14 +103,11 @@ class BusinessTypeSeeder extends Seeder
         foreach ($businessTypes as $businessTypeData) {
             $businessType = new BusinessType();
             $businessType->parent_id = $businessTypeData['parent_id'];
-            $businessType->type = $businessTypeData['type'];
+            $businessType->name = $businessTypeData['name'];
 
 
             $businessType->save();
 
-            foreach ($businessTypeData['name'] as $locale => $name) {
-                $businessType->translateOrNew($locale)->name = $name;
-            }
 
 
             $businessType->save();

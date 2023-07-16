@@ -59,6 +59,13 @@
       0 => 'Filament\\Notifications\\NotificationsServiceProvider',
     ),
   ),
+  'filament/spatie-laravel-translatable-plugin' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Filament\\SpatieLaravelTranslatablePluginServiceProvider',
+    ),
+  ),
   'filament/support' => 
   array (
     'providers' => 
@@ -203,6 +210,13 @@
     'providers' => 
     array (
       0 => 'Spatie\\QueryBuilder\\QueryBuilderServiceProvider',
+    ),
+  ),
+  'spatie/laravel-translatable' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Translatable\\TranslatableServiceProvider',
     ),
   ),
 );
