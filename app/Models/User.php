@@ -72,13 +72,6 @@ class User extends Authenticatable implements HasMedia
         }
     }
 
-    protected function password(): Attribute
-    {
-        return Attribute::make(
-            set: fn (string $value) => bcrypt($value),
-        );
-    }
-
     /*
      * ----------------------------------------------------------------- *
      * --------------------------- Relations --------------------------- *
