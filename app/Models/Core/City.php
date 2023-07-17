@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class City extends Model
 {
     use HasFactory;
+    // protected $with='state';
 
     protected $guarded = ['id'];
 

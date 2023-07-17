@@ -16,39 +16,63 @@ class RolesAndPermissionsSeeder extends Seeder
      *
      * @return void
      */
-    public function run() {
+    public function run()
+    {
         // reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Misc
-        $miscPermission = Permission::create(['name' => 'N/A']);
 
         // USER MODEL
-        $userPermission1 = Permission::create(['name' => 'create: user']);
-        $userPermission2 = Permission::create(['name' => 'read: user']);
-        $userPermission3 = Permission::create(['name' => 'update: user']);
-        $userPermission4 = Permission::create(['name' => 'delete: user']);
+        $userPermission1 = Permission::create(['name' => 'view Business Types']);
+        $userPermission2 = Permission::create(['name' => 'create Business Type']);
+        $userPermission3 = Permission::create(['name' => 'update Business Type']);
+        $userPermission3 = Permission::create(['name' => 'delete Business Type']);
+
+        $userPermission1 = Permission::create(['name' => 'create category']);
+        $userPermission2 = Permission::create(['name' => 'view categories']);
+        $userPermission3 = Permission::create(['name' => 'delete category']);
+        $userPermission4 = Permission::create(['name' => 'update category']);
 
         // ROLE MODEL
-        $rolePermission1 = Permission::create(['name' => 'create: role']);
-        $rolePermission2 = Permission::create(['name' => 'read: role']);
-        $rolePermission3 = Permission::create(['name' => 'update: role']);
-        $rolePermission4 = Permission::create(['name' => 'delete: role']);
+        $rolePermission1 = Permission::create(['name' => 'create role']);
+        $rolePermission2 = Permission::create(['name' => 'view roles']);
+        $rolePermission3 = Permission::create(['name' => 'update role']);
+        $rolePermission4 = Permission::create(['name' => 'delete role']);
 
         // PERMISSION MODEL
-        $permission1 = Permission::create(['name' => 'create: permission']);
-        $permission2 = Permission::create(['name' => 'read: permission']);
-        $permission3 = Permission::create(['name' => 'update: permission']);
-        $permission4 = Permission::create(['name' => 'delete: permission']);
+        $permission1 = Permission::create(['name' => 'view permissions']);
+        $permission2 = Permission::create(['name' => 'create permission']);
+        $permission3 = Permission::create(['name' => 'update permission']);
+        $permission4 = Permission::create(['name' => 'delet permission']);
+
+
 
         // ADMINS
-        $adminPermission1 = Permission::create(['name' => 'read: admin']);
-        $adminPermission2 = Permission::create(['name' => 'update: admin']);
-
+        $adminPermission1 = Permission::create(['name' => 'view admins']);
+        $adminPermission2 = Permission::create(['name' => 'update admin']);
+        $adminPermission2 = Permission::create(['name' => 'create admin']);
+        $adminPermission2 = Permission::create(['name' => 'delete admin']);
         // CREATE ROLES
-        $userRole = Role::create(['name' => 'user'])->syncPermissions([
-            $miscPermission,
-        ]);
+
+        // ADMINS
+        $countryPermission1 = Permission::create(['name' => 'view countries']);
+        $countryPermission2 = Permission::create(['name' => 'update country']);
+        $countryPermission2 = Permission::create(['name' => 'create country']);
+        $countryPermission2 = Permission::create(['name' => 'delete country']);
+        // CREATE ROLES
+
+        // ADMINS
+        $statePermission1 = Permission::create(['name' => 'view states']);
+        $statePermission2 = Permission::create(['name' => 'update state']);
+        $statePermission2 = Permission::create(['name' => 'create state']);
+        $statePermission2 = Permission::create(['name' => 'delete state']);
+        // ADMINS
+        $cityPermission1 = Permission::create(['name' => 'view cities']);
+        $cityPermission2 = Permission::create(['name' => 'update city']);
+        $cityPermission2 = Permission::create(['name' => 'create city']);
+        $cityPermission2 = Permission::create(['name' => 'delete city']);
+        // CREATE ROLES
 
         $superAdminRole = Role::create(['name' => 'super-admin'])->syncPermissions([
             $userPermission1,
@@ -66,6 +90,13 @@ class RolesAndPermissionsSeeder extends Seeder
             $adminPermission1,
             $adminPermission2,
             $userPermission1,
+            $countryPermission1,
+            $countryPermission2,
+            $statePermission1,
+            $statePermission2,
+            $cityPermission1,
+            $cityPermission2
+
         ]);
         $adminRole = Role::create(['name' => 'admin'])->syncPermissions([
             $userPermission1,
@@ -126,15 +157,5 @@ class RolesAndPermissionsSeeder extends Seeder
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ])->assignRole($developerRole);
-
-        for ($i=1; $i < 50; $i++) {
-            User::create([
-                'name' => 'Test '.$i,
-                'email' => 'test'.$i.'@test.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('password'), // password
-                'remember_token' => Str::random(10),
-            ])->assignRole($userRole);
-        }
     }
 }

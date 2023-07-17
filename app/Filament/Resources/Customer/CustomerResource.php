@@ -44,8 +44,8 @@ class CustomerResource extends Resource
             ->schema([
                 //
                 Forms\Components\TextInput::make('username')->required()->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('first_name')->required()->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('last_name')->required()->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('first_name')->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('last_name')->unique(ignoreRecord: true),
 
                 Forms\Components\TextInput::make('email')->email()->required()->unique(ignoreRecord: true),
                 Forms\Components\TextInput::make('password')
@@ -66,24 +66,23 @@ class CustomerResource extends Resource
 
 
                 RichEditor::make('bio')
-                    ->label('bio')
-                    ->required(),
+                    ->label('bio'),
 
 
 
                 Fieldset::make('userProfile')
                     ->relationship('userProfile')
                     ->schema([
-                        Forms\Components\TextInput::make('website')->required(),
-                        Forms\Components\TextInput::make('phone')->required(),
-                        Forms\Components\TextInput::make('mobile')->required(),
-                        Forms\Components\TextInput::make('street1')->required(),
+                        Forms\Components\TextInput::make('website'),
+                        Forms\Components\TextInput::make('phone'),
+                        Forms\Components\TextInput::make('mobile'),
+                        Forms\Components\TextInput::make('street1'),
 
 
-                        Forms\Components\TextInput::make('street2')->required(),
+                        Forms\Components\TextInput::make('street2'),
 
                         Select::make('country_id')
-                            ->relationship('country', 'name')->required(),
+                            ->relationship('country', 'name'),
 
                         // Select::make('city_id')
                         //     ->relationship('city', 'name')->required(),
