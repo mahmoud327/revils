@@ -37,9 +37,10 @@ class CityResource extends Resource
                 //     ->label('state')
                 //     ->relationship('state', 'name')
 
-                    // Select::make('state_id')
-                    // ->relationship('state', 'name')
-                    // ->required(),
+                    Select::make('state_id')
+                    ->relationship('state', 'name')
+                    ->searchable()
+                    ->required(),
 
             ]);
     }
