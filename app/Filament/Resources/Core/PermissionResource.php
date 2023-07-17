@@ -25,7 +25,7 @@ class PermissionResource extends Resource
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make('name')->required()->unique(),
+                Forms\Components\TextInput::make('name')->required()->unique(ignoreRecord: true),
 
             ]);
     }

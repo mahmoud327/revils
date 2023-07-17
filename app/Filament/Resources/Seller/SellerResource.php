@@ -43,9 +43,9 @@ class SellerResource extends Resource
             ->schema([
                 //
                 Forms\Components\TextInput::make('username')->required()->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('first_name')->required()->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('last_name')->required()->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('email')->email()->required()->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('first_name')->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('last_name')->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('email')->email()->unique(ignoreRecord: true),
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->maxLength(255)
