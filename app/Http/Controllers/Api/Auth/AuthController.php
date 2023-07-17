@@ -6,6 +6,7 @@ use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\CustomerRegisterRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
+use App\Http\Resources\UserResource;
 use App\Repositories\Auth\AuthRepositoryInterface;
 use Auth;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class AuthController extends Controller
     public function customerRegister(CustomerRegisterRequest $request)
     {
         try {
-            $user = $this->authRepository->customerRegister($request);
+            return $user = $this->authRepository->customerRegister($request);
         } catch (UnexpectedException $ex) {
             return responseError($ex->getMessage(), $ex->getCode());
         }
@@ -105,7 +106,7 @@ class AuthController extends Controller
             if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
                 $authUser = Auth::user();
                 $success['token'] = $authUser->createToken('sanctumAuth')->plainTextToken;
-                $success['user'] = $authUser;
+                $success['user'] = new UserResource($authUser);
                 return responseSuccess($success);
             } else {
                 return responseError("Username or Password is wrong", 402);

@@ -29,7 +29,9 @@ class AuthRepository implements AuthRepositoryInterface
     {
         DB::beginTransaction();
         try {
+            $request->merge(['password'=>bcrypt($request->password)]);
             $user = $this->model::create($request->all());
+
             $user->assignRole($this->model::CUSTOMER);
             DB::commit();
         } catch (\Exception $e) {
@@ -44,6 +46,7 @@ class AuthRepository implements AuthRepositoryInterface
     {
         DB::beginTransaction();
         try {
+            $request->merge(['password'=>bcrypt($request->password)]);
             $user = $this->model::create($request->all());
 
             $user->assignRole($this->model::SELLER);

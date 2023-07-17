@@ -27,8 +27,9 @@ class PostRequest extends FormRequest
     {
 
         return [
-            'user_id' => ['required', 'integer', 'exists:users,id'],
             'content' => ['required','string','max:300'],
+            'tag_ids' => ['nullable','array'],
+            'tag_ids.*' => ['exists:users,id'],
         ];
     }
 

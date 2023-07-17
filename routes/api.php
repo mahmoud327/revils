@@ -64,8 +64,7 @@ Route::post('cities', [CountryController::class, 'getCities']);
 Route::apiResource('products', ProductController::class)->only(['index', 'show']);
 
 Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
-
-    Route::group(['prefix' => 'seller', 'middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
+    Route::group(['prefix' => 'seller', 'middleware' => ['ChangeLanguage', 'auth:sanctum','role:seller']], function () {
         Route::apiResource('products', ProductSellerController::class);
         Route::post('products/{product}/images/{image}/mark-featured', [ProductImageController::class, 'markFeatured']);
         Route::apiResource('products.images', ProductImageController::class)->except(['update', 'show']);
@@ -75,7 +74,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
 
     ####### coupon  #########);
     Route::post('verify-coupon', [CouponController::class, 'verifyCoupon']);
-    ####### end copoun #########
+    ####### end coupon #########
 
     ####### payments  #########);
     Route::get('payments', [PaymentController::class, 'index']);
@@ -90,15 +89,17 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
     Route::post('seller/update-profile', [UserController::class, 'sellerUpdateProfile']);
     Route::post('profile-info', [UserController::class, 'profileInfo']);
     Route::post('change-password', [UserController::class, 'changePassword']);
-
     Route::post('profile-image', [ImageController::class, 'profileImage']);
     Route::post('cover-image', [ImageController::class, 'coverImage']);
-
     ####### end profile #########
+
+    ####### order #########
     Route::group(['prefix' => 'user'], function () {
         Route::apiResource('orders', OrderController::class);
         Route::post('order/{id}/change-status', [OrderController::class, 'changeStatus']);
     });
+    ####### end order #########
+
     ####### cart  #########
     Route::group(['prefix' => 'cart', 'middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
         Route::get('all', [CartController::class, 'getUserCartItems']);
@@ -115,6 +116,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
      * */
     ####### posts  #########
     Route::apiResource('posts', PostController::class);
+    Route::post('user-posts/{user_id}', [PostController::class,'showUserPosts'])->middleware('role:customer');
     ####### end posts #########
 });
 Route::get('/sms', function () {

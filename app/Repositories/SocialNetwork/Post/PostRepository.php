@@ -6,9 +6,11 @@ namespace App\Repositories\SocialNetwork\Post;
 use App\Exceptions\UnexpectedException;
 use App\Models\SocialNetwork\Post;
 use App\Repositories\Base\BaisRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostRepository extends BaisRepository implements PostRepositoryInterface
 {
@@ -48,7 +50,7 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
         {
             try {
                 DB::beginTransaction();
-                $post = $this->findOrFail($id);
+                $post = $this->model::findOrFail($id);
                 $post->update([
                     'content' => $data->content,
                     'user_id' => Auth::id(),
@@ -62,11 +64,24 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
                 throw  new UnexpectedException($ex->getMessage());
             }
         }
-        $post = $this->findOrFail($id);
+        $post = $this->model::findOrFail($id);
         $post->update([
             'content' => $data->content,
             'user_id' => Auth::id(),
         ]);
         return $post;
+    }
+
+    public function showUserPosts(int $user_id, ?int $paginatePerPage, bool $paginate = true) : Collection | LengthAwarePaginator
+    {
+        if($paginate)
+        {
+            if($paginatePerPage)
+            {
+                return $this->model->latest()->paginate($paginatePerPage);
+            }
+            return $this->model->latest()->paginate();
+        }
+        return $this->model->latest()->get();
     }
 }
