@@ -6,9 +6,6 @@ use App\Filament\Resources\Customer\CustomerResource\Pages\CreateCustomer;
 use App\Filament\Resources\Customer\CustomerResource\Pages\EditCustomer;
 use App\Filament\Resources\Customer\CustomerResource\Pages\ListCustomers;
 use App\Filament\Resources\Customer\CustomerResource\Pages\ShowCostomer;
-use App\Filament\Resources\CustomerResource\Pages;
-
-use App\Filament\Resources\CustomerResource\RelationManagers;
 
 use App\Models\User as Customer;
 use Filament\Forms;
@@ -20,8 +17,6 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Hash;
 
