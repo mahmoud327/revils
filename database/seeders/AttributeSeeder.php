@@ -37,12 +37,12 @@ class AttributeSeeder extends Seeder
             ],
         ];
 
-        foreach ($attributes as $attribute => $translations) {
+        foreach ($attributes as $attribute) {
+
+
             $attributeModel = Attribute::create(['name' => $attribute]);
 
-            foreach ($translations as $locale => $name) {
-                $attributeModel->translateOrNew($locale)->name = $name;
-            }
+
 
             $attributeModel->save();
         }
@@ -300,14 +300,11 @@ class AttributeSeeder extends Seeder
         ];
 
         foreach ($attributeValues as $attribute => $values) {
-            $attributeModel = Attribute::whereTranslation('name', $attribute)->firstOrFail();
+            $attributeModel = Attribute::where('name->en', $attribute)->orwhere('name->ar', $attribute)->firstOrFail();
 
-            foreach ($values as $value => $translations) {
-                $valueModel = AttributeValue::create(['attribute_id' => $attributeModel->id]);
+            foreach ($values as $value) {
+                $valueModel = AttributeValue::create(['attribute_id' => $attributeModel->id, 'value' => $value]);
 
-                foreach ($translations as $locale => $value) {
-                    $valueModel->translateOrNew($locale)->value = $value;
-                }
 
                 $valueModel->save();
             }

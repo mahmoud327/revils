@@ -61,6 +61,18 @@ class RolesAndPermissionsSeeder extends Seeder
         $countryPermission2 = Permission::create(['name' => 'create country']);
         $countryPermission2 = Permission::create(['name' => 'delete country']);
         // CREATE ROLES
+        // ADMINS
+        $attributesPermission1 = Permission::create(['name' => 'view attributes']);
+        $attributesPermission2 = Permission::create(['name' => 'update attributes']);
+        $attributesPermission2 = Permission::create(['name' => 'create attributes']);
+        $attributesPermission2 = Permission::create(['name' => 'delete attributes']);
+        // CREATE ROLES
+        // ADMINS
+        $attributevaluesPermission1 = Permission::create(['name' => 'view attribute values']);
+        $attributevaluesPermission2 = Permission::create(['name' => 'update attribute values']);
+        $attributevaluesPermission2 = Permission::create(['name' => 'create attribute values']);
+        $attributevaluesPermission2 = Permission::create(['name' => 'delete attribute values']);
+        // CREATE ROLES
 
         // ADMINS
         $statePermission1 = Permission::create(['name' => 'view states']);
@@ -95,7 +107,12 @@ class RolesAndPermissionsSeeder extends Seeder
             $statePermission1,
             $statePermission2,
             $cityPermission1,
-            $cityPermission2
+            $cityPermission2,
+            $attributevaluesPermission2,
+            $attributevaluesPermission1,
+            $attributesPermission2,
+            $attributesPermission1
+
 
         ]);
         $adminRole = Role::create(['name' => 'admin'])->syncPermissions([

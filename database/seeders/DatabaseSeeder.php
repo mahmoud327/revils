@@ -19,12 +19,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        
+
         $this->call(RolesAndPermissionsSeeder::class);
 
-        $this->call(CountriesTableSeeder::class);
-        $this->call(StatesTableSeeder::class);
-        $this->call(CitiesTableSeeder::class);
+        // $this->call(CountriesTableSeeder::class);
+        // $this->call(StatesTableSeeder::class);
+        // $this->call(CitiesTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
         $this->call(AttributeSeeder::class);
         $this->call(BusinessTypeSeeder::class);

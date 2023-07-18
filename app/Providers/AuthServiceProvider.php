@@ -5,7 +5,10 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 use App\Models\UserCart;
 use App\Policies\CartPolicy;
+use App\Policies\SellerPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -17,6 +20,8 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         UserCart::class => CartPolicy::class,
+
+
     ];
 
     /**
@@ -24,6 +29,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->registerPolicies();
+
+        Gate::define('view-seller', [SellerPolicy::class, 'view']);
+
         //
     }
 }

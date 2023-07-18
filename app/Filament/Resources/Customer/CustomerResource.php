@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\Customer;
 
+use App\Exports\CustomerExport;
 use App\Filament\Resources\Customer\CustomerResource\Pages\CreateCustomer;
 use App\Filament\Resources\Customer\CustomerResource\Pages\EditCustomer;
 use App\Filament\Resources\Customer\CustomerResource\Pages\ListCustomers;
 use App\Filament\Resources\Customer\CustomerResource\Pages\ShowCostomer;
+use Illuminate\Database\Eloquent\Collection;
+
 
 use App\Models\User as Customer;
 use Filament\Forms;
@@ -118,9 +121,15 @@ class CustomerResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
 
+
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+
+                Tables\Actions\BulkAction::make('export')
+                    ->action(fn (Collection $records) => (new CustomerExport($records))->download('customers.xlsx'))
+                    ->label('Export Selected')
+                    ->icon('heroicon-o-document-download')
             ]);
     }
 
@@ -140,6 +149,5 @@ class CustomerResource extends Resource
             'show' => ShowCostomer::route('/show/{id}'),
 
         ];
-
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Core\StateResource\Pages;
+namespace App\Filament\Resources\Product\AttributeValueResource\Pages;
 
-use App\Filament\Resources\Core\StateResource;
+use App\Filament\Resources\Product\AttributeValueResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListStates extends ListRecords
+class ListAttributeValues extends ListRecords
 {
-    protected static string $resource = StateResource::class;
+    protected static string $resource = AttributeValueResource::class;
     use ListRecords\Concerns\Translatable;
 
 

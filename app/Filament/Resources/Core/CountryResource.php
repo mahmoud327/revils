@@ -7,6 +7,7 @@ use App\Filament\Resources\Core\CountryResource\RelationManagers;
 use App\Models\Core\Country;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
+use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -16,11 +17,16 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CountryResource extends Resource
 {
+    use Translatable;
     protected static ?string $model = Country::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-view-list';
+    protected static ?string $navigationIcon = 'heroicon-o-flag';
     protected static ?string $navigationGroup = 'regions';
 
+    public static function getTranslatableLocales(): array
+    {
+        return ['en', 'ar'];
+    }
 
     public static function form(Form $form): Form
     {

@@ -23,6 +23,8 @@ class ListCustomers extends ListRecords
 
     protected function getTableQuery(): Builder
     {
-        return User::where('account_type', 0);
+        return User::query()
+        ->latest()
+        ->where('account_type', 0);
     }
 }

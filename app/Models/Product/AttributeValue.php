@@ -4,23 +4,19 @@ namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class AttributeValue extends Model
 {
 
-    use \Astrotomic\Translatable\Translatable;
 
     use HasFactory;
-
-    protected $with = [
-        'translations',
-    ];
-
-    protected $translationForeignKey = "attribute_value_id";
-    public $translatedAttributes = ['value'];
-
-    public $translationModel = 'App\Models\Product\Translation\AttributeValue';
-
+    use HasTranslations;
+    public $translatable = ['value'];
 
     protected $guarded = [];
+
+    public function attribute(){
+        return $this->belongsTo(Attribute::class);
+    }
 }

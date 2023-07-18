@@ -11,11 +11,6 @@ class BusinessType extends Model
 
     use HasFactory;
     use HasTranslations;
-
     public $translatable = ['name', 'description'];
-
-
-
-
     protected $guarded = [];
 }

@@ -1,22 +1,26 @@
 <?php
 
-namespace App\Filament\Resources\Core\CityResource\Pages;
+namespace App\Filament\Resources\Product\AttributeValueResource\Pages;
 
-use App\Filament\Resources\Core\CityResource;
+use App\Filament\Resources\Product\AttributeValueResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditCity extends EditRecord
+class EditAttributeValue extends EditRecord
 {
-    protected static string $resource = CityResource::class;
+    protected static string $resource = AttributeValueResource::class;
+
+
     use EditRecord\Concerns\Translatable;
+
+
 
     protected function getActions(): array
     {
         return [
+            Actions\DeleteAction::make(),
             Actions\LocaleSwitcher::make(),
 
-            Actions\DeleteAction::make(),
         ];
     }
     protected function getRedirectUrl(): string

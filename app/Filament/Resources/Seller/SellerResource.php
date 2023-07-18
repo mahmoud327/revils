@@ -2,12 +2,12 @@
 
 namespace App\Filament\Resources\Seller;
 
-
+use App\Exports\SellerExport;
 use App\Filament\Resources\Core\SellerResource\Pages;
 
 use App\Filament\Resources\Core\SellerResource\RelationManagers;
-use App\Filament\Resources\Seller\SellerResource\Pages\CreateSeller ;
-use App\Filament\Resources\Seller\SellerResource\Pages\EditSeller ;
+use App\Filament\Resources\Seller\SellerResource\Pages\CreateSeller;
+use App\Filament\Resources\Seller\SellerResource\Pages\EditSeller;
 use App\Filament\Resources\Seller\SellerResource\Pages\ListSellers;
 use App\Filament\Resources\Seller\SellerResource\Pages\ShowSeller;
 use App\Models\Core\Translation\BusinessType as TranslationBusinessType;
@@ -27,6 +27,7 @@ use Filament\Pages\Page;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Collection;
 
 class SellerResource extends Resource
 {
@@ -114,6 +115,10 @@ class SellerResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\BulkAction::make('export')
+                    ->action(fn (Collection $records) => (new SellerExport($records))->download('sellers.xlsx'))
+                    ->label('Export Selected')
+                    ->icon('heroicon-o-document-download')
             ]);
     }
 
@@ -128,10 +133,11 @@ class SellerResource extends Resource
     {
         return [
             'index' => ListSellers::route('/'),
-            'create' =>CreateSeller::route('/create'),
-            'edit' =>EditSeller::route('/{record}/edit'),
+            'create' => CreateSeller::route('/create'),
+            'edit' => EditSeller::route('/{record}/edit'),
             'show' => ShowSeller::route('/show/{id}'),
 
         ];
     }
+
 }

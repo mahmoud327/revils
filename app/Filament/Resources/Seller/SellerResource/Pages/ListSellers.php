@@ -22,6 +22,8 @@ class ListSellers extends ListRecords
 
     protected function getTableQuery(): Builder
     {
-        return User::where('account_type', 1);
+        return User::query()
+            ->latest()
+            ->where('account_type', 1);
     }
 }
