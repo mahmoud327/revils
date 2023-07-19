@@ -54,7 +54,7 @@ class AttributeValuePolicy
     {
         //
         //
-        if ($user->hasPermissionTo('upate attribute values')) {
+        if ($user->hasPermissionTo('update attribute values')) {
             return true;
         }
         return false;
