@@ -64,7 +64,7 @@ Route::post('cities', [CountryController::class, 'getCities']);
 Route::apiResource('products', ProductController::class)->only(['index', 'show']);
 
 Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
-    Route::group(['prefix' => 'seller', 'middleware' => ['ChangeLanguage', 'auth:sanctum','role:seller']], function () {
+    Route::group(['prefix' => 'seller', 'middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
         Route::apiResource('products', ProductSellerController::class);
         Route::post('products/{product}/images/{image}/mark-featured', [ProductImageController::class, 'markFeatured']);
         Route::apiResource('products.images', ProductImageController::class)->except(['update', 'show']);

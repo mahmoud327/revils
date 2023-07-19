@@ -22,7 +22,7 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
         $products = $this->model->approved()
             ->with(['user', 'category', 'attributes'])
             ->latest();
-         $products->filter($products);
+        $products->filter($products);
         if ($paginate) {
             if ($paginatePerPage) {
                 return $products->paginate($paginatePerPage);
@@ -38,16 +38,17 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
             $data['user_id'] = auth()->id();
             $product = $this->model->create($data->except(['attribute_ids', 'name_ar', 'name_en', 'description_ar', 'description_en']));
             $translations = [
-                'en' => [
-                    'name' => $data->name_en,
-                    'description' => $data->name_en,
+                'name' => [
+                    'en' => $data->name_en,
+                    'ar' =>  $data->name_ar,
                 ],
-                'ar' => [
-                    'name' => $data->name_en,
-                    'description' => $data->name_en,
+                'description' => [
+                    'en' => $data->description_en,
+                    'ar' => $data->description_ar,
                 ],
             ];
             $product->updateTranslations($translations);
+
             $product->attributes()->attach($data->attribute_ids);
             DB::commit();
 
@@ -76,13 +77,13 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
                 ->firstorfail();
             $product->update($data->except(['attribute_ids', 'name_ar', 'name_en', 'description_ar', 'description_en']));
             $translations = [
-                'en' => [
-                    'name' => $data->name_en,
-                    'description' => $data->description_en,
+                'name' => [
+                    'en' => $data->name_en,
+                    'ar' =>  $data->name_ar,
                 ],
-                'ar' => [
-                    'name' => $data->name_ar,
-                    'description' => $data->description_ar,
+                'description' => [
+                    'en' => $data->description_en,
+                    'ar' => $data->description_ar,
                 ],
             ];
             $product->updateTranslations($translations);

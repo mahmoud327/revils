@@ -29,7 +29,6 @@ class ProductController extends Controller
             $this->productRepository->create(data: $request);
             return responseSuccess([], __('lang.products.added'));
         } catch (UnexpectedException $ex) {
-            return $ex->getMessage();
             Log::error($ex->getMessage());
             return responseError('Something went wrong!', 402);
         }

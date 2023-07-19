@@ -18,27 +18,24 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
-
-
-
+use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements HasMedia
 
 {
+    use HasTranslations;
     use HasFactory;
     use InteractsWithMedia;
     use CanBeRated;
     use CanBeViewed;
-    use Translatable;
+
+    public $with = ['media'];
 
 
-    protected $with = [
-        'translations',
-    ];
 
-    protected $translationForeignKey = "product_id";
-    public $translatedAttributes = ['name', 'description'];
-    public $translationModel = 'App\Models\Product\Translation\Product';
+    public $translatable = ['name', 'description'];
+
+
 
 
     protected $guarded = [];
@@ -135,6 +132,14 @@ class Product extends Model implements HasMedia
     {
         return $query->whereStatus(ProductStatusEnum::APPROVED_INT);
     }
+    public function scopeRejected($query)
+    {
+        return $query->whereStatus(ProductStatusEnum::REJECTED_INT);
+    }
+    public function scopePennding($query)
+    {
+        return $query->whereStatus(ProductStatusEnum::PENDING_INT);
+    }
 
     public function scopeCategory($query, $category_id)
     {
@@ -160,7 +165,7 @@ class Product extends Model implements HasMedia
         });
     }
 
-    public function scopeFilter($query,$products)
+    public function scopeFilter($query, $products)
     {
         return QueryBuilder::for($products)
             ->allowedSorts(['id', 'price'])
@@ -219,16 +224,17 @@ class Product extends Model implements HasMedia
     }
 
 
+
     public function updateTranslations(array $translations)
     {
 
-        foreach ($translations as $locale => $values) {
-            $this->translateOrNew($locale)->name = $values['name'];
-            $this->translateOrNew($locale)->description = $values['description'];
-        }
-
+        $this->name = $translations['name'];
+        $this->description = $translations['description'];
         $this->save();
     }
+
+
+
     /**
      * Register the media collections.
      *
