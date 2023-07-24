@@ -27,6 +27,10 @@ class CountryResource extends Resource
     {
         return ['en', 'ar'];
     }
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.countries');
+    }
 
     public static function form(Form $form): Form
     {
@@ -34,18 +38,18 @@ class CountryResource extends Resource
             ->schema([
                 //
                 Forms\Components\TextInput::make('name')
-                    ->label('Name')
+                    ->label(trans('dashboard.name'))
                     ->required()
                     ->unique(ignoreRecord: true),
 
 
                 Forms\Components\TextInput::make('code')
-                    ->label('code')
+                    ->label(trans('dashboard.code'))
                     ->required()
                     ->unique(ignoreRecord: true),
 
                 Forms\Components\TextInput::make('phonecode')
-                    ->label('phone code')
+                    ->label(trans('dashboard.phone code'))
                     ->required()
                     ->unique(ignoreRecord: true),
 
@@ -56,9 +60,17 @@ class CountryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('code')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('phonecode')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(trans('dashboard.name'))
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('code')
+                    ->label(trans('dashboard.code'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('phonecode')
+                    ->label(trans('dashboard.phone code'))
+
+                    ->sortable()->searchable(),
                 //
             ])
             ->filters([

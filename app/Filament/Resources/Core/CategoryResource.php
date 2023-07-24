@@ -29,9 +29,17 @@ class CategoryResource extends Resource
     protected static ?string $navigationGroup = 'products';
 
 
+
+
     public static function getTranslatableLocales(): array
     {
         return ['en', 'ar'];
+    }
+
+
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.categories.categories');
     }
 
 
@@ -42,15 +50,16 @@ class CategoryResource extends Resource
                 Card::make()->schema([
 
                     Forms\Components\TextInput::make('name')
-                        ->label('Name')
+                    ->label(trans('dashboard.name'))
                         ->required(),
+
 
 
                     RichEditor::make('description')
-                        ->label('description')
+                    ->label(trans('dashboard.description'))
                         ->required(),
                     ColorPicker::make('color')
-                        ->label('color')
+                    ->label(trans('dashboard.categories.color'))
                         ->required(),
 
                 ])
@@ -65,8 +74,14 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 //
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('color')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                ->label(trans('dashboard.name'))
+
+                ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('color')
+                ->label(trans('dashboard.categories.color'))
+
+                ->sortable()->searchable(),
 
             ])
             ->filters([

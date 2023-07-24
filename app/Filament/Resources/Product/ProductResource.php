@@ -42,6 +42,10 @@ class ProductResource extends Resource
         return ['en', 'ar'];
     }
 
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.products.products');
+    }
 
     public static function form(Form $form): Form
     {
@@ -54,59 +58,67 @@ class ProductResource extends Resource
                     Tabs::make('Heading')
                         ->tabs([
                             Tabs\Tab::make('Genral')
+                                ->label(trans('dashboard.products.genral'))
+
                                 ->schema([
                                     Forms\Components\TextInput::make('name')
-                                        ->label('Name')
+                                        ->label(trans('dashboard.name'))
                                         ->unique(ignoreRecord: true)
                                         ->required(),
 
 
                                     RichEditor::make('description')
-                                        ->label('description')
+                                        ->label(trans('dashboard.description'))
                                         ->required(),
-                                        Toggle::make('is_dangerous_shipping'),
+                                    Toggle::make('is_dangerous_shipping')
+                                        ->label(trans('dashboard.products.is dangerous shipping')),
 
 
                                     Select::make('category_id')
                                         ->relationship('category', 'name')
+                                        ->label(trans('dashboard.products.category'))
+
                                         ->required()
                                         ->preload(),
 
 
                                     Select::make('status')
                                         ->options([
-                                            0 => 'pennding',
-                                            1 =>  'approve',
-                                            2 => 'rejected',
+                                            0 => trans('dashboard.products.pending'),
+                                            1 => trans('dashboard.products.approved'),
+                                            2 =>trans('dashboard.products.rejected'),
                                         ])
+                                        ->label(trans('dashboard.products.status'))
                                         ->required(),
 
-                                        Toggle::make('is_handcrafted'),
-
+                                    Toggle::make('is_handcrafted')
+                                        ->label(trans('dashboard.products.is handcrafted')),
                                     Forms\Components\TextInput::make('quantity')
-                                        ->label('quantity')
+                                        ->label(trans('dashboard.products.quantity'))
                                         ->required()
                                         ->numeric(),
 
                                     Forms\Components\TextInput::make('weight')
-                                        ->label('weight')
+                                        ->label(trans('dashboard.products.weight'))
+
                                         ->numeric()
                                         ->required(),
-                                        Toggle::make('is_batteries_shipping'),
+                                    Toggle::make('is_batteries_shipping'),
 
 
                                     Forms\Components\TextInput::make('cash')
-                                        ->label('cash')
+                                        ->label(trans('dashboard.products.cash'))
                                         ->numeric(),
 
                                     Forms\Components\TextInput::make('unit')
-                                        ->label('unit')
+                                        ->label(trans('dashboard.products.unit'))
                                         ->required(),
 
-                                        Toggle::make('is_liquid_shipping'),
+                                    Toggle::make('is_liquid_shipping')
+                                        ->label(trans('dashboard.products.is liquid shipping')),
 
                                     Forms\Components\TextInput::make('item_type')
-                                        ->label('item_type')
+                                        ->label(trans('dashboard.products.item type'))
                                         ->required(),
 
 
@@ -114,15 +126,18 @@ class ProductResource extends Resource
                                 ]),
 
                             Tabs\Tab::make('price')
+                                ->label(trans('dashboard.products.price'))
+
+
                                 ->schema([
                                     Forms\Components\TextInput::make('price')
-                                        ->label('price')
+                                        ->label(trans('dashboard.products.price'))
                                         ->numeric()
                                         ->required(),
 
 
                                     Forms\Components\TextInput::make('old_price')
-                                        ->label('old price')
+                                        ->label(trans('dashboard.products.old price'))
                                         ->numeric()
 
                                         ->required(),
@@ -131,17 +146,21 @@ class ProductResource extends Resource
                                 ]),
 
                             Tabs\Tab::make('Medias')
+                                ->label(trans('dashboard.products.medias'))
+
                                 ->schema([
                                     // ...
                                     Repeater::make('media')
+
                                         ->schema([
                                             Forms\Components\FileUpload::make('media')
                                                 ->multiple()
+
                                                 ->enableDownload()
                                                 ->enableReordering()
                                                 ->enableOpen()
                                                 ->directory('uploads-products')
-                                                ->label('media')
+                                                ->label(trans('dashboard.products.medias'))
                                                 ->required()
                                             // ...
                                         ])
@@ -165,16 +184,46 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 //
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('price')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('weight')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('quantity')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('old_price')->sortable()->searchable(),
-                BooleanColumn::make('is_batteries_shipping')->sortable(),
-                BooleanColumn::make('is_batteries_shipping')->sortable()->searchable(),
-                BooleanColumn::make('is_dangerous_shipping')->sortable()->searchable(),
-                BooleanColumn::make('is_handcrafted')->sortable()->searchable(),
-                BooleanColumn::make('is_liquid_shipping')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(trans('dashboard.name'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('price')
+                    ->label(trans('dashboard.products.price'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('weight')
+                    ->label(trans('dashboard.products.weight'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('quantity')
+                    ->label(trans('dashboard.products.quantity'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('old_price')
+                    ->label(trans('dashboard.products.old price'))
+
+                    ->sortable()->searchable(),
+                BooleanColumn::make('is_batteries_shipping')
+                    ->label(trans('dashboard.products.is batteries shipping'))
+
+                    ->sortable(),
+                BooleanColumn::make('is_batteries_shipping')
+                    ->label(trans('dashboard.products.is batteries shipping'))
+
+                    ->sortable()->searchable(),
+                BooleanColumn::make('is_dangerous_shipping')
+                    ->label(trans('dashboard.products.is dangerous shipping'))
+
+                    ->sortable()->searchable(),
+                BooleanColumn::make('is_handcrafted')
+                    ->label(trans('dashboard.products.is handcrafted'))
+
+
+                    ->sortable()->searchable(),
+                BooleanColumn::make('is_liquid_shipping')
+                    ->label(trans('dashboard.products.is liquid shipping'))
+                    ->sortable()->searchable(),
 
 
             ])

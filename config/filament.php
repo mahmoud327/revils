@@ -87,9 +87,12 @@ return [
 
     'auth' => [
         'guard' => env('FILAMENT_AUTH_GUARD', 'web'),
+
         'pages' => [
             'login' => \Filament\Http\Livewire\Auth\Login::class,
         ],
+        \io3x1\FilamentTranslations\Http\Middleware\LanguageMiddleware::class
+
     ],
 
     /*

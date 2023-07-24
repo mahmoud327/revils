@@ -26,21 +26,27 @@ class RoleResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-s-cog';
     protected static ?string $navigationGroup = 'Role and permisions';
 
-
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.roles.roles');
+    }
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 //
                 Card::make()
-                ->schema([
-                    //
-                    TextInput::make('name')->unique(ignoreRecord: true),
-                    MultiSelect::make('permissions')
-                    ->relationship('permissions','name')
-                    ->preload()
+                    ->schema([
+                        //
+                        TextInput::make('name')->unique(ignoreRecord: true)
+                            ->label(trans('dashboard.name')),
+                        MultiSelect::make('permissions')
+                            ->label(trans('dashboard.permissions'))
 
-                ])
+                            ->relationship('permissions', 'name')
+                            ->preload()
+
+                    ])
 
             ]);
     }
@@ -52,8 +58,13 @@ class RoleResource extends Resource
                 //
                 //
                 Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime('d-M-Y')->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(trans('dashboard.name'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label(trans('dashboard.created at'))
+                    ->dateTime('d-M-Y')->sortable(),
             ])
             ->filters([
                 //

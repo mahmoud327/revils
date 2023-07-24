@@ -1,4 +1,11 @@
 <?php return array (
+  '3x1io/filament-translations' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'io3x1\\FilamentTranslations\\FilamentTranslationsProvider',
+    ),
+  ),
   'akaunting/laravel-money' => 
   array (
     'providers' => 
@@ -228,6 +235,13 @@
     'providers' => 
     array (
       0 => 'Spatie\\Translatable\\TranslatableServiceProvider',
+    ),
+  ),
+  'spatie/laravel-translation-loader' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\TranslationLoader\\TranslationServiceProvider',
     ),
   ),
 );
