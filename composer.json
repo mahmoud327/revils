@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "3x1io/filament-translations": "^1.2",
         "alkoumi/laravel-4jawaly-sms": "^1.5",
         "astrotomic/laravel-translatable": "^11.12",
         "filament/filament": "^2.0",

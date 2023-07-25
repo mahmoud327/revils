@@ -27,6 +27,10 @@ class StateResource extends Resource
     {
         return ['en', 'ar'];
     }
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.states');
+    }
 
 
     public static function form(Form $form): Form
@@ -36,11 +40,13 @@ class StateResource extends Resource
                 //
                 //
                 Forms\Components\TextInput::make('name')
-                    ->label('Name')
+                    ->label(trans('dashboard.name'))
                     ->required()
                     ->unique(ignoreRecord: true),
                 Select::make('country_id')
                     ->label('country')
+                    ->label(trans('dashboard.contries'))
+
                     ->relationship('country', 'name')
                     ->preload()
 
@@ -54,7 +60,9 @@ class StateResource extends Resource
         return $table
             ->columns([
                 //
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(trans('dashboard.name'))
+                    ->sortable()->searchable(),
 
             ])
             ->filters([

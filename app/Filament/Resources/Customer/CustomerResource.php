@@ -34,19 +34,37 @@ class CustomerResource extends Resource
     protected static ?string $navigationGroup = 'users';
 
     protected static ?string $label = 'customer';
-
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.customers.customers');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make('username')->required()->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('first_name')->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('last_name')->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('user name')->required()
+                    ->label(trans('dashboard.user name'))
 
-                Forms\Components\TextInput::make('email')->email()->required()->unique(ignoreRecord: true),
+                    ->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('first_name')
+                    ->label(trans('dashboard.first name'))
+
+                    ->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('last_name')
+                    ->label(trans('dashboard.last name'))
+
+                    ->unique(ignoreRecord: true),
+
+                Forms\Components\TextInput::make('email')->email()
+                    ->label(trans('dashboard.email'))
+
+                    ->required()->unique(ignoreRecord: true),
                 Forms\Components\TextInput::make('password')
+                    ->label(trans('dashboard.password'))
+
+
                     ->password()
                     ->maxLength(255)
                     ->dehydrateStateUsing(
@@ -59,27 +77,37 @@ class CustomerResource extends Resource
                         static fn (null|string $state): bool =>
                         filled($state),
                     )->label(
-                        static fn (Page $livewire): string => ($livewire instanceof EditCustomer) ? 'New Password' : 'Password'
+                        static fn (Page $livewire): string => ($livewire instanceof EditCustomer) ? trans('dashboard.new password') : trans('dashboard.password')
                     ),
 
 
                 RichEditor::make('bio')
-                    ->label('bio'),
+                    ->label(trans('dashboard.bio')),
+
 
 
 
                 Fieldset::make('userProfile')
                     ->relationship('userProfile')
                     ->schema([
-                        Forms\Components\TextInput::make('website'),
-                        Forms\Components\TextInput::make('phone'),
-                        Forms\Components\TextInput::make('mobile'),
-                        Forms\Components\TextInput::make('street1'),
+                        Forms\Components\TextInput::make('website')
+                            ->label(trans('dashboard.customers.userProfile.website')),
+                        Forms\Components\TextInput::make('phone')
+                            ->label(trans('dashboard.customers.userProfile.phone')),
+                        Forms\Components\TextInput::make('mobile')
 
 
-                        Forms\Components\TextInput::make('street2'),
+                            ->label(trans('dashboard.customers.userProfile.mobile')),
+                        Forms\Components\TextInput::make('street1')
+                            ->label(trans('dashboard.customers.userProfile.street1')),
+
+
+                        Forms\Components\TextInput::make('street2')
+                            ->label(trans('dashboard.customers.userProfile.street2')),
 
                         Select::make('country_id')
+                            ->label(trans('dashboard.customers.userProfile.country'))
+
                             ->relationship('country', 'name'),
 
                         // Select::make('city_id')
@@ -101,11 +129,27 @@ class CustomerResource extends Resource
         return $table
             ->columns([
 
-                Tables\Columns\TextColumn::make('username')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('first_name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('last_name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime('d-M-Y')->sortable(),
+                Tables\Columns\TextColumn::make('username')
+                    ->label(trans('dashboard.user name'))
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('first_name')
+                    ->sortable()
+                    ->label(trans('dashboard.first name'))
+
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('last_name')
+                    ->label(trans('dashboard.last name'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label(trans('dashboard.email'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label(trans('dashboard.created at'))
+
+                    ->dateTime('d-M-Y')->sortable(),
 
 
 

@@ -136,7 +136,7 @@ class Product extends Model implements HasMedia
     {
         return $query->whereStatus(ProductStatusEnum::REJECTED_INT);
     }
-    public function scopePennding($query)
+    public function scopePending($query)
     {
         return $query->whereStatus(ProductStatusEnum::PENDING_INT);
     }

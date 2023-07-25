@@ -28,18 +28,37 @@ class UserResource extends Resource
     protected static ?string $navigationGroup = 'Admin';
     protected static ?string $model = User::class;
     protected static ?string $label = 'admin';
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.admins');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make('username')->required()->unique(),
-                Forms\Components\TextInput::make('first_name')->required()->unique(),
-                Forms\Components\TextInput::make('last_name')->required()->unique(),
-                Forms\Components\TextInput::make('email')->email()->required()->unique(),
-                Forms\Components\TextInput::make('email')->email()->required()->unique(),
+                Forms\Components\TextInput::make('user name')->required()
+                    ->label(trans('dashboard.user name'))
+
+                    ->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('first_name')
+                    ->label(trans('dashboard.first name'))
+
+                    ->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('last_name')
+                    ->label(trans('dashboard.last name'))
+
+                    ->unique(ignoreRecord: true),
+
+                Forms\Components\TextInput::make('email')->email()
+                    ->label(trans('dashboard.email'))
+
+                    ->required()->unique(ignoreRecord: true),
                 Forms\Components\TextInput::make('password')
+                    ->label(trans('dashboard.password'))
+
+
                     ->password()
                     ->maxLength(255)
                     ->dehydrateStateUsing(
@@ -52,12 +71,15 @@ class UserResource extends Resource
                         static fn (null|string $state): bool =>
                         filled($state),
                     )->label(
-                        static fn (Page $livewire): string => ($livewire instanceof EditUser) ? 'New Password' : 'Password'
+                        static fn (Page $livewire): string => ($livewire instanceof EditUser) ? trans('dashboard.new password') : trans('dashboard.password')
                     ),
+
                 CheckboxList::make('roles')
                     ->relationship('roles', 'name')
                     ->columns(2)
-                    ->helperText('choose only roles')
+                    ->label(trans('dashboard.roles.roles'))
+
+                    ->helperText(trans('dashboard.roles.choose any roles'))
                     ->required()
             ]);
     }
@@ -66,11 +88,31 @@ class UserResource extends Resource
         return $table
             ->columns([
                 //
-                Tables\Columns\TextColumn::make('username')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('first_name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('last_name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime('d-M-Y')->sortable(),
+                Tables\Columns\TextColumn::make('username')
+                    ->label(trans('dashboard.user name'))
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('first_name')
+                    ->sortable()
+                    ->label(trans('dashboard.first name'))
+
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('last_name')
+                    ->label(trans('dashboard.last name'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label(trans('dashboard.email'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label(trans('dashboard.created at'))
+
+                    ->dateTime('d-M-Y')->sortable(),
+
+
+
+
             ])
             ->filters([
                 //

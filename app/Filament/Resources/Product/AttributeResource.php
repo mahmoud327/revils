@@ -27,16 +27,18 @@ class AttributeResource extends Resource
         return ['en', 'ar'];
     }
 
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.products.attributes');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
-
                 Forms\Components\TextInput::make('name')
-                    ->label('Name')
-                    ->required(),
+                ->label(trans('dashboard.name'))
+                ->required(),
 
             ]);
     }
@@ -47,7 +49,10 @@ class AttributeResource extends Resource
             ->columns([
                 //
 
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                ->label(trans('dashboard.name'))
+
+                ->sortable()->searchable(),
 
             ])
             ->filters([

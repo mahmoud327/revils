@@ -20,12 +20,21 @@ class PermissionResource extends Resource
     protected static ?string $navigationGroup = 'Role and permisions';
 
 
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.permissions');
+    }
+
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make('name')->required()->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('name')
+                ->label(trans('dashboard.name'))
+
+                ->required()->unique(ignoreRecord: true),
 
             ]);
     }
@@ -36,8 +45,14 @@ class PermissionResource extends Resource
             ->columns([
                 //
                 Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime('d-M-Y')->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                ->label(trans('dashboard.name'))
+
+                ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                ->label(trans('dashboard.created at'))
+
+                ->dateTime('d-M-Y')->sortable(),
 
             ])
             ->filters([

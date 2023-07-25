@@ -30,6 +30,12 @@ class CityResource extends Resource
         return ['en', 'ar'];
     }
 
+
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.cities');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -37,6 +43,8 @@ class CityResource extends Resource
                 //
                 Forms\Components\TextInput::make('name')
                     ->label('Name')
+                    ->label(trans('dashboard.name'))
+
                     ->required()
                     ->unique(ignoreRecord: true),
 
@@ -46,6 +54,8 @@ class CityResource extends Resource
 
                 Select::make('state_id')
                     ->relationship('state', 'name')
+                    ->label(trans('dashboard.states'))
+
                     ->searchable()
                     ->required(),
 
@@ -57,7 +67,10 @@ class CityResource extends Resource
         return $table
             ->columns([
                 //
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                ->label(trans('dashboard.name'))
+
+                ->sortable()->searchable(),
 
             ])
             ->filters([

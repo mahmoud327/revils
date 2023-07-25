@@ -8,7 +8,12 @@ use Filament\Widgets\BarChartWidget;
 
 class UsersChart extends BarChartWidget
 {
-    protected static ?string $heading = 'customers and sellers';
+    protected function getHeading(): string
+    {
+        return trans('dashboard.sellers and customers');
+    }
+
+
 
     protected function getData(): array {
         $users = User::select('created_at')->get()->groupBy(function($users) {
@@ -21,7 +26,7 @@ class UsersChart extends BarChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'customers and sellers Joined',
+                    'label' =>trans('dashboard.sellers and customers'),
                     'data' => $quantities,
                     'backgroundColor' => [
                         'rgba(255, 99, 132, 0.2)',

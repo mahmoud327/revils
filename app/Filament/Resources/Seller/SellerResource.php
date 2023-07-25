@@ -37,18 +37,34 @@ class SellerResource extends Resource
     protected static ?string $navigationGroup = 'users';
     protected static ?string $slug = 'sellers';
     protected static ?string $label = 'sellers';
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.sellers.sellers');
+    }
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make('username')->required()->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('first_name')->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('last_name')->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('email')->email()->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('username')
+                    ->required()->unique(ignoreRecord: true)
+                    ->label(trans('dashboard.user name')),
+                Forms\Components\TextInput::make('first_name')
+                    ->label(trans('dashboard.first name'))
+
+                    ->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('last_name')->unique(ignoreRecord: true)
+                    ->label(trans('dashboard.last name')),
+                Forms\Components\TextInput::make('email')->email()
+                    ->label(trans('dashboard.email'))
+
+                    ->unique(ignoreRecord: true),
                 Forms\Components\TextInput::make('password')
                     ->password()
+                    ->label(trans('dashboard.password'))
+
                     ->maxLength(255)
                     ->dehydrateStateUsing(
                         static fn (null|string $state): null|string =>
@@ -60,29 +76,39 @@ class SellerResource extends Resource
                         static fn (null|string $state): bool =>
                         filled($state),
                     )->label(
-                        static fn (Page $livewire): string => ($livewire instanceof EditSeller) ? 'New Password' : 'Password'
+                        static fn (Page $livewire): string => ($livewire instanceof EditSeller) ? trans('dashboard.new password') : trans('dashboard.password')
                     ),
                 RichEditor::make('bio')
-                    ->label('bio')
+                    ->label(trans('dashboard.bio'))
                     ->required(),
                 Hidden::make('account_type')->default(1),
 
                 Fieldset::make('businessProfile')
+
                     ->relationship('businessProfile')
                     ->schema([
-                        Forms\Components\TextInput::make('website')->required(),
-                        Forms\Components\TextInput::make('phone')->required(),
-                        Forms\Components\TextInput::make('mobile')->required(),
-                        Forms\Components\TextInput::make('street')->required(),
+                        Forms\Components\TextInput::make('website')
+                            ->label(trans('dashboard.sellers.businessProfile.website'))
+                            ->required(),
+                        Forms\Components\TextInput::make('phone')
+                            ->label(trans('dashboard.sellers.businessProfile.phone'))
+                            ->required(),
+                        Forms\Components\TextInput::make('mobile')
+                            ->label(trans('dashboard.sellers.businessProfile.mobile'))
+                            ->required(),
+                        Forms\Components\TextInput::make('street')
+                            ->label(trans('dashboard.sellers.businessProfile.street1'))
+                            ->required(),
 
 
-                        Forms\Components\TextInput::make('street2')->required(),
+                        Forms\Components\TextInput::make('street2')
+                            ->label(trans('dashboard.sellers.businessProfile.street2'))
+                            ->required(),
 
                         Select::make('business_type_id')
-                            ->label('business')
+                            ->label(trans('dashboard.sellers.businessProfile.business'))
                             ->options(function () {
-                                $translations = TranslationBusinessType::where('locale', app()->getLocale())->get();
-                                return $translations->pluck('name', 'business_type_id')->toArray();
+                                return BusinessType::pluck('name', 'id')->toArray();
                             })->required(),
 
 
@@ -95,11 +121,31 @@ class SellerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('username')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('first_name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('last_name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime('d-M-Y')->sortable(),
+                Tables\Columns\TextColumn::make('username')
+                    ->label(trans('dashboard.user name'))
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('first_name')
+                    ->sortable()
+                    ->label(trans('dashboard.first name'))
+
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('last_name')
+                    ->label(trans('dashboard.last name'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label(trans('dashboard.email'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label(trans('dashboard.created at'))
+
+                    ->dateTime('d-M-Y')->sortable(),
+
+
+
+
 
                 //
             ])
@@ -139,5 +185,4 @@ class SellerResource extends Resource
 
         ];
     }
-
 }

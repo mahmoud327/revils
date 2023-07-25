@@ -31,15 +31,22 @@ class AttributeValueResource extends Resource
     }
 
 
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.products.attributes values');
+    }
+
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 //
                 Forms\Components\TextInput::make('value')
-                    ->label('value')
+                    ->label(trans('dashboard.name'))
                     ->required(),
                 Select::make('attribute_id')
+                    ->label(trans('dashboard.products.attributes'))
                     ->relationship('attribute', 'name')
                     ->required()
                     ->preload()
@@ -51,7 +58,10 @@ class AttributeValueResource extends Resource
         return $table
             ->columns([
                 //
-                Tables\Columns\TextColumn::make('value')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('value')
+                    ->label(trans('dashboard.name'))
+
+                    ->sortable()->searchable(),
 
             ])
             ->filters([
@@ -70,7 +80,7 @@ class AttributeValueResource extends Resource
     {
         return [
             //
-          AttributesRelationManager::class,
+            AttributesRelationManager::class,
         ];
     }
 

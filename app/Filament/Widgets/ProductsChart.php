@@ -8,7 +8,11 @@ use Filament\Widgets\BarChartWidget;
 
 class ProductsChart extends BarChartWidget
 {
-    protected static ?string $heading = 'products';
+    protected function getHeading(): string
+    {
+        return trans('dashboard.products.products');
+    }
+
 
     protected function getData(): array {
         $products = Product::select('created_at')->get()->groupBy(function($products) {
@@ -21,7 +25,7 @@ class ProductsChart extends BarChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'products Joined',
+                    'label' =>trans('dashboard.products.products'),
                     'data' => $quantities,
                     'backgroundColor' => [
                         'rgba(255, 99, 132, 0.2)',
