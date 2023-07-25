@@ -3,6 +3,7 @@
 return [
     'name' => 'name',
     'created at' => 'created at',
+    'activities' => 'activities',
     'permissions' => 'permissions',
     'sellers and customers' => 'sellers and customers',
 

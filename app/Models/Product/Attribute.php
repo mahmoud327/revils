@@ -4,6 +4,8 @@ namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Translatable\HasTranslations;
 
 class Attribute extends Model
@@ -11,6 +13,7 @@ class Attribute extends Model
 
     use HasTranslations;
     use HasFactory;
+    use LogsActivity;
 
     protected $guarded = [];
     public $translatable = ['name'];
@@ -22,5 +25,12 @@ class Attribute extends Model
     public function attributeValues()
     {
         return $this->hasMany(AttributeValue::class, 'attribute_id');
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logAll();
+
     }
 }

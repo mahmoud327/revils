@@ -25,12 +25,15 @@ use Multicaret\Acquaintances\Traits\CanLike;
 use Multicaret\Acquaintances\Traits\CanRate;
 use Multicaret\Acquaintances\Traits\CanView;
 use Multicaret\Acquaintances\Traits\Friendable;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements HasMedia
 {
+    use LogsActivity;
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
     use Friendable;
     use CanLike;
@@ -134,4 +137,12 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsToMany(Post::class,'tags','post_id','user_id','id','id');
     }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logAll();
+
+    }
 }
+

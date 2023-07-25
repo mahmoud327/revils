@@ -176,6 +176,13 @@
       0 => 'OutheBox\\BladeFlags\\BladeFlagsServiceProvider',
     ),
   ),
+  'pxlrbt/filament-activity-log' => 
+  array (
+    'providers' => 
+    array (
+      0 => '\\pxlrbt\\FilamentActivityLog\\FilamentActivityLogServiceProvider',
+    ),
+  ),
   'ryangjchandler/blade-capture-directive' => 
   array (
     'providers' => 
@@ -196,6 +203,13 @@
     'aliases' => 
     array (
       'Comments' => 'RyanChandler\\Comments\\Facades\\Comments',
+    ),
+  ),
+  'spatie/laravel-activitylog' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
     ),
   ),
   'spatie/laravel-ignition' => 

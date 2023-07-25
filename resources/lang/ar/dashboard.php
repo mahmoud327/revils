@@ -6,6 +6,8 @@ return [
     'permissions' => 'اذونات',
     'sellers and customers' => 'العملاء والبائعين',
     'admins' => 'المشرفين',
+    'activities' => 'سجل النشاطات',
+
 
     'roles' => [
         'roles' => 'الصلاحيات',

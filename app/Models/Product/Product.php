@@ -14,6 +14,8 @@ use App\Http\Resources\Core\MediaCenterResource;
 use App\Models\Core\Category;
 use Multicaret\Acquaintances\Traits\CanBeRated;
 use Multicaret\Acquaintances\Traits\CanBeViewed;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -24,6 +26,7 @@ class Product extends Model implements HasMedia
 
 {
     use HasTranslations;
+    use LogsActivity;
     use HasFactory;
     use InteractsWithMedia;
     use CanBeRated;
@@ -148,8 +151,10 @@ class Product extends Model implements HasMedia
 
     public function scopeSearch($query, $search)
     {
-        return $query->whereTranslationLike('name', '%' . $search . '%')
-            ->orwhereTranslationLike('description', '%' . $search . '%');
+        return $query->where('name->ar','like', '%' . $search . '%')
+            ->orwhere('name->en', 'like', '%' . $search . '%')
+            ->orwhere('description->ar', 'like', '%' . $search . '%')
+            ->orwhere('description->en', 'like', '%' . $search . '%');
     }
 
     public function scopeHandcrafted($query, $handcrafted)
@@ -243,5 +248,10 @@ class Product extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('images');
+    }
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll();
     }
 }

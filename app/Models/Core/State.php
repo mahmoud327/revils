@@ -7,12 +7,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Translatable\HasTranslations;
 
 class State extends Model
 {
     use HasFactory;
     use HasTranslations;
+    use LogsActivity;
+
 
     protected $guarded = ['id'];
     public $translatable = ['name'];
@@ -29,6 +33,12 @@ class State extends Model
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class,'country_id');
+    }
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logAll();
+
     }
 
 }

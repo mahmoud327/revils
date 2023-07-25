@@ -38,7 +38,7 @@ class UserResource extends Resource
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make('user name')->required()
+                Forms\Components\TextInput::make('username')->required()
                     ->label(trans('dashboard.user name'))
 
                     ->unique(ignoreRecord: true),
@@ -154,6 +154,7 @@ class UserResource extends Resource
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
+            'activities' => Pages\ListUserActivites::route('/{record}/activities'),
         ];
     }
 }

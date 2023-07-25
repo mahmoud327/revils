@@ -44,7 +44,7 @@ class CustomerResource extends Resource
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make('user name')->required()
+                Forms\Components\TextInput::make('username')->required()
                     ->label(trans('dashboard.user name'))
 
                     ->unique(ignoreRecord: true),

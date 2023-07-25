@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Translatable\HasTranslations;
 
 class City extends Model
@@ -14,6 +16,8 @@ class City extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    use LogsActivity;
+
     use HasTranslations;
     public $translatable = ['name'];
 
@@ -26,5 +30,12 @@ class City extends Model
     {
         return $this->belongsTo(City::class,'state_id');
     }
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logAll();
+
+    }
+
 
 }
