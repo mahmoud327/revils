@@ -14,7 +14,7 @@ class Post extends Model
 {
     use CanBeLiked, HasComments;
 
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     public function user() : BelongsTo
     {

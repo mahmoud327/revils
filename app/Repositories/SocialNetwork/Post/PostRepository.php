@@ -19,6 +19,20 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
         parent::__construct($model);
     }
 
+    public function all(?int $paginatePerPage,bool $paginate = true) : Collection | LengthAwarePaginator
+    {
+        if($paginate)
+        {
+            if($paginatePerPage)
+            {
+                return $this->model->with(['user','tags'])->latest()->paginate($paginatePerPage);
+            }
+            return $this->model->with(['user','tags'])->latest()->paginate();
+        }
+
+        return $this->model->with(['user','tags'])->latest()->get();
+    }
+
     public function create($data) : Model
     {
             if($data->has('tag_ids'))

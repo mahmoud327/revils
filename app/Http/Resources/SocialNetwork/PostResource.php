@@ -18,8 +18,8 @@ class PostResource extends JsonResource
         return
         [
             "id" => $this->id,
-            "user" => new UserResource($this->whenLoaded('user')),
             "content" => $this->content,
+            "user" => new UserResource($this->whenLoaded('user')),
             "tags" => UserResource::collection($this->whenLoaded('tags')),
         ];
     }

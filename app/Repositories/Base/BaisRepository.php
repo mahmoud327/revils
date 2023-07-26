@@ -10,7 +10,7 @@ class BaisRepository implements BaseRepositoryInterface
 {
     public function __construct(public Model $model){}
 
-    public function all(?int $paginatePerPage,bool $paginate = true):Collection | LengthAwarePaginator
+    public function all(?int $paginatePerPage,bool $paginate = true) : Collection | LengthAwarePaginator
     {
         if($paginate)
         {
