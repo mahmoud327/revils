@@ -24,6 +24,17 @@
       'JawalySms' => 'Alkoumi\\Laravel4jawalySms\\Facades\\JawalySms',
     ),
   ),
+  'archilex/filament-stacked-image-column' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Archilex\\StackedImageColumn\\StackedImageColumnServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'StackedImageColumn' => 'Archilex\\StackedImageColumn\\Facades\\StackedImageColumn',
+    ),
+  ),
   'astrotomic/laravel-translatable' => 
   array (
     'providers' => 
