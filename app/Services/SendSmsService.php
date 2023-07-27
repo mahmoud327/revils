@@ -41,7 +41,7 @@ class SendSmsService
 
     public function verifyOtp()
     {
-        $otp = UserOtp::whereOtp($this->otp)->firstOrFail();
+        $otp = UserOtp::whereOtp($this->otp)->first();
         if(!$otp)
         {
             return false;
