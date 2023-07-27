@@ -15,7 +15,7 @@ class SendSmsService
         $user_otp = new UserOtp();
         $user_otp->mobile  = $mobile;
         $user_otp->otp  = $otp;
-        $user_otp->save()
+        $user_otp->save();
     }
 
     public function message($otp)
