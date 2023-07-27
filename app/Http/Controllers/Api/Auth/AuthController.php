@@ -22,7 +22,7 @@ class AuthController extends Controller
     {
     }
 
-    public function customerRegister(CustomerRegisterRequest $request)
+    public function customerRegister(SellerRegisterRequest $request)
     {
         try {
             $user =  $this->authRepository->customerRegister($request);
