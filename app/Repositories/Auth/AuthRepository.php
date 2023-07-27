@@ -27,7 +27,7 @@ class AuthRepository implements AuthRepositoryInterface
         // TODO: Implement login() method.
     }
 
-    public function customerRegister(SellerRegisterRequest $request)
+    public function customerRegister(CustomerRegisterRequest $request)
     {
         DB::beginTransaction();
         try {

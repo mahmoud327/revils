@@ -10,6 +10,6 @@ use App\Http\Requests\Api\Auth\SellerRegisterRequest;
 interface AuthRepositoryInterface
 {
     public function login(LoginRequest $request);
-    public function customerRegister(SellerRegisterRequest $request);
+    public function customerRegister(CustomerRegisterRequest $request);
     public function sellerRegister(SellerRegisterRequest $request);
 }
