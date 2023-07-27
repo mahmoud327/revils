@@ -12,7 +12,6 @@ use App\Models\Product\Product;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
-
 use Filament\Forms;
 
 use Filament\Forms\Components\Card;
@@ -155,7 +154,7 @@ class ProductResource extends Resource
                                 ->label(trans('dashboard.products.attributes'))
                                 ->schema([
                                     Repeater::make('attributes')
-                                        ->relationship()
+                                    ->relationship('attributeValues')
                                         ->label(trans('dashboard.products.attributes'))
                                         ->schema([
                                             Select::make('attribute_id')

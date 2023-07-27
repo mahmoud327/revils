@@ -20,12 +20,12 @@ return new class extends Migration
             $table->double('price');
             $table->double('old_price')->nullable();
             $table->double('quantity');
-            $table->string('unit');
+            $table->string('unit')->nullable();
             $table->integer('view_number')->default(0);
             $table->tinyInteger('status')->default(0)->comment('0 pending, 1 approved, 2 rejected');
             $table->string('reason')->nullable();
             $table->tinyInteger('is_free_shipping')->default(0);
-            $table->bigInteger('cash')->default(0);
+            $table->bigInteger('cash')->nullable();
             $table->tinyInteger('is_batteries_shipping')->default(0);
             $table->tinyInteger('is_dangerous_shipping')->default(0);
             $table->tinyInteger('is_liquid_shipping')->default(0);
