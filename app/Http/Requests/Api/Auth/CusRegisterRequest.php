@@ -32,6 +32,15 @@ class CusRegisterRequest extends FormRequest
             'email' => ['required','email','unique:users,email'],
             'password' => ['required','string'],
             'account_type' => ['required','integer'],
+            'category_id' => ['required','integer'],
+            'store_name' => ['required','string'],
+            'country_id' => ['required','integer','exists:countries,id'],
+            'state_id' => ['required','integer','exists:states,id'],
+            'city_id' => ['required','integer','exists:cities,id'],
+            'zipcode' => ['required','digits:5'],
+            'area' => ['required','string','max:100'],
+            'street' => ['required','string','max:100'],
+            'agreement' => ['required']
         ];
     }
 
