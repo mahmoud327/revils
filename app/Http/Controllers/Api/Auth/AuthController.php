@@ -25,7 +25,7 @@ class AuthController extends Controller
     public function customerRegister(CustomerRegisterRequest $request)
     {
         try {
-           return  $user =  $this->authRepository->customerRegister($request);
+            $user =  $this->authRepository->customerRegister($request);
             $data['user'] = new UserResource($user);
             $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
             return responseSuccess($data, 'Registered successfully !');

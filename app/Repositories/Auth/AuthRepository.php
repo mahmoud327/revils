@@ -35,7 +35,7 @@ class AuthRepository implements AuthRepositoryInterface
             $user = $this->model::create($request->all());
             $user->assignRole($this->model::CUSTOMER);
             $sms = new SendSmsService();
-           return  $sms->sendSmsOtp($user->mobile);
+            $sms->sendSmsOtp($user->mobile);
             return $user;
             DB::commit();
         } catch (\Exception $e) {

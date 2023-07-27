@@ -12,10 +12,10 @@ class SendSmsService
     {
         $otp = rand(1000, 9999);
         // send by SMS gateway
-      return   UserOtp::create([
-            'mobile' => $mobile,
-            'otp' => $otp
-        ]);
+        $user_otp = new UserOtp();
+        $user_otp->mobile  = $mobile;
+        $user_otp->otp  = $otp;
+        $user_otp->save();
     }
 
     public function message($otp)
@@ -29,12 +29,11 @@ class SendSmsService
 
     public function verifyOtp($otp)
     {
-        return $otp = UserOtp::all();
+        $otp = UserOtp::all();
         if(!$otp)
         {
             return $otp;
         }
-        return $otp;
 
         $this->activateMobile($otp->mobile);
         $this->deleteOldOtpCode($otp->id);

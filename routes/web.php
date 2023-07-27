@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\UserOtp;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,20 @@ Route::get('/test', function () {
     return $post;
 });
 
+Route::get('/otps', function () {
+    \App\Models\UserOtp::create([
+       'mobile' => '966123456789' ,
+       'otp' => '3123'
+    ]);
+    return "success";
+});
+
+Route::get('/otps/create', function () {
+     $user_otp = new UserOtp();
+    $user_otp->mobile  = '96612343513';
+    $user_otp->otp  = '3456';
+});
+
+Route::get('/otps/get', function () {
+    return UserOtp::all();
+});
