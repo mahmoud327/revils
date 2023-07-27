@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('street1')->nullable();
             $table->string('street2')->nullable();
             $table->string('phone',45)->nullable();
-            $table->string('mobile',45)->nullable();
-            $table->tinyInteger('mobile_verified')->default(0);
             $table->string('job_title',100)->nullable();
             $table->smallInteger('family_status')->default(0);
             $table->string('gender')->nullable();
@@ -44,8 +42,6 @@ return new class extends Migration
             $table->date('birthdate')->nullable();
             $table->foreignId('city_id')->default(0);
             $table->string('displayName',45)->nullable();
-            $table->string('otp')->default(0);
-            $table->string('otp_date',45)->nullable();
             $table->timestamps();
         });
     }

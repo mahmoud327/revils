@@ -145,6 +145,8 @@ class RolesAndPermissionsSeeder extends Seeder
         // CREATE ADMINS & USERS
         User::create([
             'name' => 'super admin',
+            'username' => 'super-admin',
+            'mobile' => '+9923443543',
             'email' => 'super@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
@@ -153,6 +155,8 @@ class RolesAndPermissionsSeeder extends Seeder
 
         User::create([
             'name' => 'admin',
+            'username' => 'admin-admin',
+            'mobile' => '+9923233543',
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
@@ -161,6 +165,8 @@ class RolesAndPermissionsSeeder extends Seeder
 
         User::create([
             'name' => 'moderator',
+            'username' => 'moderator-moderator',
+            'mobile' => '+9912443543',
             'email' => 'moderator@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
@@ -169,6 +175,8 @@ class RolesAndPermissionsSeeder extends Seeder
 
         User::create([
             'name' => 'developer',
+            'username' => 'developer-developer',
+            'mobile' => '+9923443563',
             'email' => 'developer@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),

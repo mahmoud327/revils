@@ -22,7 +22,7 @@ class AuthController extends Controller
     public function customerRegister(CustomerRegisterRequest $request)
     {
         try {
-            return $user = $this->authRepository->customerRegister($request);
+            return $this->authRepository->customerRegister($request);
         } catch (UnexpectedException $ex) {
             return responseError($ex->getMessage(), $ex->getCode());
         }

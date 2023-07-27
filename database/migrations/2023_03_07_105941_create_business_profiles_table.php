@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('display_name')->nullable();
             $table->string('website')->nullable();
             $table->string('phone')->nullable();
-            $table->string('mobile', 45);
-            $table->string('email', 45)->nullable();
             $table->longText('email2')->nullable();
             $table->string('lang', 15)->nullable();
             $table->string('zipcode')->nullable();

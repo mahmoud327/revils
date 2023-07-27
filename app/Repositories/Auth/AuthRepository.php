@@ -10,6 +10,7 @@ use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Services\SendSmsService;
 use DB;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -31,8 +32,9 @@ class AuthRepository implements AuthRepositoryInterface
         try {
             $request->merge(['password'=>bcrypt($request->password)]);
             $user = $this->model::create($request->all());
-
             $user->assignRole($this->model::CUSTOMER);
+            $sms = new SendSmsService();
+            $sms->sendSmsOtp($user->mobile);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -48,8 +50,9 @@ class AuthRepository implements AuthRepositoryInterface
         try {
             $request->merge(['password'=>bcrypt($request->password)]);
             $user = $this->model::create($request->all());
-
             $user->assignRole($this->model::SELLER);
+            $sms = new SendSmsService();
+            $sms->sendSmsOtp($user->mobile);
             $this->createBusinessProfile($user, $request);
             DB::commit();
         } catch (\Exception $e) {

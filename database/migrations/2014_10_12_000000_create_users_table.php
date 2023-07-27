@@ -16,10 +16,12 @@ return new class extends Migration
             $table->id();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('username', 100)->unique()->nullable();
+            $table->string('username', 100)->unique()->index();
             $table->string('name', 100)->unique()->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->unique()->index();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('mobile',15)->unique()->index();
+            $table->timestamp('mobile_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('banned')->default(0);
             $table->string('ban_reason')->nullable();
@@ -31,8 +33,6 @@ return new class extends Migration
             $table->tinyInteger('account_type')->default(0);
             $table->string('oauth_provider')->nullable();
             $table->string('oauth_uid')->nullable();
-            $table->string('activation')->default(0);
-            $table->tinyInteger('is_activationpopup_shown')->default(0);
             $table->tinyInteger('is_logged_in')->default(0);
             $table->integer('views')->nullable();
             $table->integer('group_id')->default(0);
