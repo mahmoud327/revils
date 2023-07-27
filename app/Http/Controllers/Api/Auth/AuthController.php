@@ -26,22 +26,25 @@ class AuthController extends Controller
 
     public function customerRegister(CustomerRegisterRequest $request)
     {
-        try {
-            $request->merge(['password'=>bcrypt($request->password)]);
-            $user = User::create($request->except('agreement'));
-            $user->assignRole(User::CUSTOMER);
-            // send by SMS gateway
-            $user_otp = new UserOtp();
-            $otp = rand(1000, 9999);
-            $user_otp->mobile  = $user->mobile;
-            $user_otp->otp  = $otp;
-            $user_otp->save();
-            $data['user'] = new UserResource($user);
-            $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
-            return responseSuccess($data, 'Registered successfully !');
-        } catch (UnexpectedException $ex) {
-            return responseError($ex->getMessage(),402);
-        }
+        $user = $this->authRepository->cusRegister($request);
+        return responseSuccess($user, 'Registered successfully !');
+
+        /*        try {
+                    $request->merge(['password'=>bcrypt($request->password)]);
+                    $user = User::create($request->except('agreement'));
+                    $user->assignRole(User::CUSTOMER);
+                    // send by SMS gateway
+                    $user_otp = new UserOtp();
+                    $otp = rand(1000, 9999);
+                    $user_otp->mobile  = $user->mobile;
+                    $user_otp->otp  = $otp;
+                    $user_otp->save();
+                    $data['user'] = new UserResource($user);
+                    $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
+                    return responseSuccess($data, 'Registered successfully !');
+                } catch (UnexpectedException $ex) {
+                    return responseError($ex->getMessage(),402);
+                }*/
     }
 
     public function sellerRegister(SellerRegisterRequest $request)
