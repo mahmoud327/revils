@@ -2,7 +2,6 @@
 
 use App\Models\User;
 use App\Models\UserOtp;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,9 +37,14 @@ Route::get('/otps', function () {
     return "success";
 });
 
+Route::get('/countries', function () {
+    return \App\Models\Core\Country::all();
+    return "success";
+});
+
 Route::get('/otps/create', function () {
      $user_otp = new UserOtp();
-    $user_otp->mobile  = '96612343513';
+    $user_otp->mobile  = '2342342342';
     $user_otp->otp  = '3456';
     $user_otp->save();
     return "succsdes";
