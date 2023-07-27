@@ -28,18 +28,18 @@ class AuthController extends Controller
     {
         try {
             $request->merge(['password'=>bcrypt($request->password)]);
-            $this->authRepository->customerRegister($request);
-            $sms = new SendSmsService();
+            $user = $this->authRepository->customerRegister($request);
+/*            $sms = new SendSmsService();
             $otp = rand(1000, 9999);
             // send by SMS gateway
             $user_otp = new UserOtp();
             $user_otp->mobile  = $user->mobile;
             $user_otp->otp  = $otp;
-            $user_otp->save();
+            $user_otp->save();*/
             $data['user'] = new UserResource($user);
-            $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
+           // $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
             return responseSuccess($data, 'Registered successfully !');
-        } catch (\Exception $ex) {
+        } catch (UnexpectedException $ex) {
             return responseError($ex->getMessage(), $ex->getCode());
         }
     }

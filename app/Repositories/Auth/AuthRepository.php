@@ -40,7 +40,7 @@ class AuthRepository implements AuthRepositoryInterface
         } catch (\Exception $e) {
             DB::rollback();
             Log::warning($e);
-            throw new UnexpectedException($e->getMessage(), Response::HTTP_BAD_REQUEST);
+            throw new UnexpectedException($e->getMessage());
         }
     }
 
