@@ -28,8 +28,7 @@ class AuthController extends Controller
     {
         try {
             $request->merge(['password'=>bcrypt($request->password)]);
-            $user = User::create($request->all());
-            $user->assignRole(User::CUSTOMER);
+            $this->authRepository->customerRegister($request);
             $sms = new SendSmsService();
             $otp = rand(1000, 9999);
             // send by SMS gateway

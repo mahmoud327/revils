@@ -33,8 +33,8 @@ class AuthRepository implements AuthRepositoryInterface
             $request->merge(['password'=>bcrypt($request->password)]);
             $user = $this->model::create($request->all());
             $user->assignRole($this->model::CUSTOMER);
-            $sms = new SendSmsService();
-            $sms->sendSmsOtp($user->mobile);
+           // $sms = new SendSmsService();
+          //  $sms->sendSmsOtp($user->mobile);
             return $user;
             DB::commit();
         } catch (\Exception $e) {
