@@ -12,7 +12,7 @@ class SendSmsService
     {
         $otp = rand(1000, 9999);
         // send by SMS gateway
-        UserOtp::create([
+      return   UserOtp::create([
             'mobile' => $mobile,
             'otp' => $otp
         ]);
