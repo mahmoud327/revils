@@ -29,7 +29,7 @@ class SendSmsService
 
     public function verifyOtp($otp)
     {
-        $otp = UserOtp::whereOtp($otp)->first();
+        return $otp = UserOtp::all();
         if(!$otp)
         {
             return $otp;
