@@ -5,6 +5,7 @@ namespace App\Repositories\Auth;
 
 
 use App\Exceptions\UnexpectedException;
+use App\Http\Requests\Api\Auth\CusRegisterRequest;
 use App\Http\Requests\Api\Auth\CustomerRegisterRequest;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
@@ -27,7 +28,7 @@ class AuthRepository implements AuthRepositoryInterface
         // TODO: Implement login() method.
     }
 
-    public function customerRegister(CustomerRegisterRequest $request)
+    public function customerRegister(CusRegisterRequest $request)
     {
         DB::beginTransaction();
         try {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Auth\CusRegisterRequest;
 use App\Http\Requests\Api\Auth\CustomerRegisterRequest;
 use App\Http\Requests\Api\Auth\OtpRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
@@ -22,9 +23,16 @@ class AuthController extends Controller
     {
     }
 
-    public function customerRegister(CustomerRegisterRequest $request)
+    public function customerRegister(CusRegisterRequest $request)
     {
-        return "mada";
+        try {
+            $user =  $this->authRepository->customerRegister($request);
+            $data['user'] = new UserResource($user);
+            $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
+            return responseSuccess($data, 'Registered successfully !');
+        } catch (UnexpectedException $ex) {
+            return responseError($ex->getMessage(), $ex->getCode());
+        }
     }
 
     public function sellerRegister(SellerRegisterRequest $request)
