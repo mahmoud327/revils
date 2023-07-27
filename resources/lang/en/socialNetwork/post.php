@@ -18,6 +18,7 @@ return [
         'options' => 'Options',
         'save' => 'Save',
         'filter' => 'Filter',
+        'liked' => 'Liked Successfully',
     ],
     'messages' => [
         'created' => 'The post has been created successfully.',

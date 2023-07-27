@@ -6,12 +6,10 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Multicaret\Acquaintances\Traits\CanBeLiked;
-use RyanChandler\Comments\Concerns\HasComments;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Post extends Model
+class Comment extends Model
 {
-    use CanBeLiked, HasComments;
 
     protected $guarded = [];
 
@@ -24,6 +22,5 @@ class Post extends Model
     {
         return $this->belongsToMany(User::class,'tags','post_id','user_id','id','id');
     }
-
 
 }

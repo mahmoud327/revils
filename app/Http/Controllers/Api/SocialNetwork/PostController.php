@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\SocialNetwork;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\SocialNetwork\PostRequest;
 use App\Http\Resources\SocialNetwork\PostResource;
+use App\Models\SocialNetwork\Post;
 use App\Repositories\SocialNetwork\Post\PostRepositoryInterface;
 use Illuminate\Http\Request;
 use Auth;
@@ -46,6 +47,14 @@ class PostController extends Controller
     {
         $posts = PostResource::collection($this->postRepository->showUserPosts(user_id: $user_id, paginatePerPage: $request->perPage));
         return responseSuccess($posts);
+    }
+
+    public function likeOrUnlikePost(PostRequest $request)
+    {
+
+        $post = $this->postRepository->find(id: $request->post_id);
+        $this->postRepository->likeOrUnlikePost(post: $post);
+        return responseSuccess([], trans('socialNetwork/post.messages.actions.liked'));
     }
 
 }

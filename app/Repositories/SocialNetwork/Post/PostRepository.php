@@ -25,7 +25,7 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
         {
             if($paginatePerPage)
             {
-                return $this->model->with(['user','tags'])->latest()->paginate($paginatePerPage);
+                return $this->model->with(['user','tags','comments.user'])->latest()->paginate($paginatePerPage);
             }
             return $this->model->with(['user','tags'])->latest()->paginate();
         }
@@ -97,5 +97,10 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
             return $this->model->latest()->paginate();
         }
         return $this->model->latest()->get();
+    }
+
+    public function likeOrUnlikePost(Post $post)
+    {
+        Auth::user()->toggleLike($post);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//test
+Route::get('/test', function () {
+   $user = User::first();
+   $post = \App\Models\SocialNetwork\Post::with(['tags','comments.user'])->first();
+   return new \App\Http\Resources\SocialNetwork\PostResource($post);
+    $post->comment('Hello, world!',$user);
+    return "deeletsl";
 
+    return $post->comments()->where('commentable_id',1)->forceDelete();
+    return $post;
+});
 

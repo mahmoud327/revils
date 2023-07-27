@@ -117,7 +117,15 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
     ####### posts  #########
     Route::apiResource('posts', PostController::class);
     Route::post('user-posts/{user_id}', [PostController::class,'showUserPosts'])->middleware('role:customer');
+    Route::post('like-unlike', [PostController::class,'likeOrUnlikePost'])->middleware('role:customer');
     ####### end posts #########
+
+    ####### comments  #########
+    Route::apiResource('comments', PostController::class);
+    Route::post('user-posts/{user_id}', [PostController::class,'showUserPosts'])->middleware('role:customer');
+    Route::post('like-unlike', [PostController::class,'likeOrUnlikePost'])->middleware('role:customer');
+    ####### end comments #########
+
 });
 Route::get('/sms', function () {
 
