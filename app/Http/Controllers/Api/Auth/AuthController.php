@@ -9,6 +9,7 @@ use App\Http\Requests\Api\Auth\CustomerRegisterRequest;
 use App\Http\Requests\Api\Auth\OtpRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Models\UserOtp;
 use App\Repositories\Auth\AuthRepositoryInterface;
 use App\Services\SendSmsService;
@@ -26,11 +27,20 @@ class AuthController extends Controller
     public function customerRegister(CustomerRegisterRequest $request)
     {
         try {
-            $user =  $this->authRepository->customerRegister($request);
+            $request->merge(['password'=>bcrypt($request->password)]);
+            $user = User::create($request->all());
+            $user->assignRole(User::CUSTOMER);
+            $sms = new SendSmsService();
+            $otp = rand(1000, 9999);
+            // send by SMS gateway
+            $user_otp = new UserOtp();
+            $user_otp->mobile  = $user->mobile;
+            $user_otp->otp  = $otp;
+            $user_otp->save();
             $data['user'] = new UserResource($user);
             $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
             return responseSuccess($data, 'Registered successfully !');
-        } catch (UnexpectedException $ex) {
+        } catch (\Exception $ex) {
             return responseError($ex->getMessage(), $ex->getCode());
         }
     }

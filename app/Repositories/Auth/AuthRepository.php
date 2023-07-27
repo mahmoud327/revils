@@ -10,7 +10,6 @@ use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Models\UserOtp;
 use App\Services\SendSmsService;
 use DB;
 use Illuminate\Http\Response;
