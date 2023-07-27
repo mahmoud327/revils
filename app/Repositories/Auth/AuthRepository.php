@@ -26,44 +26,18 @@ class AuthRepository implements AuthRepositoryInterface
         // TODO: Implement login() method.
     }
 
-    public function cusRegister(CustomerRegisterRequest $request)
-    {
-        $request->merge(['password'=>bcrypt($request->password)]);
-        $user = $this->model::create($request->except('agreement'));
-        $user->assignRole($this->model::CUSTOMER);
-        $sms = new SendSmsService();
-        $sms->setMobile(mobile: $user->mobile);
-        $sms->sendSmsOtp();
-        return $user;
-       // $sms = new SendSmsService();
-        //$sms->sendSmsOtp($user->mobile);
-/*        DB::beginTransaction();
-        try {
-            $request->merge(['password'=>bcrypt($request->password)]);
-            $user = $this->model::forceCreate($request->all());
-            $user->assignRole($this->model::CUSTOMER);
-            $sms = new SendSmsService();
-            $sms->sendSmsOtp($user->mobile);
-            return $user;
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            Log::warning($e);
-            throw new UnexpectedException($e->getMessage());
-        }*/
-    }
-
     public function customerRegister(CustomerRegisterRequest $request)
     {
         DB::beginTransaction();
         try {
             $request->merge(['password'=>bcrypt($request->password)]);
-            $user = $this->model::create($request->all());
+            $user = $this->model::create($request->except('agreement'));
             $user->assignRole($this->model::CUSTOMER);
             $sms = new SendSmsService();
-            $sms->sendSmsOtp($user->mobile);
-            return $user;
+            $sms->setMobile(mobile: $user->mobile);
+            $sms->sendSmsOtp();
             DB::commit();
+            return $user;
         } catch (\Exception $e) {
             DB::rollback();
             Log::warning($e);
@@ -79,10 +53,11 @@ class AuthRepository implements AuthRepositoryInterface
             $user = $this->model::create($request->all());
             $user->assignRole($this->model::SELLER);
             $sms = new SendSmsService();
+            $sms->setMobile(mobile: $user->mobile);
+            $sms->sendSmsOtp();
             $this->createBusinessProfile($user, $request);
-            $sms->sendSmsOtp($user->mobile);
-            return $user;
             DB::commit();
+            return $user;
         } catch (\Exception $e) {
             DB::rollback();
             Log::warning($e);

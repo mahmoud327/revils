@@ -24,27 +24,15 @@ class AuthController extends Controller
 
     public function customerRegister(CustomerRegisterRequest $request)
     {
-        $user = $this->authRepository->cusRegister($request);
-        $data['user'] = new UserResource($user);
-        $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
-        return responseSuccess($data, 'Registered successfully !');
-
-        /*        try {
-                    $request->merge(['password'=>bcrypt($request->password)]);
-                    $user = User::create($request->except('agreement'));
-                    $user->assignRole(User::CUSTOMER);
-                    // send by SMS gateway
-                    $user_otp = new UserOtp();
-                    $otp = rand(1000, 9999);
-                    $user_otp->mobile  = $user->mobile;
-                    $user_otp->otp  = $otp;
-                    $user_otp->save();
-                    $data['user'] = new UserResource($user);
-                    $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
-                    return responseSuccess($data, 'Registered successfully !');
-                } catch (UnexpectedException $ex) {
-                    return responseError($ex->getMessage(),402);
-                }*/
+        try {
+            $user = $this->authRepository->customerRegister($request);
+            $data['user'] = new UserResource($user);
+            $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
+            return responseSuccess($data, 'Registered successfully !');
+        }catch (UnexpectedException $ex)
+        {
+            return responseError($ex->getMessage(),402);
+        }
     }
 
     public function sellerRegister(SellerRegisterRequest $request)
@@ -146,17 +134,6 @@ class AuthController extends Controller
             return responseError("wrong code !", 402);
         }
         return responseSuccess('','valid code');
-
-        /* $otp = UserOtp::whereOtp($request->otp)->first();
-                if(!$otp)
-                {
-                    return responseError("wrong code !", 402);
-                }
-                $user = User::whereMobile($otp->mobile)->firstOrFail();
-                $user->mobile_verified_at = now();
-                $user->save();
-                UserOtp::whereId($otp->id)->delete();*/
-        //return responseSuccess('','valid code');
     }
 
     public function logout()
