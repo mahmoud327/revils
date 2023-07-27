@@ -140,8 +140,10 @@ class AuthController extends Controller
         {
             return responseError("wrong code !", 402);
         }
-        $this->activateMobile($otp->mobile);
-        $this->deleteOldOtpCode($otp->id);
+        $user = User::whereMobile($otp->mobile)->firstOrFail();
+        $user->mobile_verified_at = now();
+        $user->save();
+        UserOtp::whereId($otp->id)->delete();
         return responseSuccess('','valid code');
     }
 
