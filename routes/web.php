@@ -28,9 +28,3 @@ Route::get('/test', function () {
     return $post->comments()->where('commentable_id',1)->forceDelete();
     return $post;
 });
-
-Route::get('/create-country', function () {
-    $service = new \App\Services\SendSmsService();
-    $service->country();
-    return 'success';
-});
