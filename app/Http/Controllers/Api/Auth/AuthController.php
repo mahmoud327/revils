@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Auth\CusRegisterRequest;
 use App\Http\Requests\Api\Auth\CustomerRegisterRequest;
 use App\Http\Requests\Api\Auth\OtpRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
 use App\Http\Resources\UserResource;
-use App\Models\User;
 use App\Models\UserOtp;
 use App\Repositories\Auth\AuthRepositoryInterface;
 use App\Services\SendSmsService;
@@ -27,7 +25,9 @@ class AuthController extends Controller
     public function customerRegister(CustomerRegisterRequest $request)
     {
         $user = $this->authRepository->cusRegister($request);
-        return responseSuccess($user, 'Registered successfully !');
+        $data['user'] = new UserResource($user);
+        $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
+        return responseSuccess($data, 'Registered successfully !');
 
         /*        try {
                     $request->merge(['password'=>bcrypt($request->password)]);
@@ -138,16 +138,25 @@ class AuthController extends Controller
 
     public function verifyMobileSms(OtpRequest $request)
     {
-        $otp = UserOtp::whereOtp($request->otp)->first();
-        if(!$otp)
+        $otp = new SendSmsService();
+        $otp->setOtp(otp: $request->otp);
+        $verification = $otp->verifyOtp();
+        if(!$verification)
         {
             return responseError("wrong code !", 402);
         }
-        $user = User::whereMobile($otp->mobile)->firstOrFail();
-        $user->mobile_verified_at = now();
-        $user->save();
-        UserOtp::whereId($otp->id)->delete();
         return responseSuccess('','valid code');
+
+        /* $otp = UserOtp::whereOtp($request->otp)->first();
+                if(!$otp)
+                {
+                    return responseError("wrong code !", 402);
+                }
+                $user = User::whereMobile($otp->mobile)->firstOrFail();
+                $user->mobile_verified_at = now();
+                $user->save();
+                UserOtp::whereId($otp->id)->delete();*/
+        //return responseSuccess('','valid code');
     }
 
     public function logout()

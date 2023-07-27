@@ -31,6 +31,9 @@ class AuthRepository implements AuthRepositoryInterface
         $request->merge(['password'=>bcrypt($request->password)]);
         $user = $this->model::create($request->except('agreement'));
         $user->assignRole($this->model::CUSTOMER);
+        $sms = new SendSmsService();
+        $sms->setMobile(mobile: $user->mobile);
+        $sms->sendSmsOtp();
         return $user;
        // $sms = new SendSmsService();
         //$sms->sendSmsOtp($user->mobile);
