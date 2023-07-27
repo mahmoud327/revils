@@ -135,12 +135,13 @@ class AuthController extends Controller
 
     public function verifyMobileSms(OtpRequest $request)
     {
-        $otp = new SendSmsService();
-        $verify = $otp->verifyOtp($request->otp);
-        if(!$verify)
+        $otp = UserOtp::whereOtp($request->otp)->first();
+        if(!$otp)
         {
             return responseError("wrong code !", 402);
         }
+        $this->activateMobile($otp->mobile);
+        $this->deleteOldOtpCode($otp->id);
         return responseSuccess('','valid code');
     }
 
