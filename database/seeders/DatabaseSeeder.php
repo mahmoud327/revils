@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
 
-         $this->call(CountriesTableSeeder::class);
-         $this->call(StatesTableSeeder::class);
-         $this->call(CitiesTableSeeder::class);
+      //   $this->call(CountriesTableSeeder::class);
+      //   $this->call(StatesTableSeeder::class);
+       //  $this->call(CitiesTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
         $this->call(AttributeSeeder::class);
         $this->call(BusinessTypeSeeder::class);
