@@ -145,7 +145,7 @@ class RolesAndPermissionsSeeder extends Seeder
         // CREATE ADMINS & USERS
         User::create([
             'name' => 'super admin',
-            'username' => 'mada',
+            'username' => 'super-admin',
             'mobile' => '+9923443543',
             'email' => 'super@admin.com',
             'email_verified_at' => now(),
