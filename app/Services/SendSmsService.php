@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Core\Country;
 use App\Models\User;
 use App\Models\UserOtp;
 
@@ -52,7 +53,15 @@ class SendSmsService
         $user->save();
     }
 
-
+    public function country()
+    {
+       $mada = array(['en'=>'egypt']);
+        Country::create([
+           'name' => json_encode($mada),
+            'phonecode' => '+20',
+            'code' => 'EN',
+        ]);
+    }
 
 
 }

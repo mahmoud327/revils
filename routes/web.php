@@ -29,31 +29,8 @@ Route::get('/test', function () {
     return $post;
 });
 
-Route::get('/otps', function () {
-    \App\Models\UserOtp::create([
-       'mobile' => '966123456789' ,
-       'otp' => '3123'
-    ]);
-    return "success";
-});
-
-Route::get('/countries', function () {
-    return \App\Models\Core\Country::all();
-    return "success";
-});
-
-Route::get('/otps/create', function () {
-     $user_otp = new UserOtp();
-    $user_otp->mobile  = '2342342342';
-    $user_otp->otp  = '3456';
-    $user_otp->save();
-    return "succsdes";
-});
-
-Route::get('/otps/get', function () {
-    return UserOtp::all();
-});
-
-Route::get('/users/get', function () {
-    return User::all();
+Route::get('/create-country', function () {
+    $service = new \App\Services\SendSmsService();
+    $service->country();
+    return 'success';
 });
