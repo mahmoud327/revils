@@ -32,8 +32,9 @@ class SendSmsService
         $otp = UserOtp::whereOtp($otp)->first();
         if(!$otp)
         {
-            return false;
+            return $otp;
         }
+        return $otp;
 
         $this->activateMobile($otp->mobile);
         $this->deleteOldOtpCode($otp->id);
