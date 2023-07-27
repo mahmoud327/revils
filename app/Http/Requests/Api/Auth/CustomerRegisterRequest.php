@@ -32,7 +32,7 @@ class CustomerRegisterRequest extends FormRequest
             'email' => ['required','email','unique:users,email'],
             'password' => ['required','string'],
             'account_type' => ['required','integer'],
-            'agreement' => ['required']
+            //'agreement' => ['required']
         ];
     }
 

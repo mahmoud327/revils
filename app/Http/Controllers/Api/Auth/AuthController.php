@@ -40,7 +40,7 @@ class AuthController extends Controller
            // $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
             return responseSuccess($data, 'Registered successfully !');
         } catch (UnexpectedException $ex) {
-            return responseError($ex->getMessage(), $ex->getCode());
+            return responseError($ex->getMessage(),401);
         }
     }
 

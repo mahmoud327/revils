@@ -40,7 +40,7 @@ class User extends Authenticatable implements HasMedia
     use CanView;
 
 
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     const CUSTOMER = 'customer';
     const SELLER = 'seller';
