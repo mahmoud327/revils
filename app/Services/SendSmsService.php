@@ -10,7 +10,7 @@ class SendSmsService
 
     public function sendSmsOtp($mobile)
     {
-        $otp = rand(100000, 999999);
+        $otp = rand(1000, 9999);
         // send by SMS gateway
         UserOtp::create([
             'mobile' => $mobile,
@@ -35,7 +35,7 @@ class SendSmsService
             return false;
         }
 
-        $this->activateUser($otp->mobile);
+        $this->activateMobile($otp->mobile);
         $this->deleteOldOtpCode($otp->id);
         return true;
     }
@@ -45,10 +45,10 @@ class SendSmsService
         UserOtp::whereId($id)->delete();
     }
 
-    public function activateUser($mobile)
+    public function activateMobile($mobile)
     {
         $user = User::whereMobile($mobile)->firstOrFail();
-        $user->activation = 1;
+        $user->mobile_verified_at = now();
         $user->save();
     }
 

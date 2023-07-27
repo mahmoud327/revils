@@ -22,6 +22,7 @@ class UserResource extends JsonResource
             "last_name" => $this->first_name,
             "username" => $this->username,
             "email" => $this->email,
+            "mobile" => $this->mobile,
             "account_type" => $this->account_type ? "seller" : "customer",
             "profile" =>  $this->account_type ? new BusinessProfileResource($this->whenLoaded('businessProfile')) : new UserProfileResource($this->whenLoaded('userProfile')),
             "coin" =>UserCoinResource::make($this->whenLoaded('userCoinEarn'))

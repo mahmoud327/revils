@@ -39,6 +39,7 @@ Route::group(['prefix' => 'auth', 'middleware' => ['ChangeLanguage']], function 
     Route::post('register/customer/', [AuthController::class, 'customerRegister']);
     Route::post('register/seller/', [AuthController::class, 'sellerRegister']);
     Route::post('login', [AuthController::class, 'login']);
+    Route::post('verify-mobile-sms', [AuthController::class, 'verifyMobileSms']);
     Route::post('validateUniqueUserNameOrEmail', [AuthController::class, 'validateUniqueUserNameOrEmail']);
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);

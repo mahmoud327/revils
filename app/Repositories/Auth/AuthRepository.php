@@ -10,6 +10,7 @@ use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\UserOtp;
 use App\Services\SendSmsService;
 use DB;
 use Illuminate\Http\Response;
@@ -35,13 +36,13 @@ class AuthRepository implements AuthRepositoryInterface
             $user->assignRole($this->model::CUSTOMER);
             $sms = new SendSmsService();
             $sms->sendSmsOtp($user->mobile);
+            return $user;
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
             Log::warning($e);
             throw new UnexpectedException($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
-        return new UserResource($user);
     }
 
     public function sellerRegister(SellerRegisterRequest $request)
@@ -52,8 +53,9 @@ class AuthRepository implements AuthRepositoryInterface
             $user = $this->model::create($request->all());
             $user->assignRole($this->model::SELLER);
             $sms = new SendSmsService();
-            $sms->sendSmsOtp($user->mobile);
             $this->createBusinessProfile($user, $request);
+            $sms->sendSmsOtp($user->mobile);
+            return $user;
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -66,7 +68,6 @@ class AuthRepository implements AuthRepositoryInterface
     public function createBusinessProfile($user, $request)
     {
         $user->businessProfile()->create([
-            'mobile' => $request->mobile,
             'display_name' => $request->store_name,
             'country_id' => $request->country_id,
             'state_id' => $request->state_id,

@@ -28,7 +28,7 @@ class SellerRegisterRequest extends FormRequest
     {
         return [
             'username' => ['required','max:100','unique:users,username'],
-            'mobile' => ['required','digits:9'],
+            'mobile' => ['required','digits:12'],
             'email' => ['required','email','unique:users,email'],
             'password' => ['required','string'],
             'account_type' => ['required','integer'],

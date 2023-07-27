@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests\Api\Auth;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Contracts\Validation\Validator;
 
-
-class CustomerRegisterRequest extends FormRequest
+class OtpRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,19 +26,14 @@ class CustomerRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => ['required','max:100','unique:users,username'],
-            'mobile' => ['required','digits:12'],
-            'email' => ['required','email','unique:users,email'],
-            'password' => ['required','string'],
-            'account_type' => ['required','integer'],
-            'agreement' => ['required']
+            'otp' => ['required','integer'],
         ];
     }
 
     public function messages()
     {
         return [
-            'required' => __('validation.required'),
+            'otp.required' => 'يرجي ادخال الكود',
         ];
     }
 

@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\CustomerRegisterRequest;
+use App\Http\Requests\Api\Auth\OtpRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
 use App\Http\Resources\UserResource;
+use App\Models\UserOtp;
 use App\Repositories\Auth\AuthRepositoryInterface;
+use App\Services\SendSmsService;
 use Auth;
 use Illuminate\Http\Request;
 use Validator;
@@ -22,18 +25,22 @@ class AuthController extends Controller
     public function customerRegister(CustomerRegisterRequest $request)
     {
         try {
-            return $this->authRepository->customerRegister($request);
+            $user =  $this->authRepository->customerRegister($request);
+            $data['user'] = new UserResource($user);
+            $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
+            return responseSuccess($data, 'Registered successfully !');
         } catch (UnexpectedException $ex) {
             return responseError($ex->getMessage(), $ex->getCode());
         }
-        return responseSuccess($user, 'Registered successfully!', 200);
     }
 
     public function sellerRegister(SellerRegisterRequest $request)
     {
         try {
             $user = $this->authRepository->sellerRegister($request);
-            return responseSuccess($user, 'Registered successfully!');
+            $data['user'] = new UserResource($user);
+            $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
+            return responseSuccess($data, 'Registered successfully !');
         } catch (UnexpectedException $ex) {
             return responseError($ex->getMessage(), $ex->getCode());
         }
@@ -116,6 +123,16 @@ class AuthController extends Controller
         }
     }
 
+    public function verifyMobileSms(OtpRequest $request)
+    {
+        $otp = new SendSmsService();
+        $verify = $otp->verifyOtp($request->otp);
+        if(!$verify)
+        {
+            return responseError("wrong code !", 402);
+        }
+        return responseSuccess('','valid code');
+    }
 
     public function logout()
     {
@@ -123,4 +140,6 @@ class AuthController extends Controller
         $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
         return responseSuccess('', 'Logged out successfully');
     }
+
+
 }
