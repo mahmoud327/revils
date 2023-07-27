@@ -42,6 +42,8 @@ Route::get('/otps/create', function () {
      $user_otp = new UserOtp();
     $user_otp->mobile  = '96612343513';
     $user_otp->otp  = '3456';
+    $user_otp->save();
+    return "succsdes";
 });
 
 Route::get('/otps/get', function () {
