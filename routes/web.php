@@ -53,3 +53,7 @@ Route::get('/otps/create', function () {
 Route::get('/otps/get', function () {
     return UserOtp::all();
 });
+
+Route::get('/users/get', function () {
+    return User::all();
+});
