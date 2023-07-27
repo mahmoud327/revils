@@ -5,9 +5,15 @@ namespace App\Filament\Resources\Product;
 use App\Exports\ProductExport;
 use App\Filament\Resources\Product\ProductResource\Pages;
 use App\Filament\Resources\Product\ProductResource\RelationManagers;
+use App\Models\Product\Attribute;
+use Archilex\StackedImageColumn\Columns\StackedImageColumn;
 use App\Models\Product\AttributeValue;
 use App\Models\Product\Product;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+
 use Filament\Forms;
+
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Fieldset;
@@ -67,6 +73,7 @@ class ProductResource extends Resource
                                         ->required(),
 
 
+
                                     RichEditor::make('description')
                                         ->label(trans('dashboard.description'))
                                         ->required(),
@@ -86,7 +93,7 @@ class ProductResource extends Resource
                                         ->options([
                                             0 => trans('dashboard.products.pending'),
                                             1 => trans('dashboard.products.approved'),
-                                            2 =>trans('dashboard.products.rejected'),
+                                            2 => trans('dashboard.products.rejected'),
                                         ])
                                         ->label(trans('dashboard.products.status'))
                                         ->required(),
@@ -127,8 +134,6 @@ class ProductResource extends Resource
 
                             Tabs\Tab::make('price')
                                 ->label(trans('dashboard.products.price'))
-
-
                                 ->schema([
                                     Forms\Components\TextInput::make('price')
                                         ->label(trans('dashboard.products.price'))
@@ -145,25 +150,46 @@ class ProductResource extends Resource
                                     // ...
                                 ]),
 
+                            Tabs\Tab::make('attributes')
+                                ->label(trans('dashboard.products.attributes'))
+                                ->schema([
+                                    Repeater::make('attributes')
+                                    ->relationship('attributeValues')
+                                        ->label(trans('dashboard.products.attributes'))
+                                        ->schema([
+                                            Select::make('attribute_id')
+                                                ->label(trans('dashboard.products.attributes'))
+                                                ->options(function () {
+                                                    return Attribute::pluck('name', 'id')->toArray();
+                                                })->required()
+                                                ->reactive()
+                                                ->afterStateUpdated(fn (callable $set) => $set('attribute_value_id', null)),
+                                            Select::make('attribute_value_id')
+                                                ->label(trans('dashboard.products.attributes values'))
+
+                                                ->options(function (callable $get) {
+                                                    $attribite = Attribute::find($get('attribute_id'));
+                                                    if (!$attribite) {
+                                                        return AttributeValue::pluck('value', 'id')->toArray();
+                                                    } else {
+                                                        return $attribite->attributeValues->pluck('value', 'id')->toArray();
+                                                    }
+                                                })->required(),
+
+                                        ])->columns(2),
+                                ]),
+
                             Tabs\Tab::make('Medias')
                                 ->label(trans('dashboard.products.medias'))
 
                                 ->schema([
+                                    SpatieMediaLibraryFileUpload::make('images')
+                                        ->collection('images')
+                                        ->multiple()
+
+
                                     // ...
-                                    Repeater::make('media')
 
-                                        ->schema([
-                                            Forms\Components\FileUpload::make('media')
-                                                ->multiple()
-
-                                                ->enableDownload()
-                                                ->enableReordering()
-                                                ->enableOpen()
-                                                ->directory('uploads-products')
-                                                ->label(trans('dashboard.products.medias'))
-                                                ->required()
-                                            // ...
-                                        ])
 
                                 ]),
 
@@ -184,6 +210,7 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 //
+
                 Tables\Columns\TextColumn::make('name')
                     ->label(trans('dashboard.name'))
 

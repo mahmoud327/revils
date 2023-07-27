@@ -151,7 +151,7 @@ class Product extends Model implements HasMedia
 
     public function scopeSearch($query, $search)
     {
-        return $query->where('name->ar','like', '%' . $search . '%')
+        return $query->where('name->ar', 'like', '%' . $search . '%')
             ->orwhere('name->en', 'like', '%' . $search . '%')
             ->orwhere('description->ar', 'like', '%' . $search . '%')
             ->orwhere('description->en', 'like', '%' . $search . '%');
@@ -210,11 +210,8 @@ class Product extends Model implements HasMedia
 
     public function attributeValues()
     {
-        return $this->belongsToMany(
-            AttributeValue::class,
-            'product_attributes',
-            'product_id',
-            'attribute_value_id'
+        return $this->hasMany(
+            ProductAttribute::class,
         );
     }
 
