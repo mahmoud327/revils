@@ -49,6 +49,8 @@ return [
         'products' => 'products',
         'is dangerous shipping' => 'is dangerous shipping',
         'category ' => 'category',
+        'user' => 'user',
+
         'status ' => 'status',
         'is handcrafted' => 'is handcrafted',
         'quantity' => 'quantity',

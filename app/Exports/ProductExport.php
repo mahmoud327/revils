@@ -7,10 +7,12 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
 
 
-class ProductExport implements FromQuery
+class ProductExport implements FromView
 {
 
     use Exportable;
@@ -18,12 +20,18 @@ class ProductExport implements FromQuery
 
     public function __construct(Collection $products)
     {
-        $this->products=$products;
-
+        $this->products = $products;
     }
 
-    public function query()
+    public function view(): View
     {
-        return Product::whereKey($this->products->pluck('id')->toArray());
+
+        $items = Product::with(['category', 'attributes', 'user', 'attributeValues'])
+            ->whereIn('id', $this->products->pluck('id')
+                ->toArray())
+            ->get();
+
+
+        return view('products.export', compact('items'));
     }
 }

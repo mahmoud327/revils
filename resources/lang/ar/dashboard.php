@@ -57,6 +57,7 @@ return [
         'cash' => 'كاش',
         'is liquid shipping' => 'الشحن السائل',
         'item type' => 'نوع العنصر',
+        'user' => 'صاحب المنتج',
         'price' => 'السعر',
         'old price' => 'سعر القديم',
         'medias' => 'الصور',

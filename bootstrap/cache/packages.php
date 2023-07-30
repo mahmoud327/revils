@@ -109,6 +109,13 @@
       'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
+  'konnco/filament-import' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Konnco\\FilamentImport\\FilamentImportServiceProvider',
+    ),
+  ),
   'laravel/sail' => 
   array (
     'providers' => 
