@@ -63,7 +63,6 @@ class AuthRepository implements AuthRepositoryInterface
             Log::warning($e);
             throw new UnexpectedException($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
-        return new UserResource($user->load('businessProfile'));
     }
 
     public function createBusinessProfile($user, $request)

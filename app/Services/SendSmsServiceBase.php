@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\UserOtp;
 
-class SendSmsService
+class SendSmsServiceBase
 {
 
     public function __construct(public $mobile = null, public $otp = null){}
@@ -29,17 +29,6 @@ class SendSmsService
         $user_otp->save();
     }
 
-    public function resendSmsOtp()
-    {
-        $otp = rand(1000, 9999);
-        // send by SMS gateway
-
-        UserOtp::create([
-            'mobile' => $this->mobile,
-            'otp' => $otp
-        ]);
-    }
-
     public function message($otp)
     {
         if(app()->getLocale() == 'en')
@@ -57,29 +46,15 @@ class SendSmsService
             return false;
         }
         $this->activateMobile($otp->mobile);
-        $this->deleteOldOtpCodes($otp->mobile);
+        $this->deleteOldOtpCode();
 
         return true;
     }
 
-    public function verifyRestPassOtp() : bool
+    public function deleteOldOtpCode()
     {
-        $otp = UserOtp::whereOtp($this->otp)->first();
-        if(!$otp)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public function deleteOldOtpCodes($mobile)
-    {
-        $oldOtps = $this->findMultipleOtps($mobile);
-        if(!$oldOtps)
-        {
-            return false;
-        }
-        UserOtp::destroy($oldOtps);
+        $otp = $this->findOtp();
+        $otp->delete();
     }
 
     public function activateMobile($mobile)
@@ -89,20 +64,9 @@ class SendSmsService
         $user->save();
     }
 
-    public function findMultipleOtps($mobile)
+    public function findOtp()
     {
-       $otps = UserOtp::whereMobile($mobile)->pluck('id');
-       if($otps->isEmpty())
-       {
-           return false;
-       }
-       return $otps;
-    }
-
-    public function findSingleOtp($otp)
-    {
-        $otp = UserOtp::whereOtp($otp)->firstOrFail();
-        return $otp;
+        return UserOtp::whereOtp($this->otp)->findOrFail();
     }
 
 

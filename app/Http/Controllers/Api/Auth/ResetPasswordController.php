@@ -1,30 +1,44 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\ResetsPasswords;
+use App\Http\Requests\Api\Auth\OtpRequest;
+use App\Http\Requests\Api\Auth\RestPassword\ChangePasswordRequest;
+use App\Http\Requests\Api\Auth\RestPassword\RestPasswordRequest;
+use App\Models\UserOtp;
+use App\Repositories\Auth\RestPassword\RestPasswordRepositoryInterface;
+use App\Services\SendSmsService;
 
 class ResetPasswordController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset requests
-    | and uses a simple trait to include this behavior. You're free to
-    | explore this trait and override any methods you wish to tweak.
-    |
-    */
+    public function __construct(public  RestPasswordRepositoryInterface $restPasswordRepository){}
+    public function sendOtp(RestPasswordRequest $request)
+    {
+        $this->restPasswordRepository->sendOtp(request: $request);
+        $code['code'] = UserOtp::whereMobile($request->mobile)->first()->otp;
+        return responseSuccess($code, 'Code is sent successfully, please check your mobile messages');
+    }
 
-    use ResetsPasswords;
+    public function verifyOtp(OtpRequest $request)
+    {
+        $otp = new SendSmsService();
+        $otp->setOtp(otp: $request->otp);
+        $verification = $otp->verifyRestPassOtp();
+        if(!$verification)
+        {
+            return responseError("wrong code !", 402);
+        }
+        return responseSuccess('','valid code');
+    }
 
-    /**
-     * Where to redirect user after resetting their password.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        $reset = $this->restPasswordRepository->changePassword(request: $request);
+        if(!$reset)
+        {
+            return responseError("Wrong code !", 402);
+        }
+        return responseSuccess('', 'Your password changed successfully');
+    }
 }

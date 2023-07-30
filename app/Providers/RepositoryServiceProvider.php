@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Auth\AuthRepository;
 use App\Repositories\Auth\AuthRepositoryInterface;
+use App\Repositories\Auth\RestPassword\RestPasswordRepository;
+use App\Repositories\Auth\RestPassword\RestPasswordRepositoryInterface;
 use App\Repositories\Core\BusinessType\BusinessTypeRepository;
 use App\Repositories\Core\BusinessType\BusinessTypeRepositoryInterface;
 use App\Repositories\Core\Category\CategoryRepository;
@@ -78,5 +80,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PaymentRepositoryInterface::class, PaymentRepository::class);
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
         $this->app->bind(PostRepositoryInterface::class, PostRepository::class);
+        $this->app->bind(RestPasswordRepositoryInterface::class, RestPasswordRepository::class);
     }
 }

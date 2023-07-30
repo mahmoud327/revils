@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\Core\BusinessTypeController;
 use App\Http\Controllers\Api\Core\CategoryController;
@@ -44,6 +45,15 @@ Route::group(['prefix' => 'auth', 'middleware' => ['ChangeLanguage']], function 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
     });
+
+    ####### reset pass #########
+    Route::group(['prefix' => 'forget-password'], function () {
+        Route::post('send-otp', [ResetPasswordController::class, 'sendOtp']);
+        Route::post('verify-otp', [ResetPasswordController::class, 'verifyOtp']);
+        Route::post('change-password', [ResetPasswordController::class, 'changePassword']);
+    });
+    ####### end reset pass #########
+
 });
 ####### end auth #########
 /*core*/
