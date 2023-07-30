@@ -30,9 +30,5 @@ class CreateProduct extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
-    protected function afterCreate(): void
-    {
-        dd($this->record);
-        // Runs after the form fields are saved to the database.
-    }
+ 
 }
