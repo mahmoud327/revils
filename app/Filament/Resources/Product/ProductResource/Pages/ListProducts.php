@@ -5,8 +5,6 @@ namespace App\Filament\Resources\Product\ProductResource\Pages;
 use App\Filament\Resources\Product\ProductResource;
 use App\Models\Product\Product;
 use Filament\Pages\Actions;
-use Filament\Tables\Actions\Action;
-
 use Filament\Forms\Components\Select;
 
 use Filament\Resources\Pages\ListRecords;
@@ -21,21 +19,21 @@ class ListProducts extends ListRecords
 
     protected function getActions(): array
     {
-
         return [
             ImportAction::make()
-                ->fields([
-                    ImportField::make('name')
-                        ->required(),
+            ->fields([
+                ImportField::make('name')
+                    ->required(),
 
-                    ImportField::make('description')
-                        ->required(),
+                ImportField::make('description')
+                    ->required(),
 
-                ], columns: 2),
+            ], columns: 2),
 
 
 
-            ];
+            Actions\CreateAction::make(),
+        ];
     }
 
     protected function getTableQuery(): Builder

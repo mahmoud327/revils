@@ -13,7 +13,7 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 use Filament\Forms;
-use Filament\Forms\Components\Actions\Modal\Actions\Action;
+
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Fieldset;
@@ -260,13 +260,8 @@ class ProductResource extends Resource
             ->actions([
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\EditAction::make(),
-
-
-
-
             ])
             ->bulkActions([
-
                 Tables\Actions\DeleteBulkAction::make(),
                 Tables\Actions\BulkAction::make('export')
                     ->action(fn (Collection $records) => (new ProductExport($records))->download('products.xlsx'))
@@ -287,7 +282,6 @@ class ProductResource extends Resource
         return [
             'index' => Pages\ListProducts::route('/'),
             'create' => Pages\CreateProduct::route('/create'),
-            
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
