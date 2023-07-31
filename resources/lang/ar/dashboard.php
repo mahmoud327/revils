@@ -60,7 +60,7 @@ return [
         'user' => 'صاحب المنتج',
         'price' => 'السعر',
         'old price' => 'سعر القديم',
-        'medias' => 'الصور',
+        'medias'=> 'الصور',
         'genral' => 'عام',
         'unit' => 'الوحدة',
         'rejected' => 'مرفوض',

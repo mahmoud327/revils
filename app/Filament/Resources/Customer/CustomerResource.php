@@ -107,14 +107,16 @@ class CustomerResource extends Resource
 
                         Select::make('country_id')
                             ->label(trans('dashboard.customers.userProfile.country'))
+                            ->relationship('country', 'name')
+                            ->searchable(),
 
-                            ->relationship('country', 'name'),
+                        Select::make('city_id')
+                            ->relationship('city', 'name')->required()
+                            ->searchable(),
 
-                        // Select::make('city_id')
-                        //     ->relationship('city', 'name')->required(),
-
-                        // Select::make('state_id')
-                        //     ->relationship('state', 'name')->required(),
+                        Select::make('state_id')
+                            ->relationship('state', 'name')->required()
+                            ->searchable(),
 
 
 

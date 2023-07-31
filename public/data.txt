@@ -1,0 +1,1484 @@
+[
+    [
+        {
+            "ar": "Afghanistan",
+            "en": "Afghanistan"
+        },
+        {
+            "ar": "Albania",
+            "en": "Albania"
+        },
+        {
+            "ar": "Algeria",
+            "en": "Algeria"
+        },
+        {
+            "ar": "American Samoa",
+            "en": "American Samoa"
+        },
+        {
+            "ar": "Andorra",
+            "en": "Andorra"
+        },
+        {
+            "ar": "Angola",
+            "en": "Angola"
+        },
+        {
+            "ar": "Anguilla",
+            "en": "Anguilla"
+        },
+        {
+            "ar": "Antarctica",
+            "en": "Antarctica"
+        },
+        {
+            "ar": "Antigua And Barbuda",
+            "en": "Antigua And Barbuda"
+        },
+        {
+            "ar": "Argentina",
+            "en": "Argentina"
+        },
+        {
+            "ar": "Armenia",
+            "en": "Armenia"
+        },
+        {
+            "ar": "Aruba",
+            "en": "Aruba"
+        },
+        {
+            "ar": "Australia",
+            "en": "Australia"
+        },
+        {
+            "ar": "Austria",
+            "en": "Austria"
+        },
+        {
+            "ar": "Azerbaijan",
+            "en": "Azerbaijan"
+        },
+        {
+            "ar": "Bahamas The",
+            "en": "Bahamas The"
+        },
+        {
+            "ar": "Bahrain",
+            "en": "Bahrain"
+        },
+        {
+            "ar": "Bangladesh",
+            "en": "Bangladesh"
+        },
+        {
+            "ar": "Barbados",
+            "en": "Barbados"
+        },
+        {
+            "ar": "Belarus",
+            "en": "Belarus"
+        },
+        {
+            "ar": "Belgium",
+            "en": "Belgium"
+        },
+        {
+            "ar": "Belize",
+            "en": "Belize"
+        },
+        {
+            "ar": "Benin",
+            "en": "Benin"
+        },
+        {
+            "ar": "Bermuda",
+            "en": "Bermuda"
+        },
+        {
+            "ar": "Bhutan",
+            "en": "Bhutan"
+        },
+        {
+            "ar": "Bolivia",
+            "en": "Bolivia"
+        },
+        {
+            "ar": "Bosnia and Herzegovina",
+            "en": "Bosnia and Herzegovina"
+        },
+        {
+            "ar": "Botswana",
+            "en": "Botswana"
+        },
+        {
+            "ar": "Bouvet Island",
+            "en": "Bouvet Island"
+        },
+        {
+            "ar": "Brazil",
+            "en": "Brazil"
+        },
+        {
+            "ar": "British Indian Ocean Territory",
+            "en": "British Indian Ocean Territory"
+        },
+        {
+            "ar": "Brunei",
+            "en": "Brunei"
+        },
+        {
+            "ar": "Bulgaria",
+            "en": "Bulgaria"
+        },
+        {
+            "ar": "Burkina Faso",
+            "en": "Burkina Faso"
+        },
+        {
+            "ar": "Burundi",
+            "en": "Burundi"
+        },
+        {
+            "ar": "Cambodia",
+            "en": "Cambodia"
+        },
+        {
+            "ar": "Cameroon",
+            "en": "Cameroon"
+        },
+        {
+            "ar": "Canada",
+            "en": "Canada"
+        },
+        {
+            "ar": "Cape Verde",
+            "en": "Cape Verde"
+        },
+        {
+            "ar": "Cayman Islands",
+            "en": "Cayman Islands"
+        },
+        {
+            "ar": "Central African Republic",
+            "en": "Central African Republic"
+        },
+        {
+            "ar": "Chad",
+            "en": "Chad"
+        },
+        {
+            "ar": "Chile",
+            "en": "Chile"
+        },
+        {
+            "ar": "China",
+            "en": "China"
+        },
+        {
+            "ar": "Christmas Island",
+            "en": "Christmas Island"
+        },
+        {
+            "ar": "Cocos (Keeling) Islands",
+            "en": "Cocos (Keeling) Islands"
+        },
+        {
+            "ar": "Colombia",
+            "en": "Colombia"
+        },
+        {
+            "ar": "Comoros",
+            "en": "Comoros"
+        },
+        {
+            "ar": "Congo",
+            "en": "Congo"
+        },
+        {
+            "ar": "Congo The Democratic Republic Of The",
+            "en": "Congo The Democratic Republic Of The"
+        },
+        {
+            "ar": "Cook Islands",
+            "en": "Cook Islands"
+        },
+        {
+            "ar": "Costa Rica",
+            "en": "Costa Rica"
+        },
+        {
+            "ar": "Cote D Ivoire (Ivory Coast)",
+            "en": "Cote D Ivoire (Ivory Coast)"
+        },
+        {
+            "ar": "Croatia (Hrvatska)",
+            "en": "Croatia (Hrvatska)"
+        },
+        {
+            "ar": "Cuba",
+            "en": "Cuba"
+        },
+        {
+            "ar": "Cyprus",
+            "en": "Cyprus"
+        },
+        {
+            "ar": "Czech Republic",
+            "en": "Czech Republic"
+        },
+        {
+            "ar": "Denmark",
+            "en": "Denmark"
+        },
+        {
+            "ar": "Djibouti",
+            "en": "Djibouti"
+        },
+        {
+            "ar": "Dominica",
+            "en": "Dominica"
+        },
+        {
+            "ar": "Dominican Republic",
+            "en": "Dominican Republic"
+        },
+        {
+            "ar": "East Timor",
+            "en": "East Timor"
+        },
+        {
+            "ar": "Ecuador",
+            "en": "Ecuador"
+        },
+        {
+            "ar": "Egypt",
+            "en": "Egypt"
+        },
+        {
+            "ar": "El Salvador",
+            "en": "El Salvador"
+        },
+        {
+            "ar": "Equatorial Guinea",
+            "en": "Equatorial Guinea"
+        },
+        {
+            "ar": "Eritrea",
+            "en": "Eritrea"
+        },
+        {
+            "ar": "Estonia",
+            "en": "Estonia"
+        },
+        {
+            "ar": "Ethiopia",
+            "en": "Ethiopia"
+        },
+        {
+            "ar": "External Territories of Australia",
+            "en": "External Territories of Australia"
+        },
+        {
+            "ar": "Falkland Islands",
+            "en": "Falkland Islands"
+        },
+        {
+            "ar": "Faroe Islands",
+            "en": "Faroe Islands"
+        },
+        {
+            "ar": "Fiji Islands",
+            "en": "Fiji Islands"
+        },
+        {
+            "ar": "Finland",
+            "en": "Finland"
+        },
+        {
+            "ar": "France",
+            "en": "France"
+        },
+        {
+            "ar": "French Guiana",
+            "en": "French Guiana"
+        },
+        {
+            "ar": "French Polynesia",
+            "en": "French Polynesia"
+        },
+        {
+            "ar": "French Southern Territories",
+            "en": "French Southern Territories"
+        },
+        {
+            "ar": "Gabon",
+            "en": "Gabon"
+        },
+        {
+            "ar": "Gambia The",
+            "en": "Gambia The"
+        },
+        {
+            "ar": "Georgia",
+            "en": "Georgia"
+        },
+        {
+            "ar": "Germany",
+            "en": "Germany"
+        },
+        {
+            "ar": "Ghana",
+            "en": "Ghana"
+        },
+        {
+            "ar": "Gibraltar",
+            "en": "Gibraltar"
+        },
+        {
+            "ar": "Greece",
+            "en": "Greece"
+        },
+        {
+            "ar": "Greenland",
+            "en": "Greenland"
+        },
+        {
+            "ar": "Grenada",
+            "en": "Grenada"
+        },
+        {
+            "ar": "Guadeloupe",
+            "en": "Guadeloupe"
+        },
+        {
+            "ar": "Guam",
+            "en": "Guam"
+        },
+        {
+            "ar": "Guatemala",
+            "en": "Guatemala"
+        },
+        {
+            "ar": "Guernsey and Alderney",
+            "en": "Guernsey and Alderney"
+        },
+        {
+            "ar": "Guinea",
+            "en": "Guinea"
+        },
+        {
+            "ar": "Guinea-Bissau",
+            "en": "Guinea-Bissau"
+        },
+        {
+            "ar": "Guyana",
+            "en": "Guyana"
+        },
+        {
+            "ar": "Haiti",
+            "en": "Haiti"
+        },
+        {
+            "ar": "Heard and McDonald Islands",
+            "en": "Heard and McDonald Islands"
+        },
+        {
+            "ar": "Honduras",
+            "en": "Honduras"
+        },
+        {
+            "ar": "Hong Kong S.A.R.",
+            "en": "Hong Kong S.A.R."
+        },
+        {
+            "ar": "Hungary",
+            "en": "Hungary"
+        },
+        {
+            "ar": "Iceland",
+            "en": "Iceland"
+        },
+        {
+            "ar": "India",
+            "en": "India"
+        },
+        {
+            "ar": "Indonesia",
+            "en": "Indonesia"
+        },
+        {
+            "ar": "Iran",
+            "en": "Iran"
+        },
+        {
+            "ar": "Iraq",
+            "en": "Iraq"
+        },
+        {
+            "ar": "Ireland",
+            "en": "Ireland"
+        },
+        {
+            "ar": "Israel",
+            "en": "Israel"
+        },
+        {
+            "ar": "Italy",
+            "en": "Italy"
+        },
+        {
+            "ar": "Jamaica",
+            "en": "Jamaica"
+        },
+        {
+            "ar": "Japan",
+            "en": "Japan"
+        },
+        {
+            "ar": "Jersey",
+            "en": "Jersey"
+        },
+        {
+            "ar": "Jordan",
+            "en": "Jordan"
+        },
+        {
+            "ar": "Kazakhstan",
+            "en": "Kazakhstan"
+        },
+        {
+            "ar": "Kenya",
+            "en": "Kenya"
+        },
+        {
+            "ar": "Kiribati",
+            "en": "Kiribati"
+        },
+        {
+            "ar": "Korea North",
+            "en": "Korea North"
+        },
+        {
+            "ar": "Korea South",
+            "en": "Korea South"
+        },
+        {
+            "ar": "Kuwait",
+            "en": "Kuwait"
+        },
+        {
+            "ar": "Kyrgyzstan",
+            "en": "Kyrgyzstan"
+        },
+        {
+            "ar": "Laos",
+            "en": "Laos"
+        },
+        {
+            "ar": "Latvia",
+            "en": "Latvia"
+        },
+        {
+            "ar": "Lebanon",
+            "en": "Lebanon"
+        },
+        {
+            "ar": "Lesotho",
+            "en": "Lesotho"
+        },
+        {
+            "ar": "Liberia",
+            "en": "Liberia"
+        },
+        {
+            "ar": "Libya",
+            "en": "Libya"
+        },
+        {
+            "ar": "Liechtenstein",
+            "en": "Liechtenstein"
+        },
+        {
+            "ar": "Lithuania",
+            "en": "Lithuania"
+        },
+        {
+            "ar": "Luxembourg",
+            "en": "Luxembourg"
+        },
+        {
+            "ar": "Macau S.A.R.",
+            "en": "Macau S.A.R."
+        },
+        {
+            "ar": "Macedonia",
+            "en": "Macedonia"
+        },
+        {
+            "ar": "Madagascar",
+            "en": "Madagascar"
+        },
+        {
+            "ar": "Malawi",
+            "en": "Malawi"
+        },
+        {
+            "ar": "Malaysia",
+            "en": "Malaysia"
+        },
+        {
+            "ar": "Maldives",
+            "en": "Maldives"
+        },
+        {
+            "ar": "Mali",
+            "en": "Mali"
+        },
+        {
+            "ar": "Malta",
+            "en": "Malta"
+        },
+        {
+            "ar": "Man (Isle of)",
+            "en": "Man (Isle of)"
+        },
+        {
+            "ar": "Marshall Islands",
+            "en": "Marshall Islands"
+        },
+        {
+            "ar": "Martinique",
+            "en": "Martinique"
+        },
+        {
+            "ar": "Mauritania",
+            "en": "Mauritania"
+        },
+        {
+            "ar": "Mauritius",
+            "en": "Mauritius"
+        },
+        {
+            "ar": "Mayotte",
+            "en": "Mayotte"
+        },
+        {
+            "ar": "Mexico",
+            "en": "Mexico"
+        },
+        {
+            "ar": "Micronesia",
+            "en": "Micronesia"
+        },
+        {
+            "ar": "Moldova",
+            "en": "Moldova"
+        },
+        {
+            "ar": "Monaco",
+            "en": "Monaco"
+        },
+        {
+            "ar": "Mongolia",
+            "en": "Mongolia"
+        },
+        {
+            "ar": "Montserrat",
+            "en": "Montserrat"
+        },
+        {
+            "ar": "Morocco",
+            "en": "Morocco"
+        },
+        {
+            "ar": "Mozambique",
+            "en": "Mozambique"
+        },
+        {
+            "ar": "Myanmar",
+            "en": "Myanmar"
+        },
+        {
+            "ar": "Namibia",
+            "en": "Namibia"
+        },
+        {
+            "ar": "Nauru",
+            "en": "Nauru"
+        },
+        {
+            "ar": "Nepal",
+            "en": "Nepal"
+        },
+        {
+            "ar": "Netherlands Antilles",
+            "en": "Netherlands Antilles"
+        },
+        {
+            "ar": "Netherlands The",
+            "en": "Netherlands The"
+        },
+        {
+            "ar": "New Caledonia",
+            "en": "New Caledonia"
+        },
+        {
+            "ar": "New Zealand",
+            "en": "New Zealand"
+        },
+        {
+            "ar": "Nicaragua",
+            "en": "Nicaragua"
+        },
+        {
+            "ar": "Niger",
+            "en": "Niger"
+        },
+        {
+            "ar": "Nigeria",
+            "en": "Nigeria"
+        },
+        {
+            "ar": "Niue",
+            "en": "Niue"
+        },
+        {
+            "ar": "Norfolk Island",
+            "en": "Norfolk Island"
+        },
+        {
+            "ar": "Northern Mariana Islands",
+            "en": "Northern Mariana Islands"
+        },
+        {
+            "ar": "Norway",
+            "en": "Norway"
+        },
+        {
+            "ar": "Oman",
+            "en": "Oman"
+        },
+        {
+            "ar": "Pakistan",
+            "en": "Pakistan"
+        },
+        {
+            "ar": "Palau",
+            "en": "Palau"
+        },
+        {
+            "ar": "Palestinian Territory Occupied",
+            "en": "Palestinian Territory Occupied"
+        },
+        {
+            "ar": "Panama",
+            "en": "Panama"
+        },
+        {
+            "ar": "Papua new Guinea",
+            "en": "Papua new Guinea"
+        },
+        {
+            "ar": "Paraguay",
+            "en": "Paraguay"
+        },
+        {
+            "ar": "Peru",
+            "en": "Peru"
+        },
+        {
+            "ar": "Philippines",
+            "en": "Philippines"
+        },
+        {
+            "ar": "Pitcairn Island",
+            "en": "Pitcairn Island"
+        },
+        {
+            "ar": "Poland",
+            "en": "Poland"
+        },
+        {
+            "ar": "Portugal",
+            "en": "Portugal"
+        },
+        {
+            "ar": "Puerto Rico",
+            "en": "Puerto Rico"
+        },
+        {
+            "ar": "Qatar",
+            "en": "Qatar"
+        },
+        {
+            "ar": "Reunion",
+            "en": "Reunion"
+        },
+        {
+            "ar": "Romania",
+            "en": "Romania"
+        },
+        {
+            "ar": "Russia",
+            "en": "Russia"
+        },
+        {
+            "ar": "Rwanda",
+            "en": "Rwanda"
+        },
+        {
+            "ar": "Saint Helena",
+            "en": "Saint Helena"
+        },
+        {
+            "ar": "Saint Kitts And Nevis",
+            "en": "Saint Kitts And Nevis"
+        },
+        {
+            "ar": "Saint Lucia",
+            "en": "Saint Lucia"
+        },
+        {
+            "ar": "Saint Pierre and Miquelon",
+            "en": "Saint Pierre and Miquelon"
+        },
+        {
+            "ar": "Saint Vincent And The Grenadines",
+            "en": "Saint Vincent And The Grenadines"
+        },
+        {
+            "ar": "Samoa",
+            "en": "Samoa"
+        },
+        {
+            "ar": "San Marino",
+            "en": "San Marino"
+        },
+        {
+            "ar": "Sao Tome and Principe",
+            "en": "Sao Tome and Principe"
+        },
+        {
+            "ar": "Saudi Arabia",
+            "en": "Saudi Arabia"
+        },
+        {
+            "ar": "Senegal",
+            "en": "Senegal"
+        },
+        {
+            "ar": "Serbia",
+            "en": "Serbia"
+        },
+        {
+            "ar": "Seychelles",
+            "en": "Seychelles"
+        },
+        {
+            "ar": "Sierra Leone",
+            "en": "Sierra Leone"
+        },
+        {
+            "ar": "Singapore",
+            "en": "Singapore"
+        },
+        {
+            "ar": "Slovakia",
+            "en": "Slovakia"
+        },
+        {
+            "ar": "Slovenia",
+            "en": "Slovenia"
+        },
+        {
+            "ar": "Smaller Territories of the UK",
+            "en": "Smaller Territories of the UK"
+        },
+        {
+            "ar": "Solomon Islands",
+            "en": "Solomon Islands"
+        },
+        {
+            "ar": "Somalia",
+            "en": "Somalia"
+        },
+        {
+            "ar": "South Africa",
+            "en": "South Africa"
+        },
+        {
+            "ar": "South Georgia",
+            "en": "South Georgia"
+        },
+        {
+            "ar": "South Sudan",
+            "en": "South Sudan"
+        },
+        {
+            "ar": "Spain",
+            "en": "Spain"
+        },
+        {
+            "ar": "Sri Lanka",
+            "en": "Sri Lanka"
+        },
+        {
+            "ar": "Sudan",
+            "en": "Sudan"
+        },
+        {
+            "ar": "Suriname",
+            "en": "Suriname"
+        },
+        {
+            "ar": "Svalbard And Jan Mayen Islands",
+            "en": "Svalbard And Jan Mayen Islands"
+        },
+        {
+            "ar": "Swaziland",
+            "en": "Swaziland"
+        },
+        {
+            "ar": "Sweden",
+            "en": "Sweden"
+        },
+        {
+            "ar": "Switzerland",
+            "en": "Switzerland"
+        },
+        {
+            "ar": "Syria",
+            "en": "Syria"
+        },
+        {
+            "ar": "Taiwan",
+            "en": "Taiwan"
+        },
+        {
+            "ar": "Tajikistan",
+            "en": "Tajikistan"
+        },
+        {
+            "ar": "Tanzania",
+            "en": "Tanzania"
+        },
+        {
+            "ar": "Thailand",
+            "en": "Thailand"
+        },
+        {
+            "ar": "Togo",
+            "en": "Togo"
+        },
+        {
+            "ar": "Tokelau",
+            "en": "Tokelau"
+        },
+        {
+            "ar": "Tonga",
+            "en": "Tonga"
+        },
+        {
+            "ar": "Trinidad And Tobago",
+            "en": "Trinidad And Tobago"
+        },
+        {
+            "ar": "Tunisia",
+            "en": "Tunisia"
+        },
+        {
+            "ar": "Turkey",
+            "en": "Turkey"
+        },
+        {
+            "ar": "Turkmenistan",
+            "en": "Turkmenistan"
+        },
+        {
+            "ar": "Turks And Caicos Islands",
+            "en": "Turks And Caicos Islands"
+        },
+        {
+            "ar": "Tuvalu",
+            "en": "Tuvalu"
+        },
+        {
+            "ar": "Uganda",
+            "en": "Uganda"
+        },
+        {
+            "ar": "Ukraine",
+            "en": "Ukraine"
+        },
+        {
+            "ar": "United Arab Emirates",
+            "en": "United Arab Emirates"
+        },
+        {
+            "ar": "United Kingdom",
+            "en": "United Kingdom"
+        },
+        {
+            "ar": "United States",
+            "en": "United States"
+        },
+        {
+            "ar": "United States Minor Outlying Islands",
+            "en": "United States Minor Outlying Islands"
+        },
+        {
+            "ar": "Uruguay",
+            "en": "Uruguay"
+        },
+        {
+            "ar": "Uzbekistan",
+            "en": "Uzbekistan"
+        },
+        {
+            "ar": "Vanuatu",
+            "en": "Vanuatu"
+        },
+        {
+            "ar": "Vatican City State (Holy See)",
+            "en": "Vatican City State (Holy See)"
+        },
+        {
+            "ar": "Venezuela",
+            "en": "Venezuela"
+        },
+        {
+            "ar": "Vietnam",
+            "en": "Vietnam"
+        },
+        {
+            "ar": "Virgin Islands (British)",
+            "en": "Virgin Islands (British)"
+        },
+        {
+            "ar": "Virgin Islands (US)",
+            "en": "Virgin Islands (US)"
+        },
+        {
+            "ar": "Wallis And Futuna Islands",
+            "en": "Wallis And Futuna Islands"
+        },
+        {
+            "ar": "Western Sahara",
+            "en": "Western Sahara"
+        },
+        {
+            "ar": "Yemen",
+            "en": "Yemen"
+        },
+        {
+            "ar": "Yugoslavia",
+            "en": "Yugoslavia"
+        },
+        {
+            "ar": "Zambia",
+            "en": "Zambia"
+        },
+        {
+            "ar": "Zimbabwe",
+            "en": "Zimbabwe"
+        }
+    ],
+    [
+        "AF",
+        "AL",
+        "DZ",
+        "AS",
+        "AD",
+        "AO",
+        "AI",
+        "AQ",
+        "AG",
+        "AR",
+        "AM",
+        "AW",
+        "AU",
+        "AT",
+        "AZ",
+        "BS",
+        "BH",
+        "BD",
+        "BB",
+        "BY",
+        "BE",
+        "BZ",
+        "BJ",
+        "BM",
+        "BT",
+        "BO",
+        "BA",
+        "BW",
+        "BV",
+        "BR",
+        "IO",
+        "BN",
+        "BG",
+        "BF",
+        "BI",
+        "KH",
+        "CM",
+        "CA",
+        "CV",
+        "KY",
+        "CF",
+        "TD",
+        "CL",
+        "CN",
+        "CX",
+        "CC",
+        "CO",
+        "KM",
+        "CG",
+        "CD",
+        "CK",
+        "CR",
+        "CI",
+        "HR",
+        "CU",
+        "CY",
+        "CZ",
+        "DK",
+        "DJ",
+        "DM",
+        "DO",
+        "TP",
+        "EC",
+        "EG",
+        "SV",
+        "GQ",
+        "ER",
+        "EE",
+        "ET",
+        "XA",
+        "FK",
+        "FO",
+        "FJ",
+        "FI",
+        "FR",
+        "GF",
+        "PF",
+        "TF",
+        "GA",
+        "GM",
+        "GE",
+        "DE",
+        "GH",
+        "GI",
+        "GR",
+        "GL",
+        "GD",
+        "GP",
+        "GU",
+        "GT",
+        "XU",
+        "GN",
+        "GW",
+        "GY",
+        "HT",
+        "HM",
+        "HN",
+        "HK",
+        "HU",
+        "IS",
+        "IN",
+        "ID",
+        "IR",
+        "IQ",
+        "IE",
+        "IL",
+        "IT",
+        "JM",
+        "JP",
+        "XJ",
+        "JO",
+        "KZ",
+        "KE",
+        "KI",
+        "KP",
+        "KR",
+        "KW",
+        "KG",
+        "LA",
+        "LV",
+        "LB",
+        "LS",
+        "LR",
+        "LY",
+        "LI",
+        "LT",
+        "LU",
+        "MO",
+        "MK",
+        "MG",
+        "MW",
+        "MY",
+        "MV",
+        "ML",
+        "MT",
+        "XM",
+        "MH",
+        "MQ",
+        "MR",
+        "MU",
+        "YT",
+        "MX",
+        "FM",
+        "MD",
+        "MC",
+        "MN",
+        "MS",
+        "MA",
+        "MZ",
+        "MM",
+        "NA",
+        "NR",
+        "NP",
+        "AN",
+        "NL",
+        "NC",
+        "NZ",
+        "NI",
+        "NE",
+        "NG",
+        "NU",
+        "NF",
+        "MP",
+        "NO",
+        "OM",
+        "PK",
+        "PW",
+        "PS",
+        "PA",
+        "PG",
+        "PY",
+        "PE",
+        "PH",
+        "PN",
+        "PL",
+        "PT",
+        "PR",
+        "QA",
+        "RE",
+        "RO",
+        "RU",
+        "RW",
+        "SH",
+        "KN",
+        "LC",
+        "PM",
+        "VC",
+        "WS",
+        "SM",
+        "ST",
+        "SA",
+        "SN",
+        "RS",
+        "SC",
+        "SL",
+        "SG",
+        "SK",
+        "SI",
+        "XG",
+        "SB",
+        "SO",
+        "ZA",
+        "GS",
+        "SS",
+        "ES",
+        "LK",
+        "SD",
+        "SR",
+        "SJ",
+        "SZ",
+        "SE",
+        "CH",
+        "SY",
+        "TW",
+        "TJ",
+        "TZ",
+        "TH",
+        "TG",
+        "TK",
+        "TO",
+        "TT",
+        "TN",
+        "TR",
+        "TM",
+        "TC",
+        "TV",
+        "UG",
+        "UA",
+        "AE",
+        "GB",
+        "US",
+        "UM",
+        "UY",
+        "UZ",
+        "VU",
+        "VA",
+        "VE",
+        "VN",
+        "VG",
+        "VI",
+        "WF",
+        "EH",
+        "YE",
+        "YU",
+        "ZM",
+        "ZW"
+    ],
+    [
+        93,
+        355,
+        213,
+        1684,
+        376,
+        244,
+        1264,
+        0,
+        1268,
+        54,
+        374,
+        297,
+        61,
+        43,
+        994,
+        1242,
+        973,
+        880,
+        1246,
+        375,
+        32,
+        501,
+        229,
+        1441,
+        975,
+        591,
+        387,
+        267,
+        0,
+        55,
+        246,
+        673,
+        359,
+        226,
+        257,
+        855,
+        237,
+        1,
+        238,
+        1345,
+        236,
+        235,
+        56,
+        86,
+        61,
+        672,
+        57,
+        269,
+        242,
+        242,
+        682,
+        506,
+        225,
+        385,
+        53,
+        357,
+        420,
+        45,
+        253,
+        1767,
+        1809,
+        670,
+        593,
+        20,
+        503,
+        240,
+        291,
+        372,
+        251,
+        61,
+        500,
+        298,
+        679,
+        358,
+        33,
+        594,
+        689,
+        0,
+        241,
+        220,
+        995,
+        49,
+        233,
+        350,
+        30,
+        299,
+        1473,
+        590,
+        1671,
+        502,
+        44,
+        224,
+        245,
+        592,
+        509,
+        0,
+        504,
+        852,
+        36,
+        354,
+        91,
+        62,
+        98,
+        964,
+        353,
+        972,
+        39,
+        1876,
+        81,
+        44,
+        962,
+        7,
+        254,
+        686,
+        850,
+        82,
+        965,
+        996,
+        856,
+        371,
+        961,
+        266,
+        231,
+        218,
+        423,
+        370,
+        352,
+        853,
+        389,
+        261,
+        265,
+        60,
+        960,
+        223,
+        356,
+        44,
+        692,
+        596,
+        222,
+        230,
+        269,
+        52,
+        691,
+        373,
+        377,
+        976,
+        1664,
+        212,
+        258,
+        95,
+        264,
+        674,
+        977,
+        599,
+        31,
+        687,
+        64,
+        505,
+        227,
+        234,
+        683,
+        672,
+        1670,
+        47,
+        968,
+        92,
+        680,
+        970,
+        507,
+        675,
+        595,
+        51,
+        63,
+        0,
+        48,
+        351,
+        1787,
+        974,
+        262,
+        40,
+        70,
+        250,
+        290,
+        1869,
+        1758,
+        508,
+        1784,
+        684,
+        378,
+        239,
+        966,
+        221,
+        381,
+        248,
+        232,
+        65,
+        421,
+        386,
+        44,
+        677,
+        252,
+        27,
+        0,
+        211,
+        34,
+        94,
+        249,
+        597,
+        47,
+        268,
+        46,
+        41,
+        963,
+        886,
+        992,
+        255,
+        66,
+        228,
+        690,
+        676,
+        1868,
+        216,
+        90,
+        7370,
+        1649,
+        688,
+        256,
+        380,
+        971,
+        44,
+        1,
+        1,
+        598,
+        998,
+        678,
+        39,
+        58,
+        84,
+        1284,
+        1340,
+        681,
+        212,
+        967,
+        38,
+        260,
+        263
+    ]
+]

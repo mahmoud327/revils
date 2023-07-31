@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Core\City;
+use App\Models\Core\Country;
+use App\Models\Core\State;
 use App\Models\User;
 use App\Models\UserOtp;
 use Illuminate\Support\Facades\Route;
@@ -14,17 +17,33 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/', function () {
-    return view('welcome');
+
+
+
+
+    City::orderBy('id')->whereBetween('id',[46001,48331])->chunk(100, function ($countries) {
+        foreach ($countries as $country) {
+
+            $country->name = ['ar' => $country->name, 'en' => $country->name];
+            $country->save();
+        }
+    });
+
+
+    return response()->json(['message' => 'Data saved successfully.']);
+
+    // return view('welcome');
 });
 
 Route::get('/test', function () {
-   $user = User::first();
-   $post = \App\Models\SocialNetwork\Post::with(['tags','comments.user'])->first();
-   return new \App\Http\Resources\SocialNetwork\PostResource($post);
-    $post->comment('Hello, world!',$user);
+    $user = User::first();
+    $post = \App\Models\SocialNetwork\Post::with(['tags', 'comments.user'])->first();
+    return new \App\Http\Resources\SocialNetwork\PostResource($post);
+    $post->comment('Hello, world!', $user);
     return "deeletsl";
 
-    return $post->comments()->where('commentable_id',1)->forceDelete();
+    return $post->comments()->where('commentable_id', 1)->forceDelete();
     return $post;
 });
