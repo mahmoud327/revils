@@ -21,14 +21,31 @@ class ListProducts extends ListRecords
     {
         return [
             ImportAction::make()
-            ->fields([
+                ->handleBlankRows(true)
+
+                ->fields([
                 ImportField::make('name')
                     ->required(),
 
                 ImportField::make('description')
                     ->required(),
 
-            ], columns: 2),
+                ImportField::make('user_id')
+                    ->required(),
+                ImportField::make('price'),
+                ImportField::make('weight'),
+                ImportField::make('unit'),
+                ImportField::make('is_liquid_shipping'),
+                ImportField::make('weight'),
+                ImportField::make('is_handcrafted'),
+                ImportField::make('status'),
+                ImportField::make('quantity'),
+                ImportField::make('category_id'),
+                    ImportField::make('item_type'),
+
+                    // ImportField::make('user'),
+               // ImportField::make('attributes')->relationship('attributeValues'),
+            ]),
 
 
 
