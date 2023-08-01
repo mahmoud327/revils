@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Product\ProductResource\Pages;
+namespace App\Filament\Resources\Core\BannerResource\Pages;
 
-use App\Filament\Resources\Product\ProductResource;
+use App\Filament\Resources\Core\BannerResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateProduct extends CreateRecord
+class CreateBanner extends CreateRecord
 {
-    protected static string $resource = ProductResource::class;
-
+    protected static string $resource = BannerResource::class;
 
     use CreateRecord\Concerns\Translatable;
 
@@ -25,5 +24,4 @@ class CreateProduct extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
-
 }

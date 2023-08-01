@@ -5,9 +5,13 @@ return [
     'created at' => 'created at',
     'activities' => 'activities',
     'permissions' => 'permissions',
+    'active' => 'active',
+
     'sellers and customers' => 'sellers and customers',
 
     'admins' => 'admins',
+    'image'=> 'image',
+
     'roles' => [
         'roles' => 'roles',
         'choose any roles' => 'choose any roles',
@@ -50,6 +54,8 @@ return [
         'is dangerous shipping' => 'is dangerous shipping',
         'category' => 'category',
         'user' => 'user',
+        'users' => 'users',
+
 
         'status' => 'status',
         'is handcrafted' => 'is handcrafted',
@@ -64,6 +70,8 @@ return [
         'old price' => 'old price',
         'medias' => 'medias',
         'unit' => 'unit',
+        'max size' => '5 mega max size',
+
         'rejected' => 'rejected',
         'approved' => 'approved',
         'pending' => 'pending',
@@ -81,5 +89,10 @@ return [
     'categories' => [
         'categories' => 'categories',
         'color' => 'color',
+    ],
+    'banners' => [
+        'banners' => 'banners',
+        'title' => 'title',
+        'description' => 'description',
     ],
 ];

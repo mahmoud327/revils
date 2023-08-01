@@ -7,6 +7,7 @@ return [
     'sellers and customers' => 'العملاء والبائعين',
     'admins' => 'المشرفين',
     'activities' => 'سجل النشاطات',
+    'active' => 'تفعيل',
 
 
     'roles' => [
@@ -58,12 +59,15 @@ return [
         'is liquid shipping' => 'الشحن السائل',
         'item type' => 'نوع العنصر',
         'user' => 'صاحب المنتج',
+        'users' => 'المستخدمين',
         'price' => 'السعر',
         'old price' => 'سعر القديم',
         'medias'=> 'الصور',
+        'image'=> 'الصورة',
         'genral' => 'عام',
         'unit' => 'الوحدة',
         'rejected' => 'مرفوض',
+        'max size' => '5 ميجا اكبر حجم لرفع الصور',
         'approved' => 'قبول',
         'pending' => 'منتظرة',
         'products-rejected' => 'المنتجات المرفوضة',
@@ -80,5 +84,10 @@ return [
     'categories' => [
         'categories' => 'الاقسام',
         'color' => 'اللون',
+    ],
+    'banners' => [
+        'banners' => 'البانر',
+        'title' => 'عنوان',
+        'description' => 'وصف',
     ],
 ];

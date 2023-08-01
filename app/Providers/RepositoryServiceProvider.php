@@ -35,6 +35,8 @@ use App\Repositories\State\StateRepository;
 use App\Repositories\State\StateRepositoryInterface;
 use App\Repositories\Core\Address\AddressRepository;
 use App\Repositories\Core\Address\AddressRepositoryInterface;
+use App\Repositories\Core\Banner\BannerRepository;
+use App\Repositories\Core\Banner\BannerRepositoryInterface;
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\User\UserRepository;
@@ -70,6 +72,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CountryRepositoryInterface::class, CountryRepository::class);
         $this->app->bind(StateRepositoryInterface::class, StateRepository::class);
         $this->app->bind(BusinessTypeRepositoryInterface::class, BusinessTypeRepository::class);
+        $this->app->bind(BannerRepositoryInterface::class, BannerRepository::class);
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(SelllerRepositoryInterface::class, SellerRepository::class);
 

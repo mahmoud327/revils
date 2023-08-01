@@ -22,6 +22,7 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Form;
@@ -84,6 +85,14 @@ class ProductResource extends Resource
                                     Select::make('category_id')
                                         ->relationship('category', 'name')
                                         ->label(trans('dashboard.products.category'))
+
+                                        ->required()
+                                        ->preload(),
+
+
+                                    Select::make('user_id')
+                                        ->relationship('user', 'name')
+                                        ->label(trans('dashboard.products.user'))
 
                                         ->required()
                                         ->preload(),
@@ -183,8 +192,13 @@ class ProductResource extends Resource
                                 ->label(trans('dashboard.products.medias'))
 
                                 ->schema([
+
+
                                     SpatieMediaLibraryFileUpload::make('images')
+                                    ->label(trans('dashboard.products.max size'))
                                         ->collection('images')
+                                        ->minSize(1)
+                                         ->maxSize(5120)
                                         ->multiple()
 
 

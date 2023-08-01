@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\Core\BannerController;
 use App\Http\Controllers\Api\Core\BusinessTypeController;
 use App\Http\Controllers\Api\Core\CategoryController;
 use App\Http\Controllers\Api\Core\CountryController;
@@ -69,7 +70,13 @@ Route::group(['middleware' => ['ChangeLanguage']], function () {
 Route::get('countries', [CountryController::class, 'index']);
 Route::post('states', [CountryController::class, 'getStates']);
 Route::post('cities', [CountryController::class, 'getCities']);
+
 ####### end auth #########
+
+#######banners#########
+Route::get('banners', [BannerController::class, 'index']);
+####### end banners #########
+
 
 ####### product  #########
 Route::apiResource('products', ProductController::class)->only(['index', 'show']);
