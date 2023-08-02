@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Product;
 
 use App\Exports\ProductExport;
+use App\Filament\Resources\Customer\CustomerResource\Pages\ShowProduct;
 use App\Filament\Resources\Product\ProductResource\Pages;
 use App\Filament\Resources\Product\ProductResource\RelationManagers;
 use App\Models\Product\Attribute;
@@ -17,6 +18,7 @@ use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
@@ -74,13 +76,12 @@ class ProductResource extends Resource
                                         ->required(),
 
 
-
                                     RichEditor::make('description')
                                         ->label(trans('dashboard.description'))
                                         ->required(),
+
                                     Toggle::make('is_dangerous_shipping')
                                         ->label(trans('dashboard.products.is dangerous shipping')),
-
 
                                     Select::make('category_id')
                                         ->relationship('category', 'name')
@@ -163,7 +164,7 @@ class ProductResource extends Resource
                                 ->label(trans('dashboard.products.attributes'))
                                 ->schema([
                                     Repeater::make('attributes')
-                                    ->relationship('attributeValues')
+                                        ->relationship('attributeValues')
                                         ->label(trans('dashboard.products.attributes'))
                                         ->schema([
                                             Select::make('attribute_id')
@@ -195,12 +196,12 @@ class ProductResource extends Resource
 
 
                                     SpatieMediaLibraryFileUpload::make('images')
-                                    ->label(trans('dashboard.products.max size'))
+                                        ->label(trans('dashboard.products.max size'))
                                         ->collection('images')
+                                        ->image()
                                         ->minSize(1)
-                                         ->maxSize(5120)
+                                        ->maxSize(5120)
                                         ->multiple()
-
 
                                     // ...
 
@@ -227,12 +228,20 @@ class ProductResource extends Resource
 
                 Tables\Columns\TextColumn::make('name')
                     ->label(trans('dashboard.name'))
-
                     ->sortable()->searchable(),
+
                 Tables\Columns\TextColumn::make('price')
                     ->label(trans('dashboard.products.price'))
-
                     ->sortable()->searchable(),
+
+                Tables\Columns\TextColumn::make('created_by')
+                    ->label(trans('dashboard.products.created by'))
+                    ->sortable()->searchable(),
+
+                Tables\Columns\TextColumn::make('updated_by')
+                    ->label(trans('dashboard.products.updated by'))
+                    ->sortable()->searchable(),
+
                 Tables\Columns\TextColumn::make('weight')
                     ->label(trans('dashboard.products.weight'))
 
@@ -272,6 +281,9 @@ class ProductResource extends Resource
                 //
             ])
             ->actions([
+                // Tables\Actions\Action::make('show')
+                // ->url(fn (Product $record) => 'products/show/' . $record->id),
+
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
@@ -297,6 +309,8 @@ class ProductResource extends Resource
             'index' => Pages\ListProducts::route('/'),
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
+            // 'show' => ShowProduct::route('/show/{id}'),
+
         ];
     }
 }

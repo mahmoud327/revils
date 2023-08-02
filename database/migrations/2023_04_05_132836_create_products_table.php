@@ -24,6 +24,8 @@ return new class extends Migration
             $table->integer('view_number')->default(0);
             $table->tinyInteger('status')->default(0)->comment('0 pending, 1 approved, 2 rejected');
             $table->string('reason')->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->tinyInteger('is_free_shipping')->default(0);
             $table->bigInteger('cash')->nullable();
             $table->tinyInteger('is_batteries_shipping')->default(0);

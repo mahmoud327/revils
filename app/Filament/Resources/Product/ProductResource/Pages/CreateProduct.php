@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Product\ProductResource\Pages;
 use App\Filament\Resources\Product\ProductResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class CreateProduct extends CreateRecord
 {
@@ -26,4 +27,15 @@ class CreateProduct extends CreateRecord
         return $this->getResource()::getUrl('index');
     }
 
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['created_by'] = auth()->user()->name;
+        return $data;
+    }
+
+
+
+
 }
+
+
