@@ -48,7 +48,14 @@ return [
     ],
     'products' => [
         'products' => 'المنتجات',
+        'created by' => 'انشاء بواسطة',
+        'updated by' => 'تعديل بواسطة',
+
         'is dangerous shipping' => 'شحن خطير',
+        'rate' => 'التقييم',
+        'rates' => 'التقييمات',
+        'id' => 'رقم المنتج',
+        'rate' => 'التقييم',
         'category' => 'الاقسام',
         'status' => 'الحالة',
         'is handcrafted' => 'مصنوع يدويًا',
@@ -67,7 +74,7 @@ return [
         'genral' => 'عام',
         'unit' => 'الوحدة',
         'rejected' => 'مرفوض',
-        'max size' => '5 ميجا اكبر حجم لرفع الصور',
+        'max size' => '5 ميجا اكبر حجم لرفع الصور (png,jpg,jpeg,svg)',
         'approved' => 'قبول',
         'pending' => 'منتظرة',
         'products-rejected' => 'المنتجات المرفوضة',

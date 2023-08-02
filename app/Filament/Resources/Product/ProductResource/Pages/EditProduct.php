@@ -22,6 +22,13 @@ class EditProduct extends EditRecord
 
         ];
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['updated_by'] = auth()->user()->name;
+
+        return $data;
+    }
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

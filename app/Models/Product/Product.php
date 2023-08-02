@@ -64,7 +64,6 @@ class Product extends Model implements HasMedia
     }
     public function getRatesAttribute()
     {
-
         return $this->averageRating('products') ?? 0;
     }
 

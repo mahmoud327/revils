@@ -10,7 +10,7 @@ return [
     'sellers and customers' => 'sellers and customers',
 
     'admins' => 'admins',
-    'image'=> 'image',
+    'image' => 'image',
 
     'roles' => [
         'roles' => 'roles',
@@ -51,6 +51,8 @@ return [
     ],
     'products' => [
         'products' => 'products',
+        'created by' => 'created by',
+        'updated by' => 'updated by',
         'is dangerous shipping' => 'is dangerous shipping',
         'category' => 'category',
         'user' => 'user',
@@ -70,8 +72,10 @@ return [
         'old price' => 'old price',
         'medias' => 'medias',
         'unit' => 'unit',
-        'max size' => '5 mega max size',
-
+        'max size' => '5 mega max size (png,jpg,jpeg,svg)',
+        'rate' => 'rate',
+        'id' => 'id',
+        'rates' => 'rates',
         'rejected' => 'rejected',
         'approved' => 'approved',
         'pending' => 'pending',

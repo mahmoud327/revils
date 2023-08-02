@@ -6,7 +6,6 @@ return [
      * If you published the migration files, please set to `false`.
      */
     'migrations' => false,
-
     /*
      * Models Related.
      */
