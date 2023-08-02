@@ -53,6 +53,7 @@ Route::group(['prefix' => 'auth', 'middleware' => ['ChangeLanguage']], function 
         Route::post('verify-otp', [ResetPasswordController::class, 'verifyOtp']);
         Route::post('change-password', [ResetPasswordController::class, 'changePassword']);
     });
+    Route::post('resend-otp', [AuthController::class, 'resendOtp']);
     ####### end reset pass #########
 
 });

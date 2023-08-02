@@ -6,8 +6,11 @@ use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\CustomerRegisterRequest;
 use App\Http\Requests\Api\Auth\OtpRequest;
+use App\Http\Requests\Api\Auth\ResendOtpRequest;
+use App\Http\Requests\Api\Auth\RestPassword\RestPasswordRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Models\UserOtp;
 use App\Repositories\Auth\AuthRepositoryInterface;
 use App\Services\SendSmsService;
@@ -134,6 +137,17 @@ class AuthController extends Controller
             return responseError("wrong code !", 402);
         }
         return responseSuccess('','valid code');
+    }
+
+    public function resendOtp(ResendOtpRequest $request)
+    {
+        $otp = new SendSmsService();
+        $otp->setMobile(mobile: $request->mobile);
+        $otp->deleteOldOtpCodes(mobile: $request->mobile);
+        $otp->sendSmsOtp();
+        $code['code'] = UserOtp::whereMobile($request->mobile)->first()->otp;
+
+        return responseSuccess($code,'Otp is sent');
     }
 
     public function logout()

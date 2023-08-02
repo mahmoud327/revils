@@ -29,17 +29,6 @@ class SendSmsService
         $user_otp->save();
     }
 
-    public function resendSmsOtp()
-    {
-        $otp = rand(1000, 9999);
-        // send by SMS gateway
-
-        UserOtp::create([
-            'mobile' => $this->mobile,
-            'otp' => $otp
-        ]);
-    }
-
     public function message($otp)
     {
         if(app()->getLocale() == 'en')
