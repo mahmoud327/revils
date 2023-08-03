@@ -37,6 +37,8 @@ use App\Repositories\Core\Address\AddressRepository;
 use App\Repositories\Core\Address\AddressRepositoryInterface;
 use App\Repositories\Core\Banner\BannerRepository;
 use App\Repositories\Core\Banner\BannerRepositoryInterface;
+use App\Repositories\Core\Setting\SettingRepository;
+use App\Repositories\Core\Setting\SettingRepositoryInterface;
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\User\UserRepository;
@@ -66,6 +68,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AttributeRepositoryInterface::class, AttributeRepository::class);
         $this->app->bind(ImageRepositoryInterface::class, ImageRepository::class);
         $this->app->bind(UserRepositoryInterface::class,UserRepository::class);
+
+        $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
 
         $this->app->bind(ImageUserRepositoryInterface::class, ImageUserRepository::class);
         $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);

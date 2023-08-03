@@ -21,6 +21,8 @@ use App\Filament\Resources\ActivityResource\RelationManagers;
 class ActivityResource extends Resource
 {
     protected static ?string $model = Activity::class;
+    protected static ?string $navigationGroup = 'core';
+
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static function getNavigationLabel(): string

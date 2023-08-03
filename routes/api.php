@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Seller\ProductController as ProductSellerController
 use App\Http\Controllers\Api\Product\ProductImageController;
 use App\Http\Controllers\Api\Product\RateController;
 use App\Http\Controllers\Api\Core\PaymentController;
+use App\Http\Controllers\Api\Core\SettingController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\SocialNetwork\PostController;
 use App\Http\Controllers\Api\User\ImageController;
@@ -76,6 +77,10 @@ Route::post('cities', [CountryController::class, 'getCities']);
 
 #######banners#########
 Route::get('banners', [BannerController::class, 'index']);
+####### end banners #########
+
+#######banners#########
+Route::get('setting', [SettingController::class, 'show']);
 ####### end banners #########
 
 

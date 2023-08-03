@@ -85,6 +85,21 @@ return [
         'attributes' => 'attributes',
         'attributes values' => 'attributes values'
     ],
+
+    'settings' => [
+        'settings' => 'settings',
+        'email' => 'email',
+        'about_us' => 'about us',
+        'phone' => 'phone',
+        'address' => 'address',
+        'fb_link' => 'facebook link',
+        'skype_link' => 'skype link',
+        'tw_link' => 'twiter link',
+        'linkedin_link' => 'linkedin link',
+        'whatsapp' => 'whatsapp',
+        'inst_link' => 'instagram link',
+        'terms_condition' => 'terms condition',
+    ],
     'cities' => 'cities',
     'states' => 'states',
     'countries' => 'countries',

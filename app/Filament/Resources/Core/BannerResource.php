@@ -24,6 +24,8 @@ class BannerResource extends Resource
     protected static ?string $model = Banner::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationGroup = 'core';
+
 
     public static function getTranslatableLocales(): array
     {

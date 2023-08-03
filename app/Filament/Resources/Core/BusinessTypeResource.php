@@ -23,6 +23,8 @@ class BusinessTypeResource extends Resource
     use Translatable;
 
     protected static ?string $model = BusinessType::class;
+    protected static ?string $navigationGroup = 'core';
+
 
     protected static ?string $navigationIcon = 'heroicon-o-view-grid';
 

@@ -34,6 +34,22 @@ return [
             'country'=> 'الدول',
         ]
     ],
+
+    'settings' => [
+        'settings' => 'الاعدادات',
+        'email' => 'الايميل',
+        'about_us' => 'من نحن',
+        'phone' => 'رقم الموبايل',
+        'address' => 'العنوان',
+        'fb_link' => 'لينك الفيس بوك',
+        'skype_link' => 'لينك سكاى بى',
+        'tw_link' => 'لينك تويتر',
+        'linkedin_link' => 'لينك لينكد ان',
+        'whatsapp' => 'الواتس اب',
+        'inst_link' => 'لينك انستجرام',
+        'terms_condition' => 'سياسة والخصوصية',
+
+    ],
     'sellers' => [
         'sellers' => 'البائعين',
         'businessProfile' => [
