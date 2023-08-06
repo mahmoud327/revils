@@ -12,6 +12,8 @@ use App\Enums\ProductStatusTextValueEnum;
 use App\Enums\BooleanEnum;
 use App\Http\Resources\Core\MediaCenterResource;
 use App\Models\Core\Category;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Multicaret\Acquaintances\Traits\CanBeRated;
 use Multicaret\Acquaintances\Traits\CanBeViewed;
 use Spatie\Activitylog\LogOptions;
@@ -201,13 +203,25 @@ class Product extends Model implements HasMedia
      */
 
 
-    public function attributes()
+    // public function attributes()
+    // {
+    //     return $this->belongsToMany(Attribute::class, 'product_attributes', 'product_id', 'attribute_id')
+    //         ->withPivot('attribute_value_id');
+    // }
+
+    public function attributes(): BelongsToMany
     {
-        return $this->belongsToMany(Attribute::class, 'product_attributes', 'product_id', 'attribute_id')
+        return $this->belongsToMany(Attribute::class, 'product_attributes')
             ->withPivot('attribute_value_id');
     }
 
-    public function attributeValues()
+    public function attributeValues(): BelongsToMany
+    {
+        return $this->belongsToMany(AttributeValue::class, 'product_attributes')
+            ->withPivot('attribute_id');
+    }
+
+    public function productAttributes(): HasMany
     {
         return $this->hasMany(
             ProductAttribute::class,

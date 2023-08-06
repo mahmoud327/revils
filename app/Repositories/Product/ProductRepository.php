@@ -20,7 +20,7 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
     public function all(?int $paginatePerPage, bool $paginate = true): Collection | LengthAwarePaginator
     {
         $products = $this->model->approved()
-            ->with(['user', 'category', 'attributes'])
+            ->with(['user', 'category', 'attributeValues', 'attributeValues.attribute'])
             ->latest();
         $products->filter($products);
         if ($paginate) {

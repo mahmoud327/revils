@@ -164,7 +164,7 @@ class ProductResource extends Resource
                                 ->label(trans('dashboard.products.attributes'))
                                 ->schema([
                                     Repeater::make('attributes')
-                                        ->relationship('attributeValues')
+                                        ->relationship('productAttributes')
                                         ->label(trans('dashboard.products.attributes'))
                                         ->schema([
                                             Select::make('attribute_id')

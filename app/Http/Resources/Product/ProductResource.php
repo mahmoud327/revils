@@ -40,7 +40,8 @@ class ProductResource extends JsonResource
             "is_liquid_shipping" => $this->getIsLiquidShipping(),
             "is_handcrafted" => $this->getIsHandcrafted(),
             "check_coin" => $this->check_coin,
-            "attributes" => AttributeResource::collection($this->whenLoaded('attributes')),
+            "attributeValues" => AttributeValueResource::collection($this->attributeValues??[]),
+
         ];
     }
 }

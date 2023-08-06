@@ -19,7 +19,7 @@ class AttributeResource extends JsonResource
         return [
             "id" => $this->id,
             "name" => $this->name,
-            // 'attribute_values' => AttributeValueResource::collection($this->attributeValues ?? []),
+
         ];
     }
 }
