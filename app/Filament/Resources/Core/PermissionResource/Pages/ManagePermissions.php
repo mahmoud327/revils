@@ -16,4 +16,9 @@ class ManagePermissions extends ManageRecords
             Actions\CreateAction::make(),
         ];
     }
+    protected function getTitle(): string
+    {
+        return trans('dashboard.permissions');
+
+    }
 }

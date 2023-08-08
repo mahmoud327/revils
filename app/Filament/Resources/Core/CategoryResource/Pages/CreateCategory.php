@@ -26,4 +26,5 @@ class CreateCategory extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+    
 }

@@ -58,4 +58,9 @@ class ListProducts extends ListRecords
         return Product::query()
             ->latest();
     }
+    protected function getTitle(): string
+    {
+        return trans('dashboard.products.products');
+
+    }
 }

@@ -16,4 +16,10 @@ class ListRoles extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getTitle(): string
+    {
+        return trans('dashboard.roles.roles');
+
+    }
 }

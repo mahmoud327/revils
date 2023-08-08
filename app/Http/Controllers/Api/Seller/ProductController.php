@@ -47,7 +47,7 @@ class ProductController extends Controller
     public function show($id)
     {
         try {
-            $product = $this->productRepository->show(id:$id);
+            $product = $this->productRepository->show(id: $id);
             return responseSuccess(new ProductResource($product));
         } catch (UnexpectedException $ex) {
             Log::error($ex->getMessage());

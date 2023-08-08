@@ -16,4 +16,11 @@ class ListCities extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getTitle(): string
+    {
+        return trans('dashboard.cities');
+
+    }
+
 }

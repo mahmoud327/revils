@@ -38,23 +38,15 @@ class ActivityResource extends Resource
                         Grid::make(2)
                         ->schema([
                             TextInput::make('id'),
-                            TextInput::make('causer_id')
-                                ->label('Logged By'),
-                            TextInput::make('description'),
-                            TextInput::make('causer_type')
-                                ->label('Model'),
-                            TextInput::make('properties.old.name')
-                                ->label('Old Name'),
+
+
                             TextInput::make('properties.attributes.name')
-                                ->label('New Name'),
-                            TextInput::make('properties.old.email')
-                                ->label('Old Email'),
+                                ->label('Name'),
+
                             TextInput::make('properties.attributes.email')
-                                ->label('New Email'),
-                            TextInput::make('properties.old.is_admin')
-                                ->label('Old Is Admin'),
-                            TextInput::make('properties.attributes.is_admin')
-                                ->label('New Is Admin'),
+                                ->label('Email'),
+
+
                             DateTimePicker::make('created_at')
                                 ->label('Created'),
                             DateTimePicker::make('updated_at')
@@ -69,13 +61,20 @@ class ActivityResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
+
+                TextColumn::make('event')
+                ->label('event'),
+
+                TextColumn::make('subject_type')
+                ->label('type table'),
+
+                TextColumn::make('subject_id')
+                ->label('table id'),
+
                 TextColumn::make('causer_id')
-                    ->label('Logged By'),
-                TextColumn::make('description'),
-                TextColumn::make('causer_type')
-                    ->label('Model'),
-                TextColumn::make('properties')
-                    ->label('Attributes'),
+                ->label('user id'),
+
+
                 TextColumn::make('created_at')
                     ->label('Logged At')
                     ->dateTime('d-M-Y'),
@@ -84,7 +83,7 @@ class ActivityResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([

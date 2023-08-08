@@ -26,6 +26,11 @@ class ListUsers extends ListRecords
     //     ];
     // }
 
+    protected function getTitle(): string
+    {
+        return trans('dashboard.admins');
+
+    }
     public function getTableQuery(): Builder
     {
         return User::whereHas('roles', function ($q) {

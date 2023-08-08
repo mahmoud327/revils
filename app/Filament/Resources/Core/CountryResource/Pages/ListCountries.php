@@ -11,7 +11,6 @@ class ListCountries extends ListRecords
     use ListRecords\Concerns\Translatable;
     protected static string $resource = CountryResource::class;
 
-
     protected function getActions(): array
     {
         return [
@@ -19,5 +18,9 @@ class ListCountries extends ListRecords
             Actions\LocaleSwitcher::make(),
 
         ];
+    }
+    protected function getTitle(): string
+    {
+        return trans('dashboard.countries');
     }
 }
