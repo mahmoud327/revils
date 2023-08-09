@@ -69,7 +69,7 @@ class ActivityResource extends Resource
                 ->label('type table'),
 
                 TextColumn::make('subject.name')
-                ->label('table id'),
+                ->label('table name'),
 
                 TextColumn::make('causer.name')
                 ->label('user name'),
