@@ -20,4 +20,9 @@ class ListStates extends ListRecords
 
         ];
     }
+    protected function getTitle(): string
+    {
+        return trans('dashboard.states');
+
+    }
 }

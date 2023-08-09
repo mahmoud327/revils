@@ -31,4 +31,9 @@ class ListCategories extends ListRecords
                 ])
         ];
     }
+    protected function getTitle(): string
+    {
+        return trans('dashboard.categories.categories');
+
+    }
 }

@@ -10,7 +10,7 @@ class ListAttributes extends ListRecords
 {
     protected static string $resource = AttributeResource::class;
     use ListRecords\Concerns\Translatable;
-
+    
 
     protected function getActions(): array
     {
@@ -19,5 +19,10 @@ class ListAttributes extends ListRecords
             Actions\LocaleSwitcher::make(),
 
         ];
+    }
+    protected function getTitle(): string
+    {
+        return trans('dashboard.products.attributes');
+
     }
 }

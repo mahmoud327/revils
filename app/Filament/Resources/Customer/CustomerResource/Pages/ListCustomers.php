@@ -27,4 +27,10 @@ class ListCustomers extends ListRecords
         ->latest()
         ->where('account_type', 0);
     }
+
+    protected function getTitle(): string
+    {
+        return trans('dashboard.customers.customers');
+
+    }
 }

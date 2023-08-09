@@ -33,6 +33,7 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
     }
     public function create($data): Model
     {
+
         try {
             DB::beginTransaction();
             $data['user_id'] = auth()->id();

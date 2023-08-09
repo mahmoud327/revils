@@ -281,8 +281,8 @@ class ProductResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\Action::make('show')
-                // ->url(fn (Product $record) => 'products/show/' . $record->id),
+                Tables\Actions\Action::make('rates')
+                ->url(fn (Product $record) => 'products/rates/' . $record->id),
 
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\EditAction::make(),

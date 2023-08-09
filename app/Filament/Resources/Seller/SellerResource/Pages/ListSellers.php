@@ -26,4 +26,9 @@ class ListSellers extends ListRecords
             ->latest()
             ->where('account_type', 1);
     }
+    protected function getTitle(): string
+    {
+        return trans('dashboard.sellers.sellers');
+
+    }
 }
