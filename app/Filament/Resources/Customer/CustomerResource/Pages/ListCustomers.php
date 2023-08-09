@@ -26,6 +26,7 @@ class ListCustomers extends ListRecords
         return User::query()
         ->latest()
         ->where('account_type', 0);
+
     }
 
     protected function getTitle(): string
