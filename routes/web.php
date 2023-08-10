@@ -28,3 +28,6 @@ Route::get('/test', function () {
     return $post->comments()->where('commentable_id',1)->forceDelete();
     return $post;
 });
+
+
+

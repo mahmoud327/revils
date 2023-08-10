@@ -68,12 +68,11 @@ class ActivityResource extends Resource
                 TextColumn::make('subject_type')
                 ->label('type table'),
 
-                TextColumn::make('subject.name')
-                ->label('table name'),
+                TextColumn::make('subject_id')
+                ->label('table id'),
 
-                TextColumn::make('causer.name')
-                ->label('user name'),
-
+                TextColumn::make('subject.username')
+                ->label('user id'),
 
                 TextColumn::make('created_at')
                     ->label('Logged At')

@@ -5,12 +5,11 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\CustomerRegisterRequest;
+use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\OtpRequest;
 use App\Http\Requests\Api\Auth\ResendOtpRequest;
-use App\Http\Requests\Api\Auth\RestPassword\RestPasswordRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
 use App\Http\Resources\UserResource;
-use App\Models\User;
 use App\Models\UserOtp;
 use App\Repositories\Auth\AuthRepositoryInterface;
 use App\Services\SendSmsService;
@@ -48,6 +47,35 @@ class AuthController extends Controller
         } catch (UnexpectedException $ex) {
             return responseError($ex->getMessage(), $ex->getCode());
         }
+    }
+
+
+    public function login(LoginRequest $request)
+    {
+        try {
+            if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+                $authUser = Auth::user();
+                $success['token'] = $authUser->createToken('sanctumAuth')->plainTextToken;
+                $success['user'] = new UserResource($authUser);
+                return responseSuccess($success);
+            } else {
+                return responseError("Username or Password is wrong", 402);
+            }
+        } catch (\Exception $ex) {
+            return $ex;
+        }
+    }
+
+    public function verifyMobileSms(OtpRequest $request)
+    {
+        $otp = new SendSmsService();
+        $otp->setOtp(otp: $request->otp);
+        $verification = $otp->verifyOtp();
+        if(!$verification)
+        {
+            return responseError("wrong code !", 402);
+        }
+        return responseSuccess('','valid code');
     }
 
     public function validateUniqueUserNameOrEmail(Request $request)
@@ -98,45 +126,6 @@ class AuthController extends Controller
             }
         }
         return responseError('please provide at least email or username', 200);
-    }
-
-
-
-    public function login(Request $request)
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'username' => 'required',
-                'password' => 'required',
-            ]);
-
-            if ($validator->fails()) {
-                return responseError($validator->errors(), 400);
-            }
-
-            if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-                $authUser = Auth::user();
-                $success['token'] = $authUser->createToken('sanctumAuth')->plainTextToken;
-                $success['user'] = new UserResource($authUser);
-                return responseSuccess($success);
-            } else {
-                return responseError("Username or Password is wrong", 402);
-            }
-        } catch (\Exception $ex) {
-            return $ex;
-        }
-    }
-
-    public function verifyMobileSms(OtpRequest $request)
-    {
-        $otp = new SendSmsService();
-        $otp->setOtp(otp: $request->otp);
-        $verification = $otp->verifyOtp();
-        if(!$verification)
-        {
-            return responseError("wrong code !", 402);
-        }
-        return responseSuccess('','valid code');
     }
 
     public function resendOtp(ResendOtpRequest $request)
