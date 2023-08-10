@@ -18,6 +18,7 @@ use App\Models\Core\Category;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Tables;
 
 class CategoryResource extends Resource
@@ -48,18 +49,22 @@ class CategoryResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
+                    SpatieMediaLibraryFileUpload::make('image')
+                        ->label(trans('dashboard.products.max size'))
+                        ->collection('categories'),
+
 
                     Forms\Components\TextInput::make('name')
-                    ->label(trans('dashboard.name'))
+                        ->label(trans('dashboard.name'))
                         ->required(),
 
 
 
                     RichEditor::make('description')
-                    ->label(trans('dashboard.description'))
+                        ->label(trans('dashboard.description'))
                         ->required(),
                     ColorPicker::make('color')
-                    ->label(trans('dashboard.categories.color'))
+                        ->label(trans('dashboard.categories.color'))
                         ->required(),
 
                 ])
@@ -75,13 +80,13 @@ class CategoryResource extends Resource
             ->columns([
                 //
                 Tables\Columns\TextColumn::make('name')
-                ->label(trans('dashboard.name'))
+                    ->label(trans('dashboard.name'))
 
-                ->sortable()->searchable(),
+                    ->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('color')
-                ->label(trans('dashboard.categories.color'))
+                    ->label(trans('dashboard.categories.color'))
 
-                ->sortable()->searchable(),
+                    ->sortable()->searchable(),
 
             ])
             ->filters([

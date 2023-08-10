@@ -20,6 +20,7 @@ class CategoryResource extends JsonResource
             "description" => $this->description,
             "parent_id" => $this->parent_id,
             "color" => $this->color,
+            "image" => $this->image
         ];
     }
 }

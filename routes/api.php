@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\Core\AddressController;
 use App\Http\Controllers\Api\Core\BannerController;
 use App\Http\Controllers\Api\Core\BusinessTypeController;
 use App\Http\Controllers\Api\Core\CategoryController;
@@ -121,6 +122,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
     Route::group(['prefix' => 'user'], function () {
         Route::apiResource('orders', OrderController::class);
         Route::post('order/{id}/change-status', [OrderController::class, 'changeStatus']);
+        Route::apiResource('address',AddressController::class);
     });
     ####### end order #########
 
