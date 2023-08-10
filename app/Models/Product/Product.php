@@ -4,7 +4,6 @@ namespace App\Models\Product;
 
 use App\Models\User;
 use Astrotomic\Translatable\Translatable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Enums\ProductStatusEnum;
@@ -12,6 +11,7 @@ use App\Enums\ProductStatusTextValueEnum;
 use App\Enums\BooleanEnum;
 use App\Http\Resources\Core\MediaCenterResource;
 use App\Models\Core\Category;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Multicaret\Acquaintances\Traits\CanBeRated;
@@ -51,7 +51,6 @@ class Product extends Model implements HasMedia
      * ----------------------------------------------------------------- *
      */
 
-
     public function getImagesAttribute()
     {
         if (($images = $this->getMedia('images'))->count()) {
@@ -59,6 +58,17 @@ class Product extends Model implements HasMedia
                 return !$image->getCustomProperty('isFeatured', false);
             }));
         }
+        return
+            [[
+                'id' => 0,
+                'original' => asset('awarebox.jpeg'),
+                'large' =>  asset('awarebox.jpeg'),
+                'medium' => asset('awarebox.jpeg'),
+                'thumb' =>  asset('awarebox.jpeg'),
+                'order' => 1,
+                'position' => 1,
+                'is_featured' => true,
+            ]];
     }
     public function getViewsAttribute()
     {
