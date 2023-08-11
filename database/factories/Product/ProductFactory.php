@@ -23,10 +23,10 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
+
             'name' => ['ar' => fake()->unique()->word, 'en' => fake()->unique()->word],
             'price' => fake()->randomFloat(2, 10, 1000),
             'quantity' => fake()->randomNumber(2),
-            'is_batteries_shipping' => fake()->randomElement([0, 1]),
             'is_liquid_shipping' => fake()->randomElement([0, 1]),
             'is_batteries_shipping' => fake()->randomElement([0, 1]),
             'is_handcrafted' => fake()->randomElement([0, 1]),
@@ -39,7 +39,7 @@ class ProductFactory extends Factory
             },
             'item_type' => fake()->randomNumber(2),
         ];
-     
+
 
     }
 }

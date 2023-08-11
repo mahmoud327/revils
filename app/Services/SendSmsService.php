@@ -45,9 +45,6 @@ class SendSmsService
         {
             return false;
         }
-        $this->activateMobile($otp->mobile);
-        $this->deleteOldOtpCodes($otp->mobile);
-
         return true;
     }
 

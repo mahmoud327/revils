@@ -6,6 +6,7 @@ use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\CustomerRegisterRequest;
 use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\MobileRequest;
 use App\Http\Requests\Api\Auth\OtpRequest;
 use App\Http\Requests\Api\Auth\ResendOtpRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
@@ -28,9 +29,7 @@ class AuthController extends Controller
     {
         try {
             $user = $this->authRepository->customerRegister($request);
-            $data['user'] = new UserResource($user);
-            $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
-            return responseSuccess($data, 'Registered successfully !');
+            return responseSuccess(new UserResource($user), 'Registered successfully !');
         }catch (UnexpectedException $ex)
         {
             return responseError($ex->getMessage(),402);
@@ -41,9 +40,7 @@ class AuthController extends Controller
     {
         try {
             $user = $this->authRepository->sellerRegister($request);
-            $data['user'] = new UserResource($user);
-            $data['code'] = UserOtp::whereMobile($user->mobile)->first()->otp;
-            return responseSuccess($data, 'Registered successfully !');
+            return responseSuccess(new UserResource($user), 'Registered successfully !');
         } catch (UnexpectedException $ex) {
             return responseError($ex->getMessage(), $ex->getCode());
         }
@@ -66,17 +63,6 @@ class AuthController extends Controller
         }
     }
 
-    public function verifyMobileSms(OtpRequest $request)
-    {
-        $otp = new SendSmsService();
-        $otp->setOtp(otp: $request->otp);
-        $verification = $otp->verifyOtp();
-        if(!$verification)
-        {
-            return responseError("wrong code !", 402);
-        }
-        return responseSuccess('','valid code');
-    }
 
     public function validateUniqueUserNameOrEmail(Request $request)
     {
@@ -126,6 +112,26 @@ class AuthController extends Controller
             }
         }
         return responseError('please provide at least email or username', 200);
+    }
+
+
+    public function sendOtp(SendSmsService $otp,MobileRequest $request)
+    {
+        $otp->setMobile(mobile: $request->mobile);
+        $otp->sendSmsOtp();
+        $code['code'] = UserOtp::whereMobile($request->mobile)->first()->otp;
+        return responseSuccess($code, 'Code is sent successfully, please check your mobile messages');
+    }
+
+    public function verifyOtp(SendSmsService $otp, OtpRequest $request)
+    {
+        $otp->setOtp(otp: $request->otp);
+        $verification = $otp->verifyOtp();
+        if(!$verification)
+        {
+            return responseError("wrong code !", 402);
+        }
+        return responseSuccess('','valid code');
     }
 
     public function resendOtp(ResendOtpRequest $request)

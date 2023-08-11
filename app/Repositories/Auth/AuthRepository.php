@@ -8,7 +8,6 @@ use App\Exceptions\UnexpectedException;
 use App\Http\Requests\Api\Auth\CustomerRegisterRequest;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\SellerRegisterRequest;
-use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\SendSmsService;
 use DB;
@@ -17,9 +16,7 @@ use Illuminate\Support\Facades\Log;
 
 class AuthRepository implements AuthRepositoryInterface
 {
-    public function __construct(public User $model)
-    {
-    }
+    public function __construct(public User $model){}
 
     public function login(LoginRequest $request)
     {
@@ -34,8 +31,8 @@ class AuthRepository implements AuthRepositoryInterface
             $user = $this->model::create($request->except('agreement'));
             $user->assignRole($this->model::CUSTOMER);
             $sms = new SendSmsService();
-            $sms->setMobile(mobile: $user->mobile);
-            $sms->sendSmsOtp();
+            $sms->activateMobile($user->mobile);
+            $sms->deleteOldOtpCodes($user->mobile);
             DB::commit();
             return $user;
         } catch (\Exception $e) {
@@ -52,9 +49,6 @@ class AuthRepository implements AuthRepositoryInterface
             $request->merge(['password'=>bcrypt($request->password)]);
             $user = $this->model::create($request->all());
             $user->assignRole($this->model::SELLER);
-            $sms = new SendSmsService();
-            $sms->setMobile(mobile: $user->mobile);
-            $sms->sendSmsOtp();
             $this->createBusinessProfile($user, $request);
             DB::commit();
             return $user;

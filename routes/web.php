@@ -19,6 +19,13 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
+     $arr = array();
+    if ($arr)
+    {
+        return "array";
+    }else{
+        return "not0";
+    }
    $user = User::first();
    $post = \App\Models\SocialNetwork\Post::with(['tags','comments.user'])->first();
    return new \App\Http\Resources\SocialNetwork\PostResource($post);
