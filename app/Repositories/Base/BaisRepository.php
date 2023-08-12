@@ -39,10 +39,9 @@ class BaisRepository implements BaseRepositoryInterface
         return $this->model->findOrFail($id);
     }
 
-    public function destroy($id): Model
+    public function destroy($id): bool
     {
-         $this->model->whereId($id)->delete();
-         return $this->model;
+         return $this->find($id)->delete();
     }
 
 }

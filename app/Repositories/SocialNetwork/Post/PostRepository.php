@@ -35,8 +35,6 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
 
     public function create($data) : Model
     {
-            if($data->has('tag_ids'))
-            {
                 try {
                     DB::beginTransaction();
                     $post = $this->model::create([
@@ -44,6 +42,9 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
                        'user_id' => Auth::id(),
                     ]);
                     $post->tags()->attach($data->tag_ids);
+                    $post
+                        ->addMedia($data->image)
+                        ->toMediaCollection();
                     DB::commit();
                     return $post;
                 }catch (\Exception $ex)
@@ -51,17 +52,10 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
                     DB::rollback();
                     throw  new UnexpectedException($ex->getMessage());
                 }
-            }
-         return $this->model::create([
-            'content' => $data->content,
-            'user_id' => Auth::id(),
-        ]);
     }
 
     public function update($id,$data)
     {
-        if($data->has('tag_ids'))
-        {
             try {
                 DB::beginTransaction();
                 $post = $this->model::findOrFail($id);
@@ -70,20 +64,25 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
                     'user_id' => Auth::id(),
                 ]);
                 $post->tags()->sync($data->tag_ids);
+                if ($data->hasFile('image')) {
+                    $post->clearMediaCollection();
+                    $post->addMedia($data->image)->toMediaCollection();
+                }
                 DB::commit();
                 return $post;
             }catch (\Exception $ex)
             {
                 DB::rollback();
                 throw  new UnexpectedException($ex->getMessage());
-            }
         }
-        $post = $this->model::findOrFail($id);
-        $post->update([
-            'content' => $data->content,
-            'user_id' => Auth::id(),
-        ]);
-        return $post;
+    }
+
+
+    public function destroy($id): bool
+    {
+        $model = $this->find($id);
+        $model->clearMediaCollection();
+        return $model->delete();
     }
 
     public function showUserPosts(int $user_id, ?int $paginatePerPage, bool $paginate = true) : Collection | LengthAwarePaginator

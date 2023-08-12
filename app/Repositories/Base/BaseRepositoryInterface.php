@@ -12,5 +12,5 @@ interface BaseRepositoryInterface
     public function create($data): Model;
     public function update(int $id,$data);
     public function find(int $id): ?Model;
-    public function destroy(int $id): Model;
+    public function destroy(int $id): bool;
 }

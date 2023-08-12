@@ -35,6 +35,7 @@ class PostRequest extends FormRequest
             'content' => ['required','string','max:300'],
             'tag_ids' => ['nullable','array'],
             'tag_ids.*' => ['exists:users,id'],
+            'image' => ['required', 'mimes:png,jpg,jpeg','max:10240'],
         ];
     }
 
