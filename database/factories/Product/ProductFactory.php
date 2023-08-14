@@ -45,21 +45,21 @@ class ProductFactory extends Factory
 
     }
 
-    public function configure(): static
-    {
-        $attributes = Attribute::select('id')
-        ->get();
-        $attribute_values = AttributeValue::whereIn('attribute_id', $attributes)
-            ->inRandomOrder()
-            ->first()
-            ->id;
+    // public function configure(): static
+    // {
+    //     $attributes = Attribute::select('id')
+    //     ->get();
+    //     $attribute_values = AttributeValue::whereIn('attribute_id', $attributes)
+    //         ->inRandomOrder()
+    //         ->first()
+    //         ->id;
 
-        return $this->afterCreating(function (Product $product) use($attributes,$attribute_values) {
-            // ...
+    //     return $this->afterCreating(function (Product $product) use($attributes,$attribute_values) {
+    //         // ...
 
-            $product->hasAttached($attributes, ['attribute_value_id' => $attribute_values]);
+    //         $product->hasAttached($attributes, ['attribute_value_id' => $attribute_values]);
 
-        });
-    }
+    //     });
+    // }
 
 }
