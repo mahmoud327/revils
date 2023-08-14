@@ -142,5 +142,10 @@ class User extends Authenticatable implements HasMedia
         ->logAll();
 
     }
+    public function canManageSettings(): bool
+{
+    return $this->can('manage.settings');
 }
+}
+
 

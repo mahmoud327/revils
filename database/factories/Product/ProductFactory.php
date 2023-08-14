@@ -4,6 +4,7 @@ namespace Database\Factories\Product;
 
 use App\Models\Core\Category;
 use App\Models\Product\Attribute;
+use App\Models\Product\AttributeValue;
 use App\Models\Product\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -38,8 +39,27 @@ class ProductFactory extends Factory
                 return User::inRandomOrder()->first()->id;
             },
             'item_type' => fake()->randomNumber(2),
+
         ];
 
 
     }
+
+    public function configure(): static
+    {
+        $attributes = Attribute::select('id')
+        ->get();
+        $attribute_values = AttributeValue::whereIn('attribute_id', $attributes)
+            ->inRandomOrder()
+            ->first()
+            ->id;
+
+        return $this->afterCreating(function (Product $product) use($attributes,$attribute_values) {
+            // ...
+
+            $product->hasAttached($attributes, ['attribute_value_id' => $attribute_values]);
+
+        });
+    }
+
 }

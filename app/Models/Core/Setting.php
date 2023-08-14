@@ -9,6 +9,15 @@ use Spatie\Translatable\HasTranslations;
 class Setting extends Model
 {
 
+    public string $site_name;
+
+    public bool $site_active;
+
+    public static function group(): string
+    {
+        return 'general';
+    }
+
     use HasTranslations;
     use InteractsWithMedia;
 
@@ -24,5 +33,5 @@ class Setting extends Model
      */
 
 
-    
+
 }

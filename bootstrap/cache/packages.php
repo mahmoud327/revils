@@ -208,6 +208,13 @@
       0 => '\\pxlrbt\\FilamentActivityLog\\FilamentActivityLogServiceProvider',
     ),
   ),
+  'reworck/filament-settings' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Reworck\\FilamentSettings\\FilamentSettingsProvider',
+    ),
+  ),
   'ryangjchandler/blade-capture-directive' => 
   array (
     'providers' => 

@@ -3,8 +3,9 @@
 namespace App\Filament\Resources\Product;
 
 use App\Exports\ProductExport;
-use App\Filament\Resources\Customer\CustomerResource\Pages\ShowProduct;
+use App\Filament\Resources\Customer\ProductResource\Pages\ShowProductRates;
 use App\Filament\Resources\Product\ProductResource\Pages;
+use App\Filament\Resources\Product\ProductResource\Pages\ShowProduct;
 use App\Filament\Resources\Product\ProductResource\RelationManagers;
 use App\Models\Product\Attribute;
 use Archilex\StackedImageColumn\Columns\StackedImageColumn;
@@ -281,7 +282,10 @@ class ProductResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('rates')
-                ->url(fn (Product $record) => 'products/rates/' . $record->id),
+                    ->url(fn (Product $record) => 'products/' . $record->id . '/rates'),
+
+
+
 
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\EditAction::make(),
@@ -308,7 +312,7 @@ class ProductResource extends Resource
             'index' => Pages\ListProducts::route('/'),
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
-            // 'show' => ShowProduct::route('/show/{id}'),
+            'rates' => ShowProductRates::route('/{record}/rates'),
 
         ];
     }

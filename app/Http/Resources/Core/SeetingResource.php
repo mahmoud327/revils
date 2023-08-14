@@ -15,8 +15,7 @@ class SeetingResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "phone" => $this->phone,
+            "phone" => optional($this->phone),
             "email" => $this->email,
             "address" => $this->address,
             "whatsapp" => $this->whatsapp,

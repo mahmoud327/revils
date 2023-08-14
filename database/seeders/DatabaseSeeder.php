@@ -18,18 +18,24 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        // // \App\Models\User::factory()->create([
-        // //     'name' => 'Test User',
-        // //     'email' => 'test@example.com',
-        // // ]);
-        $this->call(SettingSeeder::class);
-        $this->call(RolesAndPermissionsSeeder::class);
-        $this->call(CountriesTableSeeder::class);
-        $this->call(StatesTableSeeder::class);
-        $this->call(CitiesTableSeeder::class);
-        $this->call(CategoryTableSeeder::class);
-        $this->call(AttributeSeeder::class);
-        $this->call(BusinessTypeSeeder::class);
-        Product::factory(10)->create();
+
+        // $this->call(SettingSeeder::class);
+        // $this->call(RolesAndPermissionsSeeder::class);
+        // $this->call(CountriesTableSeeder::class);
+        // $this->call(StatesTableSeeder::class);
+        // $this->call(CitiesTableSeeder::class);
+        // $this->call(CategoryTableSeeder::class);
+        // $this->call(AttributeSeeder::class);
+        // $this->call(BusinessTypeSeeder::class);
+
+         $attributes = Attribute::select('id')
+            ->get();
+        $attribute_values = AttributeValue::whereIn('attribute_id', $attributes)
+            ->inRandomOrder()
+            ->first()
+            ->id;
+
+        Product::factory()
+            ->count(3)->make();
     }
 }

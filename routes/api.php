@@ -75,15 +75,13 @@ Route::group(['middleware' => ['ChangeLanguage']], function () {
 Route::get('countries', [CountryController::class, 'index']);
 Route::post('states', [CountryController::class, 'getStates']);
 Route::post('cities', [CountryController::class, 'getCities']);
-
 ####### end auth #########
-
 #######banners#########
 Route::get('banners', [BannerController::class, 'index']);
 ####### end banners #########
 
 #######banners#########
-Route::get('setting', [SettingController::class, 'show']);
+Route::get('setting',SettingController::class);
 ####### end banners #########
 
 

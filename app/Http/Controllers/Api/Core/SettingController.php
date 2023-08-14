@@ -5,19 +5,15 @@ namespace App\Http\Controllers\Api\Core;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Exceptions\NotFoundException;
-use App\Http\Resources\Core\SeetingResource;
-use App\Repositories\Core\Setting\SettingRepositoryInterface;
+use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
-    public function __construct(public SettingRepositoryInterface $settingRepository){}
 
-    public function show()
+    public function __invoke(Request $request)
     {
-        $setting = SeetingResource::make($this->settingRepository->find(1));
+        $settingsFilePath = Storage::get('settings.json');
+        $setting = json_decode($settingsFilePath, true);
         return responseSuccess($setting);
     }
-
-
-
 }

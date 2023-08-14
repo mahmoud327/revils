@@ -90,6 +90,8 @@ return [
         'settings' => 'settings',
         'email' => 'email',
         'about_us' => 'about us',
+        'vat' => 'vat %',
+
         'phone' => 'phone',
         'address' => 'address',
         'fb_link' => 'facebook link',

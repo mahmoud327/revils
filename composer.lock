@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "266427aa6b6ed2b896e5ccee49154108",
+    "content-hash": "ef4636c91fd581b9856d5ad59ebfbb5f",
     "packages": [
         {
             "name": "3x1io/filament-translations",
@@ -4057,16 +4057,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.16.0",
+            "version": "v4.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "19526a33fb561ef417e822e85f08a00db4059c17"
+                "reference": "a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/19526a33fb561ef417e822e85f08a00db4059c17",
-                "reference": "19526a33fb561ef417e822e85f08a00db4059c17",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d",
+                "reference": "a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d",
                 "shasum": ""
             },
             "require": {
@@ -4107,9 +4107,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.16.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.17.1"
             },
-            "time": "2023-06-25T14:52:30+00:00"
+            "time": "2023-08-13T19:53:39+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -5174,6 +5174,52 @@
             "time": "2023-04-15T23:01:58+00:00"
         },
         {
+            "name": "reworck/filament-settings",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reworck/filament-settings.git",
+                "reference": "502aef406d64163f82681f37f0291b71bd9acca1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reworck/filament-settings/zipball/502aef406d64163f82681f37f0291b71bd9acca1",
+                "reference": "502aef406d64163f82681f37f0291b71bd9acca1",
+                "shasum": ""
+            },
+            "require": {
+                "livewire/livewire": "^v2.8.2",
+                "php": "^8.0",
+                "spatie/valuestore": "^1.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Reworck\\FilamentSettings\\FilamentSettingsProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Reworck\\FilamentSettings\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "quintenbuis",
+                    "email": "quinten@reworck.nl",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Manage your settings in filament for spatie/valuestore",
+            "support": {
+                "source": "https://github.com/reworck/filament-settings/tree/0.4.0"
+            },
+            "time": "2023-04-21T08:55:35+00:00"
+        },
+        {
             "name": "ryangjchandler/blade-capture-directive",
             "version": "v0.3.0",
             "source": {
@@ -6140,6 +6186,73 @@
                 }
             ],
             "time": "2023-04-28T07:47:42+00:00"
+        },
+        {
+            "name": "spatie/valuestore",
+            "version": "1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/valuestore.git",
+                "reference": "29562273e843ff0967725f1e2cb946e5c029d606"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/valuestore/zipball/29562273e843ff0967725f1e2cb946e5c029d606",
+                "reference": "29562273e843ff0967725f1e2cb946e5c029d606",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0|^8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Valuestore\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Jolita Grazyte",
+                    "email": "jolita@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily store some values",
+            "homepage": "https://github.com/spatie/valuestore",
+            "keywords": [
+                "json",
+                "spatie",
+                "valuestore"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/valuestore/issues",
+                "source": "https://github.com/spatie/valuestore/tree/1.3.2"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-12-13T09:04:49+00:00"
         },
         {
             "name": "symfony/console",
@@ -9122,7 +9235,7 @@
         },
         {
             "name": "filament/upgrade",
-            "version": "v3.0.19",
+            "version": "v3.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/upgrade.git",
