@@ -20,6 +20,7 @@ use Filament\Resources\Table;
 use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Tables;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class CategoryResource extends Resource
 {
@@ -78,6 +79,9 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
+                SpatieMediaLibraryImageColumn::make('image')
+                ,
+
                 //
                 Tables\Columns\TextColumn::make('name')
                     ->label(trans('dashboard.name'))
