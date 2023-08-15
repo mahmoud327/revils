@@ -22,6 +22,7 @@ class PostResource extends JsonResource
             "user" => new UserResource($this->whenLoaded('user')),
             "tags" => UserResource::collection($this->whenLoaded('tags')),
             "comments" => CommentResource::collection($this->whenLoaded('comments')),
+            "image" => $this->getFirstMedia()->original_url??"",
         ];
     }
 }
