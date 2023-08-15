@@ -20,6 +20,7 @@ class AttributeValueResource extends Resource
     use Translatable;
 
     protected static ?string $model = AttributeValue::class;
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $navigationGroup = 'products';

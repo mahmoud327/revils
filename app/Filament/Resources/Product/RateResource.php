@@ -18,6 +18,8 @@ class RateResource extends Resource
 {
     protected static ?string $model = Interaction::class;
     protected static ?string $navigationGroup = 'products';
+    protected static bool $shouldRegisterNavigation = false;
+
 
     protected static ?string $slug = 'rates';
 

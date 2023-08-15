@@ -22,7 +22,7 @@ class CityResource extends Resource
 
     protected static ?string $model = City::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-flag';
+    protected static ?string $navigationIcon = 'heroicon-o-office-building';
     protected static ?string $navigationGroup = 'regions';
 
     public static function getTranslatableLocales(): array

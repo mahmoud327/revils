@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Product;
 
+use App\Filament\Resources\AttributeValueResource\RelationManagers\AttributesRelationManager;
 use App\Filament\Resources\Product\AttributeResource\Pages;
 use App\Filament\Resources\Product\AttributeResource\RelationManagers;
 use App\Models\Product\Attribute;
@@ -71,6 +72,7 @@ class AttributeResource extends Resource
     {
         return [
             //
+            AttributesRelationManager::class
 
         ];
     }

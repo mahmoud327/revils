@@ -281,6 +281,9 @@ class ProductResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('show')
+                ->url(fn (Product $record) => 'products/'.$record->id.'/show'),
+
                 Tables\Actions\Action::make('rates')
                     ->url(fn (Product $record) => 'products/' . $record->id . '/rates'),
 
@@ -313,6 +316,7 @@ class ProductResource extends Resource
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
             'rates' => ShowProductRates::route('/{record}/rates'),
+            'show' => ShowProduct::route('/{record}/show'),
 
         ];
     }

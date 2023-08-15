@@ -5,28 +5,40 @@
     <x-filament::card>
         <div class="title">
 
-            <h1> {{ $data->name }}</h1>
+            <h1> @lang('dashboard.products.name'):-{{ $data->name }}</h1>
         </div>
+
 
 
 
 
         <div class="content">
             <ul>
-                {{-- <li>website:{{ $data->['website'] }}</li> --}}
-                <li>user:{{ optional($data->user)->name }}</li>
-                <li>category:{{ optional($data->category)->name }}</li>
-                <li>is handcrafted:{{$data->is_handcrafted }}</li>
-                <li>is liquid_shipping:{{$data->is_liquid_shipping }}</li>
-                <li>is dangerous_shipping:{{$data->is_dangerous_shipping }}</li>
-                <li>description:{!! $data->description!!} </li>
-                <li>description:{!! $data->description!!} </li>
-                <li>weight:{!! $data->weight!!} </li>
-                <li>price:{!! $data->price!!} </li>
-                <li>description:{!! $data->description!!} </li>
-                <li>description:{!! $data->description!!} </li>
+                  <li>@lang('dashboard.products.user'):{{ optional($data->user)->name }}</li>
+                <li>@lang('dashboard.products.category'):{{ optional($data->category)->name }}</li>
+                <li>@lang('dashboard.products.quantity'):{{ $data->quantity }}</li>
+                <li>@lang('dashboard.products.item type'):{{ $data->item_type }}</li>
+                <li>@lang('dashboard.products.unit'):{{ $data->unit }}</li>
+                <li>@lang('dashboard.products.status'):{{ $data->getStatus() }}</li>
+                <li>@lang('dashboard.products.cash'):{{ $data->cash }}</li>
+                <li>@lang('dashboard.products.is free shipping'):{{ $data->getIsFreeShipping() }}</li>
+                <li>@lang('dashboard.products.is handcrafted'):{{$data->getIsHandcrafted() }}</li>
+                <li>@lang('dashboard.products.is batteries shipping'):{{$data->getIsBatteriesShipping() }}</li>
+                <li>@lang('dashboard.products.is liquid shipping'):{{$data->getIsLiquidShipping() }}</li>
+                <li>@lang('dashboard.products.is dangerous shipping'):{{$data->getIsDangerousShipping() }}</li>
+                <li>@lang('dashboard.products.weight'):{!! $data->weight!!} </li>
+                <li>@lang('dashboard.products.price'):{!! $data->price!!} </li>
+                <li>@lang('dashboard.description'):{!! $data->description!!} </li>
 
-                <li>user:{{ optional($data->user)->name }}</li>
+                <ul>
+                    <li>@lang('dashboard.products.attributes') </li>
+                    @foreach ($data->attributeValues as $attribute)
+                    {{ optional( $attribute->attribute)->name }}:
+
+                        {{ $attribute->value }}<br><br>
+                    @endforeach
+                </ul>
+
 
 
             </ul>

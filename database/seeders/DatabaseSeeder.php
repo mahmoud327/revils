@@ -27,9 +27,10 @@ class DatabaseSeeder extends Seeder
         // $this->call(CategoryTableSeeder::class);
         // $this->call(AttributeSeeder::class);
         // $this->call(BusinessTypeSeeder::class);
+        $this->call(ProductSeeder::class);
 
 
-        Product::factory()
-            ->count(10)->create();
+        // Product::factory()
+        //     ->count(10)->create();
     }
 }
