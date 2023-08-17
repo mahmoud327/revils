@@ -16,11 +16,13 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
         return [
             "id" => $this->id,
             "user" => new UserResource($this->whenLoaded('user')),
             "category" => new CategoryResource($this->whenLoaded('category')),
             "name" => $this->name,
+            "item_type"=>$this->item_type,
             "weight" => $this->weight,
             "price" => $this->price,
             "old_price" => $this->old_price,
