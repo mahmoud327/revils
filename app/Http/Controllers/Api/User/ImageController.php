@@ -19,11 +19,11 @@ class ImageController extends Controller
     {
         $this->imageRepository->uploadProfileImage(request: $request);
 
-        return responseSuccess(auth()->user()->profileImage);
+        return responseSuccess([],__('lang.users.profie_image'));
     }
     public function coverImage(ImageRequest $request)
     {
         $this->imageRepository->uploadCoverImage(request: $request);
-        return responseSuccess(auth()->user()->coverImage);
+        return responseSuccess([],__('lang.users.cover_image'));
     }
 }
