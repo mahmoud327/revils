@@ -43,7 +43,7 @@ class UserRepository implements UserRepositoryInterface
                 'last_name' => $request->last_name,
                 'first_name' => $request->first_name
             ]);
-            auth()->user()->userProfile()->update($request->except(['email', 'last_name', 'first_name']));
+            auth()->user()->userProfile()->update($request->except(['email', 'last_name', 'first_name','mobile']));
             return   auth()->user()->load('userProfile');
         } catch (\Exception $e) {
             Log::warning($e);

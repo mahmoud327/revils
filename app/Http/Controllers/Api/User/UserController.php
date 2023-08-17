@@ -27,7 +27,7 @@ class UserController extends Controller
             Log::error($ex->getMessage());
             return responseError('Something went wrong!', 402);
         }
-        return responseSuccess(UserResource::make($user));
+        return responseSuccess([], __('lang.users.updated sucessfully'));
     }
     public function sellerUpdateProfile(SellerProfileRequest $request)
     {
@@ -37,7 +37,7 @@ class UserController extends Controller
             Log::error($ex->getMessage());
             return responseError('Something went wrong!', 402);
         }
-        return responseSuccess(UserResource::make($user));
+        return responseSuccess([], __('lang.users.updated sucessfully'));
     }
     public function changePassword(ChangePasswordRequest $request)
     {
@@ -53,6 +53,6 @@ class UserController extends Controller
     }
     public function profileInfo()
     {
-        return responseSuccess(UserResource::make(auth()->user()->load(['businessProfile', 'userProfile','userCoinEarn'])));
+        return responseSuccess(UserResource::make(auth()->user()->load(['businessProfile', 'userProfile', 'userCoinEarn'])));
     }
 }
