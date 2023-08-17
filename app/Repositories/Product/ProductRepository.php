@@ -72,7 +72,7 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
     public function show($id)
     {
         $product = $this->model
-            ->load([
+            ->with([
                 'user', 'attributes', 'category',
                 'relatedProducts', 'user.businessProfile',
                 'user.businessProfile'
