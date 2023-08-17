@@ -6,7 +6,6 @@ use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Product\ProductRequest;
 use App\Http\Resources\Product\ProductResource;
-use App\Models\Product\Product;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Seller\SelllerRepositoryInterface;
 use Illuminate\Http\Request;

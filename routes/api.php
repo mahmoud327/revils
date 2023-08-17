@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\Product\RateController;
 use App\Http\Controllers\Api\Core\PaymentController;
 use App\Http\Controllers\Api\Core\SettingController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\Seller\SellerController;
 use App\Http\Controllers\Api\SocialNetwork\PostController;
 use App\Http\Controllers\Api\User\ImageController;
 use App\Http\Controllers\Api\User\UserController;
@@ -109,9 +110,10 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
     Route::apiResource('products.rates', RateController::class)->only('store');
     ####### end rates #########
 
-    ####### profile #########
+    ####### profile seller customer #########
     Route::post('customer/update-profile', [UserController::class, 'customerUpdateProfile']);
     Route::post('seller/update-profile', [UserController::class, 'sellerUpdateProfile']);
+    Route::get('seller', [SellerController::class, 'index']);
     Route::post('profile-info', [UserController::class, 'profileInfo']);
     Route::post('change-password', [UserController::class, 'changePassword']);
     Route::post('profile-image', [ImageController::class, 'profileImage']);
@@ -185,6 +187,5 @@ Route::get('/sms', function () {
     $response = curl_exec($curl);
     curl_close($curl);
     var_dump(json_decode($response));
-
     //JawalySms::message("mada")->to('01099912408')->send();
 });

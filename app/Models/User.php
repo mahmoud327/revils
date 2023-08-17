@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\UserTypesEnum;
 use App\Http\Resources\Core\MediaCenterResource;
 use App\Models\Core\City;
 use App\Models\Core\Country;
@@ -28,6 +29,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class User extends Authenticatable implements HasMedia
 {
@@ -143,9 +146,28 @@ class User extends Authenticatable implements HasMedia
 
     }
     public function canManageSettings(): bool
-{
-    return $this->can('manage.settings');
-}
+    {
+        return $this->can('manage.settings');
+
+    }
+
+    public function scopeCustomer($query)
+    {
+        return $query->where('account_type',UserTypesEnum::CUSTOMER);
+    }
+
+    public function scopeSeller($query)
+    {
+        return $query->where('account_type',UserTypesEnum::SELLER);
+    }
+
+    public function scopeFilter($query, $products)
+    {
+        return QueryBuilder::for($products)
+            ->allowedFilters([
+                'id', 'first_name','last_name'
+            ]);
+    }
 }
 
 

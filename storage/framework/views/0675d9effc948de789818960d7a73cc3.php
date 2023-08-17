@@ -1,0 +1,1 @@
+<?php /**PATH D:\Programing\awarebox\awarebox-backend\vendor\filament\filament\src\/../resources/views/components/global-search/end.blade.php ENDPATH**/ ?>

@@ -47,7 +47,18 @@ class AuthRepository implements AuthRepositoryInterface
         DB::beginTransaction();
         try {
             $request->merge(['password'=>bcrypt($request->password)]);
-            $user = $this->model::create($request->all());
+            $except = [
+                'category_id',
+                'store_name',
+                'country_id',
+                'state_id',
+                'city_id',
+                'zipcode',
+                'area',
+                'street',
+                'agreement'
+            ];
+            $user = $this->model::create($request->except($except));
             $user->assignRole($this->model::SELLER);
             $this->createBusinessProfile($user, $request);
             DB::commit();

@@ -10,6 +10,7 @@
         "alkoumi/laravel-4jawaly-sms": "^1.5",
         "archilex/filament-stacked-image-column": "^1.0",
         "astrotomic/laravel-translatable": "^11.12",
+        "cms-multi/filament-clear-cache": "^1.0",
         "filament/filament": "^2.0",
         "filament/spatie-laravel-media-library-plugin": "^2.0",
         "filament/spatie-laravel-translatable-plugin": "^2.17",

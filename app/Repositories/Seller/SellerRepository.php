@@ -3,18 +3,13 @@
 
 namespace App\Repositories\Seller;
 
-use App\Exceptions\UnexpectedException;
-use App\Http\Requests\Api\Product\ProductRequest;
+
 use App\Models\Product\Product;
+use App\Models\User;
 use App\Repositories\Base\BaisRepository;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use Spatie\QueryBuilder\QueryBuilder;
-use Spatie\QueryBuilder\AllowedFilter;
-
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\DB;
+use App\Enums\UserTypesEnum;
 
 class SellerRepository extends BaisRepository implements SelllerRepositoryInterface
 {
@@ -37,5 +32,19 @@ class SellerRepository extends BaisRepository implements SelllerRepositoryInterf
         }
 
         return $products->get();
+    }
+
+    public function getSellers(?int $paginatePerPage, bool $paginate = true): Collection | LengthAwarePaginator
+    {
+        $sellerModel = User::seller();
+        $sellerModel->filter($sellerModel);
+        if ($paginate) {
+            if ($paginatePerPage) {
+                return $sellerModel->paginate($paginatePerPage);
+            }
+            return $sellerModel->paginate();
+        }
+
+        return $sellerModel->get();
     }
 }
