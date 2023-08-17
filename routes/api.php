@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\Core\SettingController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\Seller\SellerController;
 use App\Http\Controllers\Api\SocialNetwork\PostController;
+use App\Http\Controllers\Api\SocialNetwork\UserFriendshipController;
 use App\Http\Controllers\Api\User\ImageController;
 use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Http\Request;
@@ -125,6 +126,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
         Route::apiResource('orders', OrderController::class);
         Route::post('order/{id}/change-status', [OrderController::class, 'changeStatus']);
         Route::apiResource('address',AddressController::class);
+
     });
     ####### end order #########
 
@@ -149,10 +151,18 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
     Route::post('like-unlike', [PostController::class,'likeOrUnlikePost'])->middleware('role:customer');
     ####### end posts #########
 
+
     ####### comments  #########
-    Route::apiResource('comments', PostController::class);
+    Route::apiResource('comments', CommentController::class);
     Route::post('user-posts/{user_id}', [PostController::class,'showUserPosts'])->middleware('role:customer');
     Route::post('like-unlike', [PostController::class,'likeOrUnlikePost'])->middleware('role:customer');
+    Route::post('send-follow-request', [UserFriendshipController::class, 'sendFollowingRequest']);
+    Route::post('accept-follow-request', [UserFriendshipController::class, 'acceptFollowRequest']);
+    Route::post('deny-follow-request', [UserFriendshipController::class, 'denyFollowRequest']);
+    Route::post('unfollow-friend', [UserFriendshipController::class, 'unfollow']);
+    Route::post('block-friend', [UserFriendshipController::class, 'blockFriend']);
+    Route::post('unblock-friend', [UserFriendshipController::class, 'unblockFriend']);
+
     ####### end comments #########
 
 });
