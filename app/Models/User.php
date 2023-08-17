@@ -96,7 +96,7 @@ class User extends Authenticatable implements HasMedia
 
     public function userProfile(): HasOne
     {
-        return $this->hasOne(UserProfile::class, 'user_id');
+        return $this->hasOne(UserProfile::class,'user_id');
     }
 
     public function businessProfile(): HasOne
