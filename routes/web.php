@@ -28,6 +28,25 @@ Route::get('/', function () {
 //     return view('products.rates.index', compact('rates'));
 // })->name('produt.rates');
 Route::get('/test', function () {
+
+    $user = User::whereId(4)->first();
+     $pro = Product::whereId(1)->first();
+     $pro->raters()->get();
+    return $user->hasRated($pro);
+
+
+    return $user->ratings(Product::class)->get();
+
+     $user->ratings()->get(); // App\User:class
+
+    $user->setRateType('bedside-manners')->rate($pro, 4);
+return "success";
+  return   $pro->raters()->get();
+
+//    $object->raters()->get();
+
+    // $object->raters()->get();
+    return $pro->userSumRatingAllTypes();
     $arr = array();
     if ($arr) {
         return "array";
