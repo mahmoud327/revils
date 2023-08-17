@@ -181,6 +181,10 @@ return [
     */
 
     'attributes' => [],
+    "users"=>[
+        "cover_image"=>'تم رفع الصورة بنجاح',
+        "profile_image"=>'تم رفع الصورة بنجاح',
+    ],
 
     'products' => [
         'addded' => 'تم اضافة المنتج بنجاح',

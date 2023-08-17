@@ -1,0 +1,1 @@
+<?php /**PATH C:\laragon\www\awarebox-backend\vendor\filament\filament\src\/../resources/views/components/layouts/app/sidebar/start.blade.php ENDPATH**/ ?>

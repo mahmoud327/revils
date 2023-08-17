@@ -63,17 +63,23 @@ class User extends Authenticatable implements HasMedia
      * ----------------------------------------------------------------- *
      */
 
+
     public function getCoverImageAttribute()
     {
-        if ($this->getMedia('cover')->count()) {
-            return MediaCenterResource::make($this->getMedia('cover')->first());
+        if (($images = $this->getMedia('cover'))->count()) {
+            return asset(optional($this->getFirstMedia('cover'))->getUrl());
         }
+        return asset('awarebox.jpeg');
+
     }
+
     public function getProfileImageAttribute()
     {
-        if ($this->getMedia('profile')->count()) {
-            return MediaCenterResource::make($this->getMedia('profile')->first());
+        if (($images = $this->getMedia('profile'))->count()) {
+            return asset(optional($this->getFirstMedia('profile'))->getUrl());
         }
+        return asset('awarebox.jpeg');
+
     }
 
     /*

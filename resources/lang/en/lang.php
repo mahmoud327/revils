@@ -194,6 +194,10 @@ return [
 
 
     ],
+    "users"=>[
+        "cover_image"=>'upload cover image sucessfully',
+        "profile_image"=>'upload cover image sucessfully',
+    ],
 
     'coupons' => [
         'expired' => 'coupon expired',
