@@ -24,7 +24,6 @@ class UserController extends Controller
         try {
             $user = $this->userRepository->customerUpdateProfile(request: $request);
         } catch (UnexpectedException $ex) {
-            return $ex->getMessage();
             Log::error($ex->getMessage());
             return responseError('Something went wrong!', 402);
         }

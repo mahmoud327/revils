@@ -70,7 +70,11 @@ class User extends Authenticatable implements HasMedia
             return asset(optional($this->getFirstMedia('cover'))->getUrl());
         }
         return asset('awarebox.jpeg');
-
+    }
+    
+    public function getProfileUrlAttribute()
+    {
+        return asset($this->username);
     }
 
     public function getProfileImageAttribute()
@@ -79,7 +83,6 @@ class User extends Authenticatable implements HasMedia
             return asset(optional($this->getFirstMedia('profile'))->getUrl());
         }
         return asset('awarebox.jpeg');
-
     }
 
     /*
@@ -96,7 +99,7 @@ class User extends Authenticatable implements HasMedia
 
     public function userProfile(): HasOne
     {
-        return $this->hasOne(UserProfile::class,'user_id');
+        return $this->hasOne(UserProfile::class, 'user_id');
     }
 
     public function businessProfile(): HasOne
@@ -139,40 +142,36 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Post::class, 'user_id');
     }
 
-    public function tagPosts() : BelongsToMany
+    public function tagPosts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class,'tags','post_id','user_id','id','id');
+        return $this->belongsToMany(Post::class, 'tags', 'post_id', 'user_id', 'id', 'id');
     }
 
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logAll();
-
+            ->logAll();
     }
     public function canManageSettings(): bool
     {
         return $this->can('manage.settings');
-
     }
 
     public function scopeCustomer($query)
     {
-        return $query->where('account_type',UserTypesEnum::CUSTOMER);
+        return $query->where('account_type', UserTypesEnum::CUSTOMER);
     }
 
     public function scopeSeller($query)
     {
-        return $query->where('account_type',UserTypesEnum::SELLER);
+        return $query->where('account_type', UserTypesEnum::SELLER);
     }
 
     public function scopeFilter($query, $products)
     {
         return QueryBuilder::for($products)
             ->allowedFilters([
-                'id', 'first_name','last_name','username'
+                'id', 'first_name', 'last_name', 'username'
             ]);
     }
 }
-
-
