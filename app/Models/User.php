@@ -167,9 +167,9 @@ class User extends Authenticatable implements HasMedia
         return $query->where('account_type', UserTypesEnum::SELLER);
     }
 
-    public function scopeFilter($query, $products)
+    public function scopeFilter($query, $users)
     {
-        return QueryBuilder::for($products)
+        return QueryBuilder::for($users)
             ->allowedFilters([
                 'id', 'first_name', 'last_name', 'username'
             ]);
