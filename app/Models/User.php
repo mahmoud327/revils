@@ -71,7 +71,7 @@ class User extends Authenticatable implements HasMedia
         }
         return asset('awarebox.jpeg');
     }
-    
+
     public function getProfileUrlAttribute()
     {
         return asset($this->username);

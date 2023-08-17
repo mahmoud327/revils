@@ -62,7 +62,7 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
 
     public function show($id)
     {
-        $product = $this->model->with(['user', 'attributes', 'category'])->findorfail($id);
+        $product = $this->model->with(['user', 'attributes', 'category','relatedProducts'])->findorfail($id);
         if (auth()->guard('sanctum')->check()) {
             auth()->guard('sanctum')->user()
                 ->view($product);

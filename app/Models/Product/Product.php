@@ -62,9 +62,6 @@ class Product extends Model implements HasMedia
             [[
                 'id' => 0,
                 'original' => asset('awarebox.jpeg'),
-                'large' =>  asset('awarebox.jpeg'),
-                'medium' => asset('awarebox.jpeg'),
-                'thumb' =>  asset('awarebox.jpeg'),
                 'order' => 1,
                 'position' => 1,
                 'is_featured' => true,
@@ -224,6 +221,14 @@ class Product extends Model implements HasMedia
         return $this->belongsToMany(Attribute::class, 'product_attributes')
             ->withPivot('attribute_value_id');
     }
+
+
+    public function relatedProducts(): HasMany
+    {
+        return $this->hasMany(Product::class, 'category_id', 'category_id')
+            ->where('id', '!=', $this->id);
+    }
+
 
     public function attributeValues(): BelongsToMany
     {
