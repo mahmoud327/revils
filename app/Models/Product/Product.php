@@ -3,7 +3,6 @@
 namespace App\Models\Product;
 
 use App\Models\User;
-use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Enums\ProductStatusEnum;
@@ -33,6 +32,7 @@ class Product extends Model implements HasMedia
     use InteractsWithMedia;
     use CanBeRated;
     use CanBeViewed;
+
 
     public $with = ['media'];
 
