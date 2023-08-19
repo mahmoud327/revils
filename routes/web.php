@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Livewire\ProductRates;
 use App\Models\Product\Product;
 use App\Models\User;
-use App\Models\UserOtp;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,45 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('admin/products/rates', ProductRates::class);
 
-// Route::get('admin/product/{id}/rates', function ($id) {
-//     $product = Product::find($id);
-//     $rates = $product->raters('rating')->get();
-//     return view('products.rates.index', compact('rates'));
-// })->name('produt.rates');
 Route::get('/test', function () {
 
-    $user = User::whereId(4)->first();
-     $pro = Product::whereId(1)->first();
-     $pro->raters()->get();
-    return $user->hasRated($pro);
-
-
-    return $user->ratings(Product::class)->get();
-
-     $user->ratings()->get(); // App\User:class
-
-    $user->setRateType('bedside-manners')->rate($pro, 4);
-return "success";
-  return   $pro->raters()->get();
-
-//    $object->raters()->get();
-
-    // $object->raters()->get();
-    return $pro->userSumRatingAllTypes();
-    $arr = array();
-    if ($arr) {
-        return "array";
-    } else {
-        return "not0";
-    }
-    $user = User::first();
-    $post = \App\Models\SocialNetwork\Post::with(['tags', 'comments.user'])->first();
-    return new \App\Http\Resources\SocialNetwork\PostResource($post);
-    $post->comment('Hello, world!', $user);
-    return "deeletsl";
-
-    return $post->comments()->where('commentable_id', 1)->forceDelete();
-    return $post;
 });

@@ -42,6 +42,17 @@
       0 => 'Astrotomic\\Translatable\\TranslatableServiceProvider',
     ),
   ),
+  'beyondcode/laravel-websockets' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'BeyondCode\\LaravelWebSockets\\WebSocketsServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'WebSocketRouter' => 'BeyondCode\\LaravelWebSockets\\Facades\\WebSocketRouter',
+    ),
+  ),
   'blade-ui-kit/blade-heroicons' => 
   array (
     'providers' => 
@@ -182,6 +193,17 @@
     'providers' => 
     array (
       0 => 'Multicaret\\Acquaintances\\AcquaintancesServiceProvider',
+    ),
+  ),
+  'munafio/chatify' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Chatify\\ChatifyServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Chatify' => 'Chatify\\Facades\\ChatifyMessenger',
     ),
   ),
   'nesbot/carbon' => 

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\UserTypesEnum;
-use App\Http\Resources\Core\MediaCenterResource;
 use App\Models\Core\City;
 use App\Models\Core\Country;
 use App\Models\Core\State;
@@ -20,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Multicaret\Acquaintances\Interaction;
 use Multicaret\Acquaintances\Traits\CanLike;
 use Multicaret\Acquaintances\Traits\CanRate;
 use Multicaret\Acquaintances\Traits\CanView;
