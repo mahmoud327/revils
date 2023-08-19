@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Multicaret\Acquaintances\Traits\CanBeRated;
 use Multicaret\Acquaintances\Traits\CanBeViewed;
+use PDO;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
@@ -62,9 +63,6 @@ class Product extends Model implements HasMedia
             [[
                 'id' => 0,
                 'original' => asset('awarebox.jpeg'),
-                'large' =>  asset('awarebox.jpeg'),
-                'medium' => asset('awarebox.jpeg'),
-                'thumb' =>  asset('awarebox.jpeg'),
                 'order' => 1,
                 'position' => 1,
                 'is_featured' => true,
@@ -157,7 +155,9 @@ class Product extends Model implements HasMedia
 
     public function scopeCategory($query, $category_id)
     {
-        return $query->whereCategoryId($category_id);
+        if ($category_id != 'all') {
+            return $query->whereCategoryId($category_id);
+        }
     }
 
     public function scopeSearch($query, $search)
@@ -224,6 +224,14 @@ class Product extends Model implements HasMedia
         return $this->belongsToMany(Attribute::class, 'product_attributes')
             ->withPivot('attribute_value_id');
     }
+
+
+    public function relatedProducts(): HasMany
+    {
+        return $this->hasMany(Product::class, 'category_id', 'category_id')
+            ->where('id', '!=', $this->id);
+    }
+
 
     public function attributeValues(): BelongsToMany
     {

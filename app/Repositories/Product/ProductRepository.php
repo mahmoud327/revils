@@ -20,7 +20,11 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
     public function all(?int $paginatePerPage, bool $paginate = true): Collection | LengthAwarePaginator
     {
         $products = $this->model->approved()
-            ->with(['user', 'category', 'attributeValues', 'attributeValues.attribute'])
+            ->with([
+                'user', 'category',
+                'attributeValues',
+                'attributeValues.attribute'
+            ])
             ->latest();
         $products->filter($products);
         if ($paginate) {
@@ -37,7 +41,12 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
         try {
             DB::beginTransaction();
             $data['user_id'] = auth()->id();
-            $product = $this->model->create($data->except(['attribute_ids', 'name_ar', 'name_en', 'description_ar', 'description_en']));
+            $product = $this->model->create($data->except([
+                'attribute_ids',
+                'name_ar', 'name_en',
+                'description_ar',
+                'description_en'
+            ]));
             $translations = [
                 'name' => [
                     'en' => $data->name_en,
@@ -62,7 +71,14 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
 
     public function show($id)
     {
-        $product = $this->model->with(['user', 'attributes', 'category'])->findorfail($id);
+        $product = $this->model
+            ->with([
+                'user', 'attributes', 'category',
+                'relatedProducts', 'user.businessProfile',
+                'user.businessProfile'
+            ])
+            ->findorfail($id);
+
         if (auth()->guard('sanctum')->check()) {
             auth()->guard('sanctum')->user()
                 ->view($product);
@@ -76,7 +92,11 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
             DB::beginTransaction();
             $product = $this->model->whereId($id)
                 ->firstorfail();
-            $product->update($data->except(['attribute_ids', 'name_ar', 'name_en', 'description_ar', 'description_en']));
+            $product->update($data->except([
+                'attribute_ids', 'name_ar',
+                'name_en', 'description_ar',
+                'description_en'
+            ]));
             $translations = [
                 'name' => [
                     'en' => $data->name_en,

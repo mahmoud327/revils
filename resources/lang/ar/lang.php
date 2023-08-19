@@ -184,6 +184,7 @@ return [
     "users"=>[
         "cover_image"=>'تم رفع الصورة بنجاح',
         "profile_image"=>'تم رفع الصورة بنجاح',
+        "updated sucessfully"=>'تم تعديل البيانات بنجاح',
     ],
 
     'products' => [

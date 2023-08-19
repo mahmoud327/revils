@@ -67,17 +67,6 @@
       0 => 'BladeUI\\Icons\\BladeIconsServiceProvider',
     ),
   ),
-  'cms-multi/filament-clear-cache' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'CmsMulti\\FilamentClearCache\\FilamentClearCacheServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'FilamentClearCache' => 'CmsMulti\\FilamentClearCache\\Facades\\FilamentClearCache',
-    ),
-  ),
   'filament/filament' => 
   array (
     'providers' => 

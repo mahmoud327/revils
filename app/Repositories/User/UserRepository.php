@@ -28,6 +28,9 @@ class UserRepository implements UserRepositoryInterface
                 'last_name' => $request->last_name,
                 'first_name' => $request->first_name
             ]);
+            if (auth()->user()->businessProfile()->exists()) {
+                auth()->user()->businessProfile()->delete();
+            }
             auth()->user()->businessProfile()->update($request->except(['email', 'last_name', 'first_name']));
             return   auth()->user()->load('businessProfile');
         } catch (\Exception $e) {
@@ -43,7 +46,10 @@ class UserRepository implements UserRepositoryInterface
                 'last_name' => $request->last_name,
                 'first_name' => $request->first_name
             ]);
-            auth()->user()->userProfile()->update($request->except(['email', 'last_name', 'first_name']));
+            if (auth()->user()->userProfile()->exists()) {
+                auth()->user()->userProfile()->delete();
+            }
+            auth()->user()->userProfile()->create($request->except(['email', 'last_name', 'first_name', 'mobile']));
             return   auth()->user()->load('userProfile');
         } catch (\Exception $e) {
             Log::warning($e);
