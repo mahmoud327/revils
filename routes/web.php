@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Product\Product;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +18,6 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-
+      $prod = \App\Models\Product\Product::whereId(3)->with(['ratingsPure.user'])->first();
+    return new \App\Http\Resources\Product\ProductResource(($prod));
 });

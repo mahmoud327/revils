@@ -29,7 +29,6 @@ class ProductResource extends JsonResource
             "quantity" => $this->quantity,
             "description" => $this->description,
             "views" => $this->views,
-            "rates" => $this->rates,
             "unit" => $this->unit,
             "view_number" => $this->view_number,
             "images" => $this->images,
@@ -44,7 +43,7 @@ class ProductResource extends JsonResource
             "check_coin" => $this->check_coin,
             'relatedProducts'=>ProductResource::collection($this->whenLoaded('relatedProducts')),
             "attributeValues" => AttributeValueResource::collection($this->attributeValues??[]),
-
+            'rates' => RateResource::collection($this->whenLoaded('ratingsPure')),
         ];
     }
 }
