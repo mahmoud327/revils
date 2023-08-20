@@ -43,6 +43,7 @@ class User extends Authenticatable implements HasMedia
 
 
     protected $guarded = [];
+    
 
     const CUSTOMER = 'customer';
     const SELLER = 'seller';

@@ -37,6 +37,5 @@ class Category extends Model implements HasMedia
             return asset(optional($this->getFirstMedia('categories'))->getUrl());
         }
         return asset('awarebox.jpeg');
-
     }
 }

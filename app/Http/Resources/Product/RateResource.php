@@ -16,8 +16,8 @@ class RateResource extends JsonResource
     {
         return [
             "user_id" => $this->user_id,
-            "username" => $this->user->username,
-            "profile_image" => $this->user->profile_image,
+            "username" => optional($this->user)->username,
+            "profile_image" => optional($this->user)->profile_image,
             "rate_value" => $this->relation_value,
             "comment" => $this->relation_type,
         ];

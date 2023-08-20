@@ -179,6 +179,12 @@ class Product extends Model implements HasMedia
             $query->whereBetween('price', [$range[0], $range[1]]);
         });
     }
+    public function scopeRate($query, $rate)
+    {
+        return $query->whereHas('ratingsPure', function ($q) use ($rate) {
+            $q->whereRelationValue($rate);
+        });
+    }
 
     public function scopeFilter($query, $products)
     {
@@ -189,6 +195,7 @@ class Product extends Model implements HasMedia
                 AllowedFilter::scope('search'),
                 AllowedFilter::scope('category'),
                 AllowedFilter::scope('handcrafted'),
+                AllowedFilter::scope('rate'),
             ]);
     }
     /*
@@ -228,6 +235,7 @@ class Product extends Model implements HasMedia
     public function relatedProducts(): HasMany
     {
         return $this->hasMany(Product::class, 'category_id', 'category_id')
+            ->approved()
             ->where('id', '!=', $this->id);
     }
 
