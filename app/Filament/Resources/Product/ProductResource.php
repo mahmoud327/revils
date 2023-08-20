@@ -93,7 +93,7 @@ class ProductResource extends Resource
 
 
                                     Select::make('user_id')
-                                        ->relationship('user', 'name')
+                                        ->relationship('user', 'username')
                                         ->label(trans('dashboard.products.user'))
 
                                         ->required()
