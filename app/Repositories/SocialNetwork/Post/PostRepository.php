@@ -27,10 +27,16 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
             {
                 return $this->model->with(['user','tags','comments.user'])->latest()->paginate($paginatePerPage);
             }
-            return $this->model->with(['user','tags'])->latest()->paginate();
+            return $this->model->with(['user','tags','comments.user'])->latest()->paginate();
         }
 
-        return $this->model->with(['user','tags'])->latest()->get();
+        return $this->model->with(['user','tags','comments.user'])->latest()->get();
+    }
+
+    public function find($id): ?Model
+    {
+         $data = $this->model->findOrFail($id);
+         return $data->load('comments.user');
     }
 
     public function create($data) : Model

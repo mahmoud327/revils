@@ -31,7 +31,6 @@ class OrderResource extends JsonResource
             'orderDetails' => OrderDetailResource::collection($this->orderDetails ?? []),
             'payment' => PaymentResource::make($this->whenLoaded('payment')),
             'userAddress' => AddressResource::make($this->whenLoaded('userAddress')),
-
         ];
     }
 }

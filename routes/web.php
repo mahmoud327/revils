@@ -18,6 +18,6 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-      $prod = \App\Models\Product\Product::whereId(3)->with(['ratingsPure.user'])->first();
+      $prod = \App\Models\Product\Product::with(['ratingsPure.user'])->first();
     return new \App\Http\Resources\Product\ProductResource(($prod));
 });

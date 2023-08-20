@@ -146,24 +146,29 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
      * */
     ####### posts  #########
     Route::apiResource('posts', PostController::class)->except('update');
+    Route::post('user-posts/{user_id}', [PostController::class,'showUserPosts'])->middleware('role:customer');
     Route::post('posts/update/{post}', [PostController::class,'update']);
     Route::post('user-posts/{user_id}', [PostController::class,'showUserPosts'])->middleware('role:customer');
     Route::post('like-unlike', [PostController::class,'likeOrUnlikePost'])->middleware('role:customer');
+
+    ##### comments ######
+    Route::post('post/add-comment', [PostController::class,'addCommentPost']);
+    Route::post('post/show-comment', [PostController::class,'showCommentPost']);
+    Route::put('post/update-comment', [PostController::class,'updateCommentPost']);
+    Route::delete('post/delete-comment', [PostController::class,'deleteCommentPost']);
+    ##### end comments ######
+
     ####### end posts #########
 
 
-    ####### comments  #########
-    Route::apiResource('comments', CommentController::class);
-    Route::post('user-posts/{user_id}', [PostController::class,'showUserPosts'])->middleware('role:customer');
-    Route::post('like-unlike', [PostController::class,'likeOrUnlikePost'])->middleware('role:customer');
+    ####### followers   #########
     Route::post('send-follow-request', [UserFriendshipController::class, 'sendFollowingRequest']);
     Route::post('accept-follow-request', [UserFriendshipController::class, 'acceptFollowRequest']);
     Route::post('deny-follow-request', [UserFriendshipController::class, 'denyFollowRequest']);
     Route::post('unfollow-friend', [UserFriendshipController::class, 'unfollow']);
     Route::post('block-friend', [UserFriendshipController::class, 'blockFriend']);
     Route::post('unblock-friend', [UserFriendshipController::class, 'unblockFriend']);
-
-    ####### end comments #########
+    ####### end followers #########
 
 });
 Route::get('/sms', function () {

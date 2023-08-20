@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Api\SocialNetwork;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\SocialNetwork\PostComments\CommentPostRequest;
+use App\Http\Requests\Api\SocialNetwork\PostComments\CommentRequest;
+use App\Http\Requests\Api\SocialNetwork\PostComments\UpdateCommentRequest;
 use App\Http\Requests\Api\SocialNetwork\PostRequest;
+use App\Http\Resources\SocialNetwork\CommentResource;
 use App\Http\Resources\SocialNetwork\PostResource;
-use App\Models\SocialNetwork\Post;
 use App\Repositories\SocialNetwork\Post\PostRepositoryInterface;
-use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Http\Request;
+use RyanChandler\Comments\Models\Comment;
 
 class PostController extends Controller
 {
@@ -56,5 +60,37 @@ class PostController extends Controller
         $this->postRepository->likeOrUnlikePost(post: $post);
         return responseSuccess([], trans('socialNetwork/post.messages.actions.liked'));
     }
+
+    public function addCommentPost(CommentPostRequest $request)
+    {
+        $post = $this->postRepository->find(id: $request->post_id);
+        $post->comment($request->comment);
+        return responseSuccess([], trans('socialNetwork/post.messages.actions.commented'));
+    }
+
+
+    public function showCommentPost(CommentRequest $request)
+    {
+        $comment = Comment::whereId($request->comment_id)->whereUserId(Auth::id())->firstOrFail();
+        $data = new CommentResource($comment);
+        return responseSuccess($data);
+    }
+
+    public function updateCommentPost(UpdateCommentRequest $request)
+    {
+        $comment = Comment::whereId($request->comment_id)->whereUserId(Auth::id())->firstOrFail();
+        $comment->update([
+          'content' =>   $request->body
+        ]);
+        return responseSuccess([], trans('comment updated'));
+    }
+
+    public function deleteCommentPost(CommentRequest $request)
+    {
+        $comment = Comment::whereId($request->comment_id)->whereUserId(Auth::id())->firstOrFail();
+        $comment->delete();
+        return responseSuccess([], trans('comment deleted'));
+    }
+
 
 }

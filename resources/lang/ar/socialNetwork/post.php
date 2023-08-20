@@ -18,6 +18,7 @@ return [
         'save' => 'حفظ',
         'filter' => 'فلترة',
         'liked' => 'تم الإعجاب',
+        'commented' => 'تم التعليق',
     ],
     'messages' => [
         'created' => 'تم إنشاء المنشور بنجاح',
