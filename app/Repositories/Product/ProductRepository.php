@@ -23,6 +23,7 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
             ->with([
                 'user', 'category',
                 'attributeValues',
+                'ratingsPure',
                 'attributeValues.attribute'
             ])
             ->latest();
@@ -74,6 +75,7 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
         $product = $this->model
             ->with([
                 'user', 'attributes', 'category',
+                'ratingsPure',
                 'relatedProducts', 'user.businessProfile',
                 'user.businessProfile'
             ])

@@ -93,7 +93,7 @@ class ProductResource extends Resource
 
 
                                     Select::make('user_id')
-                                        ->relationship('user', 'name')
+                                        ->relationship('user', 'username')
                                         ->label(trans('dashboard.products.user'))
 
                                         ->required()
@@ -161,34 +161,34 @@ class ProductResource extends Resource
                                     // ...
                                 ]),
 
-                            // Tabs\Tab::make('attributes')
-                            //     ->label(trans('dashboard.products.attributes'))
-                            //     ->schema([
-                            //         Repeater::make('attributes')
-                            //             ->relationship('productAttributes')
-                            //             ->label(trans('dashboard.products.attributes'))
-                            //             ->schema([
-                            //                 Select::make('attribute_id')
-                            //                     ->label(trans('dashboard.products.attributes'))
-                            //                     ->options(function () {
-                            //                         return Attribute::pluck('name', 'id')->toArray();
-                            //                     })->required()
-                            //                     ->reactive()
-                            //                     ->afterStateUpdated(fn (callable $set) => $set('attribute_value_id', null)),
-                            //                 Select::make('attribute_value_id')
-                            //                     ->label(trans('dashboard.products.attributes values'))
+                            Tabs\Tab::make('attributes')
+                                ->label(trans('dashboard.products.attributes'))
+                                ->schema([
+                                    Repeater::make('attributes')
+                                        ->relationship('productAttributes')
+                                        ->label(trans('dashboard.products.attributes'))
+                                        ->schema([
+                                            Select::make('attribute_id')
+                                                ->label(trans('dashboard.products.attributes'))
+                                                ->options(function () {
+                                                    return Attribute::pluck('name', 'id')->toArray();
+                                                })->required()
+                                                ->reactive()
+                                                ->afterStateUpdated(fn (callable $set) => $set('attribute_value_id', null)),
+                                            Select::make('attribute_value_id')
+                                                ->label(trans('dashboard.products.attributes values'))
 
-                            //                     ->options(function (callable $get) {
-                            //                         $attribite = Attribute::find($get('attribute_id'));
-                            //                         if (!$attribite) {
-                            //                             return AttributeValue::pluck('value', 'id')->toArray();
-                            //                         } else {
-                            //                             return $attribite->attributeValues->pluck('value', 'id')->toArray();
-                            //                         }
-                            //                     })->required(),
+                                                ->options(function (callable $get) {
+                                                    $attribite = Attribute::find($get('attribute_id'));
+                                                    if (!$attribite) {
+                                                        return AttributeValue::pluck('value', 'id')->toArray();
+                                                    } else {
+                                                        return $attribite->attributeValues->pluck('value', 'id')->toArray();
+                                                    }
+                                                })->required(),
 
-                            //             ])->columns(2),
-                            //     ]),
+                                        ])->columns(2),
+                                ]),
 
                             Tabs\Tab::make('Medias')
                                 ->label(trans('dashboard.products.medias'))
