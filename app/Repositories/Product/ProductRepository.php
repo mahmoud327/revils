@@ -24,6 +24,8 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
                 'user', 'category',
                 'attributeValues',
                 'ratingsPure',
+                "relatedProducts.user",
+                "relatedProducts.category",
                 'attributeValues.attribute'
             ])
             ->latest();
@@ -76,6 +78,8 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
             ->with([
                 'user', 'attributes', 'category',
                 'ratingsPure',
+                "relatedProducts.user",
+                "relatedProducts.category",
                 'relatedProducts', 'user.businessProfile',
                 'user.businessProfile'
             ])

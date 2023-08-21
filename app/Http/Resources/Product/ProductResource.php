@@ -34,6 +34,7 @@ class ProductResource extends JsonResource
             "images" => $this->images,
             "status" => $this->getStatus(),
             "reason" => $this->reason,
+            "rate"=>$this->rates,
             "is_free_shipping" => $this->getIsFreeShipping(),
             "cash" => $this->cash,
             "is_batteries_shipping" => $this->getIsBatteriesShipping(),
