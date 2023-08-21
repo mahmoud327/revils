@@ -34,7 +34,7 @@ class ProductResource extends JsonResource
             "images" => $this->images,
             "status" => $this->getStatus(),
             "reason" => $this->reason,
-            "rate"=>$this->rates,
+            "rates"=>$this->rates,
             "is_free_shipping" => $this->getIsFreeShipping(),
             "cash" => $this->cash,
             "is_batteries_shipping" => $this->getIsBatteriesShipping(),
@@ -44,7 +44,7 @@ class ProductResource extends JsonResource
             "check_coin" => $this->check_coin,
             'relatedProducts'=>ProductResource::collection($this->whenLoaded('relatedProducts')),
             "attributeValues" => AttributeValueResource::collection($this->attributeValues??[]),
-            'rates' => RateResource::collection($this->whenLoaded('ratingsPure')),
+            'customerReviews' => RateResource::collection($this->whenLoaded('ratingsPure')),
         ];
     }
 }
