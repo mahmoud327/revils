@@ -57,8 +57,7 @@ class PaymentResource extends Resource
                     ->label(trans('dashboard.payments.remarks')),
 
                 Forms\Components\TextInput::make('paid_on')
-                    ->label(trans('dashboard.payments.paid_on'))
-                    ->required(),
+                    ->label(trans('dashboard.payments.paid_on')),
 
                 DatePicker::make('capture_date')
                     ->label(trans('dashboard.payments.capture_date'))
