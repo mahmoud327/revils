@@ -80,6 +80,7 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
                 'ratingsPure',
                 "relatedProducts.user",
                 "relatedProducts.category",
+                'attributeValues.attribute',
                 'relatedProducts', 'user.businessProfile',
                 'user.businessProfile'
             ])
