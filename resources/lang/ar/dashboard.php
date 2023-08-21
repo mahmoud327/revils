@@ -112,6 +112,16 @@ return [
         'categories' => 'الاقسام',
         'color' => 'اللون',
     ],
+
+    'payments' => [
+        'payments' => 'الدفع',
+        'payment_type' => ' بوابة الدفع',
+        'card_type' => 'نوع الكارت',
+        'card_digits' => ' اخر ارقام الكارت ',
+        'remarks' => 'ملاحظات',
+        'capture_date' => 'تاريخ التقاط',
+        'paid_on' => 'المدفوعة',
+    ],
     'banners' => [
         'banners' => 'البانر',
         'title' => 'عنوان',

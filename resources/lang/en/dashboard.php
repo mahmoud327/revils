@@ -49,6 +49,16 @@ return [
             'business' => 'business',
         ]
     ],
+    'payments' => [
+        'payments' => 'payments',
+        'payment_type' => 'payment_type',
+        'card_type' => 'card_type',
+        'card_digits' => 'card_digits',
+        'remarks' => 'remarks',
+        'capture_date' => 'capture_date',
+        'paid_on' => 'paid_on',
+    ],
+
     'products' => [
         'products' => 'products',
         'created by' => 'created by',
