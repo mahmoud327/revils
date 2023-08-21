@@ -40,7 +40,8 @@ class SellerRegisterRequest extends FormRequest
             'zipcode' => ['required','digits:5'],
             'area' => ['required','string','max:100'],
             'street' => ['required','string','max:100'],
-            'agreement' => ['required']
+            'agreement' => ['required'],
+            'fcm_token' => ['nullable','string'],
         ];
     }
 
