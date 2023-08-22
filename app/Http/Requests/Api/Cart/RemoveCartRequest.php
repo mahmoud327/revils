@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CartRequest extends FormRequest
+class RemoveCartRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,18 +25,9 @@ class CartRequest extends FormRequest
      */
     public function rules()
     {
-        if(request()->is('api/cart/add'))
-        {
-            return [
-                'product_id' => ['required','integer','exists:products,id'],
-                'quantity' => ['required','integer'],
-            ];
-        }else{
             return [
                 'cart_id' => ['required','integer','exists:user_carts,id'],
-                'quantity' => ['required','integer'],
             ];
-        }
     }
 
     public function messages()
