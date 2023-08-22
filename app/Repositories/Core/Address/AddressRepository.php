@@ -46,15 +46,13 @@ class AddressRepository extends BaisRepository implements AddressRepositoryInter
     {
 
         try {
-            DB::beginTransaction();
             auth()->user()->update([
                 'first_name' => $data->first_name,
                 'last_name' => $data->last_name,
                 'email' => $data->email,
                 'mobile' => $data->mobile,
             ]);
-
-            $this->model->find($id)
+            $this->model->findorfail($id)
                 ->update($data->except([
                     'first_name',
                     'last_name',
@@ -62,9 +60,7 @@ class AddressRepository extends BaisRepository implements AddressRepositoryInter
                     'mobile',
                 ]));
             return $this->model;
-            DB::commit();
         } catch (\Exception $e) {
-            DB::rollback();
 
             throw  new UnexpectedException($e->getMessage());
         }
