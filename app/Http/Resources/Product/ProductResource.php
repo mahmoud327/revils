@@ -32,6 +32,7 @@ class ProductResource extends JsonResource
             "unit" => $this->unit,
             "view_number" => $this->view_number,
             "sizes" => $this->sizes,
+            "styles" => $this->styles,
             "colors" => $this->colors,
             "images" => $this->images,
             "status" => $this->getStatus(),
@@ -45,7 +46,6 @@ class ProductResource extends JsonResource
             "is_handcrafted" => $this->getIsHandcrafted(),
             "check_coin" => $this->check_coin,
             'relatedProducts'=>ProductResource::collection($this->whenLoaded('relatedProducts')),
-            "attributeValues" => AttributeValueResource::collection($this->attributeValues??[]),
             'customerReviews' => RateResource::collection($this->whenLoaded('ratingsPure')),
         ];
     }

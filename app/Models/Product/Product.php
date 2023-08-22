@@ -96,8 +96,14 @@ class Product extends Model implements HasMedia
             })
             ->pluck('value');
     }
-
-
+    public function getStylesAttribute()
+    {
+        return $this->attributeValues()
+            ->whereHas('attribute', function ($q) {
+                $q->where('name->en', 'Style');
+            })
+            ->pluck('value');
+    }
 
     public function getRatesAttribute()
     {
