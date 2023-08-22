@@ -96,14 +96,42 @@ class Product extends Model implements HasMedia
             })
             ->pluck('value');
     }
-    public function getStylesAttribute()
+    public function getStyleAttribute()
     {
         return $this->attributeValues()
             ->whereHas('attribute', function ($q) {
                 $q->where('name->en', 'Style');
             })
-            ->pluck('value');
+            ->select('value')->first();
     }
+
+    public function getGenderAttribute()
+    {
+        return $this->attributeValues()
+            ->whereHas('attribute', function ($q) {
+                $q->where('name->en', 'Gender');
+            })
+            ->select('value')->first();
+    }
+    public function getProducedAsAttribute()
+    {
+        return $this->attributeValues()
+            ->whereHas('attribute', function ($q) {
+                $q->where('name->en', 'Produced as');
+            })
+            ->select('value')->first();
+    }
+
+    public function getFeaturesAttribute()
+    {
+        return [
+            'gender'=>$this->gender,
+            'producedAs'=>$this->produced_as,
+            'style'=>$this->style,
+            'is_handcrafted'=>$this->getIsHandcrafted(),
+        ];
+    }
+
 
     public function getRatesAttribute()
     {
