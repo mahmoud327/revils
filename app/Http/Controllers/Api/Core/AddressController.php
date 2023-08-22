@@ -30,7 +30,6 @@ class AddressController extends Controller
             $this->addressRepository->create(data: $request->all());
             return responseSuccess([], __('lang.address.added'));
         } catch (UnexpectedException $ex) {
-            return $ex->getMessage();
             Log::error($ex->getMessage());
             return responseError('Something went wrong!', 402);
         }
