@@ -31,6 +31,8 @@ class ProductResource extends JsonResource
             "views" => $this->views,
             "unit" => $this->unit,
             "view_number" => $this->view_number,
+            "sizes" => $this->sizes,
+            "colors" => $this->colors,
             "images" => $this->images,
             "status" => $this->getStatus(),
             "reason" => $this->reason,

@@ -10,6 +10,7 @@ use App\Enums\ProductStatusTextValueEnum;
 use App\Enums\BooleanEnum;
 use App\Http\Resources\Core\MediaCenterResource;
 use App\Models\Core\Category;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -33,6 +34,13 @@ class Product extends Model implements HasMedia
     use CanBeRated;
     use CanBeViewed;
 
+
+
+    // protected $appends = [
+    //     'sizes',
+    //     'colors',
+    //     'images'
+    // ];
 
     public $with = ['media'];
 
@@ -71,6 +79,26 @@ class Product extends Model implements HasMedia
     {
         return $this->viewersCount();
     }
+
+    public function getSizesAttribute()
+    {
+        return $this->attributeValues()
+            ->whereHas('attribute', function ($q) {
+                $q->where('name->en', 'Size');
+            })
+            ->pluck('value');
+    }
+    public function getColorsAttribute()
+    {
+        return $this->attributeValues()
+            ->whereHas('attribute', function ($q) {
+                $q->where('name->en', 'Color');
+            })
+            ->pluck('value');
+    }
+
+
+
     public function getRatesAttribute()
     {
         return $this->ratingsPure()->avg('relation_value') ?? 0;
@@ -189,6 +217,7 @@ class Product extends Model implements HasMedia
             })
         };
     }
+
 
     public function scopeFilter($query, $products)
     {
