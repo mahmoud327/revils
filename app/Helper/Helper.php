@@ -3,6 +3,7 @@
 use App\Models\Core\Coupon;
 use App\Models\Core\CouponUser;
 use App\Models\Product\Product;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Image\Image;
 use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
@@ -53,7 +54,7 @@ if (!function_exists('uploadMedia')) {
         $dirName = Str::snake(Str::plural(class_basename($model)));
 
         $tempPath = storage_path("tmp/uploads/{$dirName}");
-        
+
         collect($images)->each(function (UploadedFile $image) use ($model, &$position, $dirName, $tempPath, $key, $isModelHasMedia) {
             $fileName = $model->id . time() . uniqid() . '.' . $image->getClientOriginalExtension();
             $originalImage = $image->move($tempPath, $fileName);
@@ -104,6 +105,22 @@ if (!function_exists('uploadMedia')) {
             }
 
             return  $total < 0 ? 0 : $total;
+        }
+    }
+
+    if (!function_exists('getUserIdToSendNotification')) {
+
+        function getUserIdToSendNotification($object)
+        {
+            if(is_object($object))
+            {
+                if(Auth::id()==$object->user_id)
+                {
+                    return false;
+                }
+                 return $object->user_id;
+            }
+            return false;
         }
     }
 }

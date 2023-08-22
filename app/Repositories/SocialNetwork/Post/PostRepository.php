@@ -25,12 +25,12 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
         {
             if($paginatePerPage)
             {
-                return $this->model->with(['user','tags','comments.user'])->latest()->paginate($paginatePerPage);
+                return $this->model->with(['user','tags','comments.user','likers'])->withCount('likers')->latest()->paginate($paginatePerPage);
             }
-            return $this->model->with(['user','tags','comments.user'])->latest()->paginate();
+            return $this->model->with(['user','tags','comments.user','likers'])->withCount('likers')->latest()->paginate();
         }
 
-        return $this->model->with(['user','tags','comments.user'])->latest()->get();
+        return $this->model->with(['user','tags','comments.user','likers'])->withCount('likers')->latest()->get();
     }
 
     public function find($id): ?Model
@@ -89,19 +89,6 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
         $model = $this->find($id);
         $model->clearMediaCollection();
         return $model->delete();
-    }
-
-    public function showUserPosts(int $user_id, ?int $paginatePerPage, bool $paginate = true) : Collection | LengthAwarePaginator
-    {
-        if($paginate)
-        {
-            if($paginatePerPage)
-            {
-                return $this->model->wherelatest()->paginate($paginatePerPage);
-            }
-            return $this->model->latest()->paginate();
-        }
-        return $this->model->latest()->get();
     }
 
     public function likeOrUnlikePost(Post $post)

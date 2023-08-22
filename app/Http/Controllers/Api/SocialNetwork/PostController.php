@@ -9,9 +9,12 @@ use App\Http\Requests\Api\SocialNetwork\PostComments\UpdateCommentRequest;
 use App\Http\Requests\Api\SocialNetwork\PostRequest;
 use App\Http\Resources\SocialNetwork\CommentResource;
 use App\Http\Resources\SocialNetwork\PostResource;
+use App\Models\User;
+use App\Notifications\SendFirebaseNotification;
 use App\Repositories\SocialNetwork\Post\PostRepositoryInterface;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use RyanChandler\Comments\Models\Comment;
 
 class PostController extends Controller
@@ -49,7 +52,7 @@ class PostController extends Controller
 
     public function showUserPosts()
     {
-        $posts = PostResource::collection(Auth::user()->posts()->with('user','tags','comments.user')->get());
+        $posts = PostResource::collection(Auth::user()->posts()->with(['user','tags','comments.user','likers'])->withCount('likers')->get());
         return responseSuccess($posts);
     }
 
@@ -65,6 +68,9 @@ class PostController extends Controller
     {
         $post = $this->postRepository->find(id: $request->post_id);
         $post->comment($request->comment);
+       // $user_id = getUserIdToSendNotification($post);
+        //$user = User::find($user_id);
+       // Notification::send($user, new SendFirebaseNotification($user));
         return responseSuccess([], trans('socialNetwork/post.messages.actions.commented'));
     }
 

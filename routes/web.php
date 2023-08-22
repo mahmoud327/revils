@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\SocialNetwork\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,8 @@ Route::get('test2',function(){
     return 'login';
 })->name('login');
 Route::get('/test', function () {
+   // Auth::login(User::whereId(4)->first());
+    return  $post = Post::with(['user','tags','comments.user','likers'])->withCount('likers')->whereId(7)->first();
       $prod = \App\Models\Product\Product::with(['ratingsPure.user'])->first();
     return new \App\Http\Resources\Product\ProductResource(($prod));
 });
