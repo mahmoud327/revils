@@ -73,7 +73,7 @@ class Product extends Model implements HasMedia
     }
     public function getRatesAttribute()
     {
-        return $this->averageRating('products') ?? 0;
+        return $this->ratingsPure()->avg('relation_value') ?? 0;
     }
 
     /**
@@ -181,9 +181,13 @@ class Product extends Model implements HasMedia
     }
     public function scopeRate($query, $rate)
     {
-        return $query->whereHas('ratingsPure', function ($q) use ($rate) {
-            $q->whereRelationValue($rate);
-        });
+        $approve = $query->approved();
+        match ($rate) {
+            '0' => $approve->doesntHave('ratingsPure'),
+            default => $approve->whereHas('ratingsPure', function ($q) use ($rate) {
+                $q->whereRelationValue($rate);
+            })
+        };
     }
 
     public function scopeFilter($query, $products)
