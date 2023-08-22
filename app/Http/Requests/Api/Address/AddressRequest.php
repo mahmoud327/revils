@@ -5,6 +5,7 @@ namespace App\Http\Requests\Api\Address;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class AddressRequest extends FormRequest
 {
@@ -30,9 +31,14 @@ class AddressRequest extends FormRequest
             'country_id' => ['required', 'integer', 'exists:countries,id'],
             'state_id' => ['required', 'integer', 'exists:states,id'],
             'address' => ['required'],
-            'address_type' => ['required','in:office,home,other'],
+            'address_type' => ['required', 'in:office,home,other'],
             'zipcode' => ['required'],
             'note' => ['nullable'],
+            "first_name" => [Rule::when(request()->isMethod('put'), 'required')],
+            "last_name" => [Rule::when(request()->isMethod('put'), 'required')],
+            "email" => [Rule::when(request()->isMethod('put'), 'required'), Rule::unique('users')->ignore(auth()->id())],
+            "mobile" => [Rule::when(request()->isMethod('put'), 'required')],
+
             'city_id' => ['required', 'integer', 'exists:cities,id'],
         ];
     }
@@ -70,5 +76,12 @@ class AddressRequest extends FormRequest
                 ],
             )
         );
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'user_id' => auth()->id(),
+        ]);
     }
 }

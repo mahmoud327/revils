@@ -33,10 +33,9 @@ class AddressRepository extends BaisRepository implements AddressRepositoryInter
     public function create($data): Model
     {
 
-        try {
-            $data['user_id'] = auth()->id();
-            $this->model->create($data);
 
+        try {
+            $this->model->create($data->all());
             return $this->model;
         } catch (\Exception $e) {
 
@@ -47,9 +46,25 @@ class AddressRepository extends BaisRepository implements AddressRepositoryInter
     {
 
         try {
-            $this->model->find($id)->update($data);
+            DB::beginTransaction();
+            auth()->user()->update([
+                'first_name' => $data->first_name,
+                'last_name' => $data->last_name,
+                'email' => $data->email,
+                'mobile' => $data->mobile,
+            ]);
+
+            $this->model->find($id)
+                ->update($data->except([
+                    'first_name',
+                    'last_name',
+                    'email',
+                    'mobile',
+                ]));
             return $this->model;
+            DB::commit();
         } catch (\Exception $e) {
+            DB::rollback();
 
             throw  new UnexpectedException($e->getMessage());
         }

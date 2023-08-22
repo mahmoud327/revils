@@ -17,7 +17,6 @@ class ProductController extends Controller
     public function __construct(public ProductRepositoryInterface $productRepository)
     {
     }
-
     public function index(Request $request)
     {
         $products = ProductResource::collection($this->productRepository->all(paginatePerPage: $request->perPage));
