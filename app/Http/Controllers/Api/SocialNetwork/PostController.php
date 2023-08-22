@@ -47,9 +47,9 @@ class PostController extends Controller
         return responseSuccess([], trans('socialNetwork/post.messages.deleted'));
     }
 
-    public function showUserPosts($user_id, Request $request)
+    public function showUserPosts()
     {
-        $posts = PostResource::collection($this->postRepository->showUserPosts(user_id: $user_id, paginatePerPage: $request->perPage));
+        $posts = PostResource::collection(Auth::user()->posts()->with('user','tags','comments.user')->get());
         return responseSuccess($posts);
     }
 

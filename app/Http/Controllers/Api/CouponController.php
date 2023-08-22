@@ -21,11 +21,13 @@ class CouponController extends Controller
 
         $coupon = $this->couponRepository->verifyCoupon($request);
 
-        if (!$coupon) {
+        if (!$coupon)
+        {
             return responseError(__('lang.coupons.expired'), 402);
         }
 
-        if ($coupon->userUsedCoupon) {
+        if ($coupon->userUsedCoupon)
+        {
             return responseError(__('lang.coupons.used'), 402);
         }
         return responseSuccess(new CouponResource($coupon), __('lang.coupons.valid'));

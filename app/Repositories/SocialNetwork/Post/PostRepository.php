@@ -97,7 +97,7 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
         {
             if($paginatePerPage)
             {
-                return $this->model->latest()->paginate($paginatePerPage);
+                return $this->model->wherelatest()->paginate($paginatePerPage);
             }
             return $this->model->latest()->paginate();
         }
