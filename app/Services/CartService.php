@@ -6,6 +6,7 @@ use App\Exceptions\NotFoundException;
 use App\Exceptions\StockAvailabilityException;
 use App\Exceptions\UnexpectedException;
 use App\Http\Requests\Api\Cart\CartRequest;
+use App\Http\Requests\Api\Cart\RemoveCartRequest;
 use App\Models\Product\Product;
 use App\Models\UserCart;
 use Auth;
@@ -31,7 +32,7 @@ class CartService
                 throw new StockAvailabilityException();
             }
             $shoppingCart->update([
-                'quantity' => $shoppingCart->quantity + 1
+                'quantity' => $request->quantity
             ]);
             return $shoppingCart;
         } else {
@@ -59,24 +60,13 @@ class CartService
     public function updateCart(CartRequest $request)
     {
         $shoppingCart = UserCart::whereId($request->cart_id)->whereUserId(Auth::id())->first();
-        if ($request->increase) {
             $shoppingCart->update([
-                'quantity' => $shoppingCart->quantity + 1
+                'quantity' => $request->quantity
             ]);
             return $shoppingCart;
-        }
-        if ($request->decrease) {
-            if ($shoppingCart->quantity == 1) {
-                return false;
-            }
-            $shoppingCart->update([
-                'quantity' => $shoppingCart->quantity - 1
-            ]);
-            return $shoppingCart;
-        }
     }
 
-    public function removeFromCart(CartRequest $request)
+    public function removeFromCart(RemoveCartRequest $request)
     {
         $shoppingCart = UserCart::whereUserId(Auth::id())->find($request->cart_id);
         if (!isset($shoppingCart)) {

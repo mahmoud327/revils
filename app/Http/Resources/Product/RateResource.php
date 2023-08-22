@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Product;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,6 +21,7 @@ class RateResource extends JsonResource
             "profile_image" => optional($this->user)->profile_image,
             "rate_value" => $this->relation_value,
             "comment" => $this->relation_type,
+            "create_at_human" =>Carbon::parse($this->created_at)->diffForHumans(),
         ];
     }
 }
