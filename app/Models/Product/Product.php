@@ -10,6 +10,7 @@ use App\Enums\ProductStatusTextValueEnum;
 use App\Enums\BooleanEnum;
 use App\Http\Resources\Core\MediaCenterResource;
 use App\Models\Core\Category;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -33,6 +34,13 @@ class Product extends Model implements HasMedia
     use CanBeRated;
     use CanBeViewed;
 
+
+
+    // protected $appends = [
+    //     'sizes',
+    //     'colors',
+    //     'images'
+    // ];
 
     public $with = ['media'];
 
@@ -71,9 +79,63 @@ class Product extends Model implements HasMedia
     {
         return $this->viewersCount();
     }
+
+    public function getSizesAttribute()
+    {
+        return $this->attributeValues()
+            ->whereHas('attribute', function ($q) {
+                $q->where('name->en', 'Size');
+            })
+            ->pluck('value');
+    }
+    public function getColorsAttribute()
+    {
+        return $this->attributeValues()
+            ->whereHas('attribute', function ($q) {
+                $q->where('name->en', 'Color');
+            })
+            ->pluck('value');
+    }
+    public function getStyleAttribute()
+    {
+        return optional($this->attributeValues()
+            ->whereHas('attribute', function ($q) {
+                $q->where('name->en', 'Style');
+            })
+            ->first())->value;
+    }
+
+    public function getGenderAttribute()
+    {
+        return optional($this->attributeValues()
+            ->whereHas('attribute', function ($q) {
+                $q->where('name->en', 'Gender');
+            })
+            ->first())->value;
+    }
+    public function getProducedAsAttribute()
+    {
+        return optional($this->attributeValues()
+            ->whereHas('attribute', function ($q) {
+                $q->where('name->en', 'Produced as');
+            })
+            ->first())->value;
+    }
+
+    public function getFeaturesAttribute()
+    {
+        return [
+            'gender'=>$this->gender,
+            'producedAs'=>$this->produced_as,
+            'style'=>$this->style,
+            'is_handcrafted'=>$this->getIsHandcrafted(),
+        ];
+    }
+
+
     public function getRatesAttribute()
     {
-        return $this->averageRating('products') ?? 0;
+        return $this->ratingsPure()->avg('relation_value') ?? 0;
     }
 
     /**
@@ -181,10 +243,15 @@ class Product extends Model implements HasMedia
     }
     public function scopeRate($query, $rate)
     {
-        return $query->whereHas('ratingsPure', function ($q) use ($rate) {
-            $q->whereRelationValue($rate);
-        });
+        $approve = $query->approved();
+        match ($rate) {
+            '0' => $approve->doesntHave('ratingsPure'),
+            default => $approve->whereHas('ratingsPure', function ($q) use ($rate) {
+                $q->whereRelationValue($rate);
+            })
+        };
     }
+
 
     public function scopeFilter($query, $products)
     {
