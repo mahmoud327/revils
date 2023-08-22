@@ -34,11 +34,6 @@ class AddressRequest extends FormRequest
             'address_type' => ['required', 'in:office,home,other'],
             'zipcode' => ['required'],
             'note' => ['nullable'],
-            "first_name" => [Rule::when(request()->isMethod('put'), 'required')],
-            "last_name" => [Rule::when(request()->isMethod('put'), 'required')],
-            "email" => [Rule::when(request()->isMethod('put'), 'required'), Rule::unique('users')->ignore(auth()->id())],
-            "mobile" => [Rule::when(request()->isMethod('put'), 'required')],
-
             'city_id' => ['required', 'integer', 'exists:cities,id'],
         ];
     }

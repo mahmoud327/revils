@@ -46,19 +46,9 @@ class AddressRepository extends BaisRepository implements AddressRepositoryInter
     {
 
         try {
-            auth()->user()->update([
-                'first_name' => $data->first_name,
-                'last_name' => $data->last_name,
-                'email' => $data->email,
-                'mobile' => $data->mobile,
-            ]);
+
             $this->model->findorfail($id)
-                ->update($data->except([
-                    'first_name',
-                    'last_name',
-                    'email',
-                    'mobile',
-                ]));
+                ->update($data->all());
             return $this->model;
         } catch (\Exception $e) {
 
