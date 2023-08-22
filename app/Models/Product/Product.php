@@ -125,10 +125,10 @@ class Product extends Model implements HasMedia
     public function getFeaturesAttribute()
     {
         return [
-            'gender'=>$this->gender,
-            'producedAs'=>$this->produced_as,
-            'style'=>$this->style,
-            'is_handcrafted'=>$this->getIsHandcrafted(),
+            'gender' => $this->gender,
+            'producedAs' => $this->produced_as,
+            'style' => $this->style,
+            'is_handcrafted' => $this->getIsHandcrafted(),
         ];
     }
 
