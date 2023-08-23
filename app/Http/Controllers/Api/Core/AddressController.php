@@ -25,10 +25,8 @@ class AddressController extends Controller
 
     public function store(AddressRequest $request)
     {
-
         try {
-            $this->addressRepository->create(data: $request);
-            return responseSuccess([], __('lang.address.added'));
+            return responseSuccess(new AddressResource($this->addressRepository->create(data: $request)));
         } catch (UnexpectedException $ex) {
             Log::error($ex->getMessage());
             return responseError('Something went wrong!', 402);
@@ -38,8 +36,8 @@ class AddressController extends Controller
     {
 
         try {
-            $this->addressRepository->update(id: $id, data:$request);
-            return responseSuccess([], __('lang.address.updated'));
+
+            return responseSuccess(new AddressResource($this->addressRepository->update(id: $id, data: $request)));
         } catch (UnexpectedException $ex) {
             return $ex->getMessage();
             Log::error($ex->getMessage());
