@@ -37,7 +37,7 @@ class AddressController extends Controller
 
         try {
 
-            return responseSuccess(new AddressResource($this->addressRepository->update(id: $id, data: $request)));
+            return responseSuccess(new AddressResource($this->addressRepository->update(id:$id,data:$request)));
         } catch (UnexpectedException $ex) {
             return $ex->getMessage();
             Log::error($ex->getMessage());
