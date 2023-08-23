@@ -149,7 +149,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
     Route::get('user-posts', [PostController::class,'showUserPosts'])->middleware('role:customer');
     Route::post('posts/update/{post}', [PostController::class,'update']);
     Route::post('like-unlike', [PostController::class,'likeOrUnlikePost'])->middleware('role:customer');
-
+    Route::post('favorite-unfavorite', [PostController::class,'favoriteOrUnfavorit'])->middleware('role:customer');
     ##### comments ######
     Route::post('post/add-comment', [PostController::class,'addCommentPost']);
     Route::post('post/show-comment', [PostController::class,'showCommentPost']);

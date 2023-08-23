@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Multicaret\Acquaintances\Interaction;
+use Multicaret\Acquaintances\Traits\CanFavorite;
 use Multicaret\Acquaintances\Traits\CanLike;
 use Multicaret\Acquaintances\Traits\CanRate;
 use Multicaret\Acquaintances\Traits\CanView;
@@ -40,10 +40,11 @@ class User extends Authenticatable implements HasMedia
     use InteractsWithMedia;
     use CanRate;
     use CanView;
+    use CanFavorite;
 
 
     protected $guarded = [];
-    
+
 
     const CUSTOMER = 'customer';
     const SELLER = 'seller';

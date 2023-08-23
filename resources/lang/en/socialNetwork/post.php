@@ -18,13 +18,14 @@ return [
         'options' => 'Options',
         'save' => 'Save',
         'filter' => 'Filter',
-        'liked' => 'Liked Successfully',
-        'commented' => 'Comment is added',
     ],
     'messages' => [
         'created' => 'The post has been created successfully.',
         'updated' => 'The post has been updated successfully.',
         'deleted' => 'The post has been deleted successfully.',
+        'liked' => 'Liked Successfully',
+        'commented' => 'Comment is added',
+        'favorited' => 'added to favorite',
     ],
     'attributes' => [
         'content' => 'Content',

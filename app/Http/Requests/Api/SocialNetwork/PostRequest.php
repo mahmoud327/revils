@@ -25,7 +25,7 @@ class PostRequest extends FormRequest
      */
     public function rules()
     {
-        if(request()->is('api/like-unlike') or request()->is('api/unlike-post'))
+        if(request()->is('api/like-unlike') or request()->is('api/unlike-post') or request()->is('api/favorite-unfavorite'))
         {
             return [
                 'post_id' => ['required','exists:posts,id'],

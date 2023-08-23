@@ -64,6 +64,14 @@ class PostController extends Controller
         return responseSuccess([], trans('socialNetwork/post.messages.actions.liked'));
     }
 
+    public function favoriteOrUnfavorit(PostRequest $request)
+    {
+        $post = $this->postRepository->find(id: $request->post_id);
+        $this->postRepository->favoriteOrUnfavorit(post: $post);
+        return responseSuccess([], trans('socialNetwork/post.messages.actions.favorited'));
+    }
+
+
     public function addCommentPost(CommentPostRequest $request)
     {
         $post = $this->postRepository->find(id: $request->post_id);

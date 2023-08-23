@@ -95,4 +95,9 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
     {
         Auth::user()->toggleLike($post);
     }
+
+    public function favoriteOrUnfavorit(Post $post)
+    {
+        Auth::user()->toggleFavorite($post);
+    }
 }
