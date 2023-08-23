@@ -154,7 +154,7 @@ class CustomerResource extends Resource
                                     'office' => 'office',
                                     'other' => 'other',
                                 ])
-                                ->required(),
+                               ,
                         ])
                         ->columns(2)
                 ])
