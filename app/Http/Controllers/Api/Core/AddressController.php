@@ -27,7 +27,7 @@ class AddressController extends Controller
     {
 
         try {
-            $this->addressRepository->create(data: $request->all());
+            $this->addressRepository->create(data: $request);
             return responseSuccess([], __('lang.address.added'));
         } catch (UnexpectedException $ex) {
             Log::error($ex->getMessage());
