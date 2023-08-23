@@ -295,6 +295,29 @@
                                         clip-rule="evenodd"></path>
                                 </svg> </button>
                         </th>
+                        <th class="filament-tables-header-cell p-0 filament-table-header-cell-color">
+                            <button wire:click="sortTable('color')" type="button"
+                                class="flex w-full items-center gap-x-1 whitespace-nowrap px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 ">
+                                <span class="sr-only">
+                                    ترتيب حسب
+                                </span>
+
+                                <span>
+                                    التعليق
+                                </span>
+
+                                <span class="sr-only">
+                                    تصاعدي
+                                </span>
+
+                                <svg class="filament-tables-header-cell-sort-icon h-3 w-3 dark:text-gray-300 opacity-25"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                    aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg> </button>
+                        </th>
 
                         <th class="w-5"></th>
                     </tr>
@@ -365,7 +388,31 @@
                                             <div class="inline-flex items-center space-x-1 rtl:space-x-reverse">
 
                                                 <span class="">
-                                                    {{ $rate->pivot->relation_value }}
+                                                    {{ optional($rate->pivot)->relation_value }}
+
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </a>
+                                </div>
+                            </td>
+
+                            <td class="filament-tables-cell dark:text-white filament-table-cell-color"
+                                wire:key="ujZ424LKBxycw6EglhIo.table.record.1.column.color"
+                                wire:loading.remove.delay="wire:loading.remove.delay"
+                                wire:target="previousPage,nextPage,gotoPage,sortTable,tableFilters,resetTableFiltersForm,tableSearchQuery,tableColumnSearchQueries,tableRecordsPerPage">
+                                <div class="filament-tables-column-wrapper">
+                                    <a href="http://127.0.0.1:8000/admin/core/categories/1/edit"
+                                        class="flex w-full justify-start text-start">
+                                        <div class="filament-tables-text-column px-4 py-3">
+
+                                            <div class="inline-flex items-center space-x-1 rtl:space-x-reverse">
+
+                                                <span class="">
+                                                    {{ optional($rate->pivot)->relation_type }}
 
                                                 </span>
 

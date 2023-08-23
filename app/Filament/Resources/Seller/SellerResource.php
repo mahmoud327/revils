@@ -26,6 +26,9 @@ use Filament\Resources\Form;
 use Filament\Pages\Page;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -48,71 +51,105 @@ class SellerResource extends Resource
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make('username')
-                    ->required()->unique(ignoreRecord: true)
-                    ->label(trans('dashboard.user name')),
-                Forms\Components\TextInput::make('first_name')
-                    ->label(trans('dashboard.first name'))
+                Card::make()->schema([
 
-                    ->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('last_name')->unique(ignoreRecord: true)
-                    ->label(trans('dashboard.last name')),
-                Forms\Components\TextInput::make('email')->email()
-                    ->label(trans('dashboard.email'))
+                    Forms\Components\TextInput::make('username')
+                        ->required()->unique(ignoreRecord: true)
+                        ->label(trans('dashboard.user name')),
+                    Forms\Components\TextInput::make('first_name')
+                        ->label(trans('dashboard.first name'))
 
-                    ->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->label(trans('dashboard.password'))
+                        ->unique(ignoreRecord: true),
+                    Forms\Components\TextInput::make('last_name')->unique(ignoreRecord: true)
+                        ->label(trans('dashboard.last name')),
+                    Forms\Components\TextInput::make('email')->email()
+                        ->label(trans('dashboard.email'))
 
-                    ->maxLength(255)
-                    ->dehydrateStateUsing(
-                        static fn (null|string $state): null|string =>
-                        filled($state) ? Hash::make($state) : null,
-                    )->required(
-                        static fn (Page $livewire): bool =>
-                        $livewire instanceof CreateSeller,
-                    )->dehydrated(
-                        static fn (null|string $state): bool =>
-                        filled($state),
-                    )->label(
-                        static fn (Page $livewire): string => ($livewire instanceof EditSeller) ? trans('dashboard.new password') : trans('dashboard.password')
-                    ),
-                RichEditor::make('bio')
-                    ->label(trans('dashboard.bio'))
-                    ->required(),
-                Hidden::make('account_type')->default(1),
+                        ->unique(ignoreRecord: true),
+                    Forms\Components\TextInput::make('password')
+                        ->password()
+                        ->label(trans('dashboard.password'))
 
-                Fieldset::make('businessProfile')
+                        ->maxLength(255)
+                        ->dehydrateStateUsing(
+                            static fn (null|string $state): null|string =>
+                            filled($state) ? Hash::make($state) : null,
+                        )->required(
+                            static fn (Page $livewire): bool =>
+                            $livewire instanceof CreateSeller,
+                        )->dehydrated(
+                            static fn (null|string $state): bool =>
+                            filled($state),
+                        )->label(
+                            static fn (Page $livewire): string => ($livewire instanceof EditSeller) ? trans('dashboard.new password') : trans('dashboard.password')
+                        ),
+                    RichEditor::make('bio')
+                        ->label(trans('dashboard.bio'))
+                        ->required(),
+                    Hidden::make('account_type')->default(1),
 
-                    ->relationship('businessProfile')
-                    ->schema([
-                        Forms\Components\TextInput::make('website')
-                            ->label(trans('dashboard.sellers.businessProfile.website'))
-                            ->required(),
-                        Forms\Components\TextInput::make('phone')
-                            ->label(trans('dashboard.sellers.businessProfile.phone'))
-                            ->required(),
-                        Forms\Components\TextInput::make('mobile')
-                            ->label(trans('dashboard.sellers.businessProfile.mobile'))
-                            ->required(),
-                        Forms\Components\TextInput::make('street')
-                            ->label(trans('dashboard.sellers.businessProfile.street1'))
-                            ->required(),
+                    Fieldset::make('businessProfile')
 
+                        ->relationship('businessProfile')
+                        ->schema([
+                            Forms\Components\TextInput::make('website')
+                                ->label(trans('dashboard.sellers.businessProfile.website'))
+                                ->required(),
+                            Forms\Components\TextInput::make('phone')
+                                ->label(trans('dashboard.sellers.businessProfile.phone'))
+                                ->required(),
 
-                        Forms\Components\TextInput::make('street2')
-                            ->label(trans('dashboard.sellers.businessProfile.street2'))
-                            ->required(),
-
-                        Select::make('business_type_id')
-                            ->label(trans('dashboard.sellers.businessProfile.business'))
-                            ->options(function () {
-                                return BusinessType::pluck('name', 'id')->toArray();
-                            })->required(),
+                            Forms\Components\TextInput::make('street')
+                                ->label(trans('dashboard.sellers.businessProfile.street1'))
+                                ->required(),
 
 
-                    ]),
+                            Forms\Components\TextInput::make('street2')
+                                ->label(trans('dashboard.sellers.businessProfile.street2'))
+                                ->required(),
+
+                            Select::make('business_type_id')
+                                ->label(trans('dashboard.sellers.businessProfile.business'))
+                                ->options(function () {
+                                    return BusinessType::pluck('name', 'id')->toArray();
+                                })->required(),
+
+
+                        ]),
+
+                    Repeater::make('userAddress')
+                        ->relationship('userAddress')
+
+                        ->schema([
+                            TextInput::make('last_name'),
+                            TextInput::make('first_name'),
+                            TextInput::make('email'),
+                            TextInput::make('mobile'),
+
+                            Select::make('country_id')
+                                ->label(trans('dashboard.customers.userProfile.country'))
+                                ->relationship('country', 'name')
+                                ->searchable(),
+
+                            Select::make('city_id')
+                                ->relationship('city', 'name')->required()
+                                ->searchable(),
+
+                            Select::make('state_id')
+                                ->relationship('state', 'name')->required()
+                                ->searchable(),
+
+                            Select::make('address_type')
+                                ->options([
+                                    'home' => 'home',
+                                    'office' => 'office',
+                                    'other' => 'other',
+                                ])
+                                ->required(),
+                        ])
+                        ->columns(2)
+                ])
+
 
             ]);
     }
