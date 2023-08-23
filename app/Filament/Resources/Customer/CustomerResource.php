@@ -130,10 +130,10 @@ class CustomerResource extends Resource
                     ->relationship('userAddress')
 
                         ->schema([
-                            TextInput::make('last_name')->required(),
-                            TextInput::make('first_name')->required(),
-                            TextInput::make('email')->required(),
-                            TextInput::make('mobile')->required(),
+                            TextInput::make('last_name'),
+                            TextInput::make('first_name'),
+                            TextInput::make('email'),
+                            TextInput::make('mobile'),
 
                             Select::make('country_id')
                                 ->label(trans('dashboard.customers.userProfile.country'))
