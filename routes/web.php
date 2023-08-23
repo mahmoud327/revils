@@ -21,6 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('test2',function(){
+    return Auth::user();
     $user=User::find(6);
     Auth::login($user);
     return 'login';

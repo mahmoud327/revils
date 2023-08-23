@@ -876,7 +876,7 @@ function getContacts() {
         if (contactsPage < 2) {
           $(".listOfContacts").html(data.contacts);
         } else {
-          $(".listOfContacts").append(data.contacts);
+            $(".listOfContacts").append(data.contacts);
         }
         updateSelectedContact();
         // update data-action required with [responsive design]
