@@ -44,9 +44,7 @@ class AddressRepository extends BaisRepository implements AddressRepositoryInter
     }
     public function update($id, $data): Model
     {
-
         try {
-
             $this->model->findorfail($id)
                 ->update($data->all());
             return $this->model;

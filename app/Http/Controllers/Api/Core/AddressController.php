@@ -27,7 +27,7 @@ class AddressController extends Controller
     {
 
         try {
-            $this->addressRepository->create(data:$request);
+            $this->addressRepository->create(data: $request->all());
             return responseSuccess([], __('lang.address.added'));
         } catch (UnexpectedException $ex) {
             Log::error($ex->getMessage());
@@ -38,7 +38,7 @@ class AddressController extends Controller
     {
 
         try {
-            $this->addressRepository->update(id: $id, data:$request);
+            $this->addressRepository->update(id: $id, data:$request->all());
             return responseSuccess([], __('lang.address.updated'));
         } catch (UnexpectedException $ex) {
             return $ex->getMessage();
