@@ -29,12 +29,12 @@ class CartRequest extends FormRequest
         {
             return [
                 'product_id' => ['required','integer','exists:products,id'],
-                'quantity' => ['required','integer'],
             ];
         }else{
             return [
                 'cart_id' => ['required','integer','exists:user_carts,id'],
-                'quantity' => ['required','integer'],
+                'decrease' => ['nullable','integer'],
+                'increase' => ['nullable','integer'],
             ];
         }
     }

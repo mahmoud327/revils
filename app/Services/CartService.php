@@ -26,20 +26,19 @@ class CartService
     public function addToCart(CartRequest $request)
     {
         $authId = Auth::id();
+        $product = Product::findOrFail($request->product_id);
         $shoppingCart = UserCart::whereUserId($authId)->whereProductId($request->product_id)->first();
         if ($shoppingCart) {
             if (!$this->checkProductStock($shoppingCart, $shoppingCart->quantity)) {
                 throw new StockAvailabilityException();
             }
             $shoppingCart->update([
-                'quantity' => $request->quantity
+                'quantity' => ($shoppingCart->quantity + 1)
             ]);
             return $shoppingCart;
         } else {
 
             try {
-                $product = Product::findOrFail($request->product_id);
-
                 if (!$product->quantity) {
                     throw new StockAvailabilityException('Not available in the stock');
                 }
@@ -60,10 +59,20 @@ class CartService
     public function updateCart(CartRequest $request)
     {
         $shoppingCart = UserCart::whereId($request->cart_id)->whereUserId(Auth::id())->first();
+        if($request->increase)
+        {
             $shoppingCart->update([
-                'quantity' => $request->quantity
+                'quantity' => ($shoppingCart->quantity + 1)
             ]);
-            return $shoppingCart;
+        }
+        if($request->decrease)
+        {
+            $shoppingCart->update([
+                'quantity' => ($shoppingCart->quantity - 1)
+            ]);
+        }
+
+        return $shoppingCart;
     }
 
     public function removeFromCart(RemoveCartRequest $request)
