@@ -7,20 +7,35 @@ use App\Exceptions\StockAvailabilityException;
 use App\Exceptions\UnexpectedException;
 use App\Http\Requests\Api\Cart\CartRequest;
 use App\Http\Requests\Api\Cart\RemoveCartRequest;
+use App\Http\Resources\Cart\CartResource;
+use App\Models\Core\Coupon;
 use App\Models\Product\Product;
 use App\Models\UserCart;
 use Auth;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use DB;
 
 class CartService
 {
+    protected $total_amount = null;
 
-    public function getUserCartItems(): Collection
+    protected $total_after_discount = null;
+
+    protected $is_discount = false;
+
+    protected $coupon = null;
+
+
+
+    public function getUserCartItems()
     {
-        return UserCart::with('product.attributes')->whereUserId(Auth::id())->get();
+        $cartItems =  $this->getShopingCartWithSummary();
+        if(!$cartItems)
+        {
+            return 0;
+        }
+        return $cartItems;
     }
 
     public function addToCart(CartRequest $request)
@@ -35,14 +50,13 @@ class CartService
             $shoppingCart->update([
                 'quantity' => ($shoppingCart->quantity + 1)
             ]);
-            return $shoppingCart;
+            return $this->getShopingCartWithSummary();
         } else {
-
             try {
                 if (!$product->quantity) {
                     throw new StockAvailabilityException('Not available in the stock');
                 }
-                $shoppingCart = UserCart::create([
+                UserCart::create([
                     'user_id' => $authId,
                     'product_id' => $product->id,
                     'quantity' => 1,
@@ -53,7 +67,7 @@ class CartService
                 throw new UnexpectedException($e->getMessage(), Response::HTTP_BAD_REQUEST);
             }
         }
-        return $shoppingCart;
+        return $this->getShopingCartWithSummary();
     }
 
     public function updateCart(CartRequest $request)
@@ -71,8 +85,11 @@ class CartService
                 'quantity' => ($shoppingCart->quantity - 1)
             ]);
         }
-
-        return $shoppingCart;
+        if($request->coupon_id)
+        {
+            $this->findCoupon($request->coupon_id);
+        }
+        return $this->getShopingCartWithSummary();
     }
 
     public function removeFromCart(RemoveCartRequest $request)
@@ -82,7 +99,7 @@ class CartService
             throw new NotFoundException();
         }
         $shoppingCart->delete();
-        return $shoppingCart;
+        return $this->getShopingCartWithSummary();
     }
 
     public function checkProductStock(UserCart $userCart, int $productQuantityInCart)
@@ -92,6 +109,70 @@ class CartService
         }
         return false;
     }
+
+    public function calcTotalAmount($data)
+    {
+        $total = 0;
+        foreach ($data as $item) {
+            $product = Product::find($item->product->id);
+            $total += $product->price * $item->quantity; // missing the shipping cost
+        }
+        $this->total_amount=$total;
+    }
+
+    public function calcTotalAmountAfterDiscount()
+    {
+            if ($this->coupon)
+            {
+                $total = $this->total_amount;
+                $discount_value = $this->coupon->discount($total);
+                $this->total_after_discount = $total - $discount_value;
+            }
+
+        return  $total < 0 ? 0 : $total;
+    }
+
+    public function getTotalAmountAttribute()
+    {
+        return $this->total_amount;
+    }
+
+    public function getTotalAmountAfterDisAttribute()
+    {
+        return $this->total_after_discount;
+    }
+
+    public function getShopingCartWithSummary()
+    {
+        $cartItems =  UserCart::with('product.attributes')->whereUserId(Auth::id())->get();
+        if($cartItems->isEmpty())
+        {
+            return false;
+        }
+        $this->calcTotalAmount($cartItems);
+        if(is_null($this->coupon))
+        {
+            $this->total_after_discount = $this->total_amount;
+            $data['cart'] = CartResource::collection($cartItems);
+            $data['order_summary']['total_amount'] = $this->total_amount;
+             return $data;
+        }
+        $this->is_discount = true;
+        $this->calcTotalAmountAfterDiscount();
+        $data['cart'] = array(CartResource::collection($cartItems));
+        $data['coupon'] = $this->coupon;
+        $data['order_summary']['total_amount'] = $this->total_amount;
+        $data['order_summary']['total_amount_after_discount'] = $this->total_after_discount;
+        return $data;
+    }
+
+    public function findCoupon($coupon_id)
+    {
+        $coupon = Coupon::findOrFail($coupon_id);
+        $this->coupon = $coupon;
+    }
+
+
 
 
 }

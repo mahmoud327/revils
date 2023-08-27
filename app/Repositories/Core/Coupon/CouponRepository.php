@@ -16,7 +16,7 @@ class CouponRepository extends BaisRepository implements CouponRepositoryInterfa
     public function verifyCoupon($request)
     {
           return $this->model->query()
-            ->whereCode(request()->coupon)
+            ->whereCode($request->coupon)
             ->vaild()
             ->first();
     }

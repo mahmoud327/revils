@@ -42,14 +42,14 @@ class UserCart extends Model
      * ----------------------------------------------------------------- *
      */
 
-    public function getTotalAmountAttribute()
+/*    public function getTotalAmountAttribute()
     {
         return getTotalAmount(auth()->user()->cartItems);
-    }
+    }*/
 
-    public function getTotalAmountAfterDiscountAttribute()
+/*    public function getTotalAmountAfterDiscountAttribute()
     {
         return getTotalAmountAfterDiscount($this->total_amount);
-    }
+    }*/
 
 }

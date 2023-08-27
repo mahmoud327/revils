@@ -3,7 +3,6 @@
 
 namespace App\Repositories\Order;
 
-use App\Exceptions\CartEmptyException;
 use App\Exceptions\OrderNotAllowException;
 use App\Exceptions\StockAvailabilityException;
 use App\Exceptions\UnexpectedException;
@@ -14,7 +13,6 @@ use App\Models\Product\Product;
 use App\Repositories\Base\BaisRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
@@ -84,7 +82,6 @@ class OrderRepository extends BaisRepository implements OrderRepositoryInterface
                 throw new StockAvailabilityException('Not available in the stock');
             }
             if (isset($product)) {
-
                 $subtotal += $product->price * $cartItem['quantity'];
                 if ($product->quantity > 0) {
                     $product->quantity -= $cartItem->quantity;

@@ -6,6 +6,7 @@ use App\Exceptions\StockAvailabilityException;
 use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Cart\CartRequest;
+use App\Http\Requests\Api\Cart\RemoveCartRequest;
 use App\Http\Resources\Cart\CartResource;
 use App\Services\CartService;
 
@@ -19,16 +20,16 @@ class CartController extends Controller
     public function getUserCartItems()
     {
         $userCartItems = $this->cartService->getUserCartItems();
-        if ($userCartItems->isEmpty()) {
+        if (!$userCartItems) {
             return responseSuccess('There is no items in your cart');
         }
-        return responseSuccess(CartResource::collection($userCartItems));
+        return responseSuccess($userCartItems);
     }
 
     public function addToCart(CartRequest $request)
     {
         try {
-            return responseSuccess(new CartResource($this->cartService->addToCart($request)), 'added successfully');
+            return responseSuccess($this->cartService->addToCart($request), 'added successfully');
         } catch (UnexpectedException $ex) {
             return responseError($ex->getMessage(), $ex->getCode());
         }catch (StockAvailabilityException $ex) {
@@ -48,8 +49,8 @@ class CartController extends Controller
         return responseSuccess(new CartResource($shoppingCart), 'updated successfully');
     }
 
-    public function removeFromCart(CartRequest $request)
+    public function removeFromCart(RemoveCartRequest $request)
     {
-        return responseSuccess(new CartResource($this->cartService->removeFromCart($request)), 'item deleted successfully');
+        return responseSuccess($this->cartService->removeFromCart($request), 'item deleted successfully');
     }
 }

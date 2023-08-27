@@ -35,6 +35,7 @@ class CartRequest extends FormRequest
                 'cart_id' => ['required','integer','exists:user_carts,id'],
                 'decrease' => ['nullable','integer'],
                 'increase' => ['nullable','integer'],
+                'coupon_id' => ['nullable','integer','exists,coupons,id'],
             ];
         }
     }

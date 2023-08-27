@@ -4,8 +4,10 @@ namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Core\CategoryResource;
 use App\Http\Resources\UserResource;
+use App\Models\UserCart;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class ProductResource extends JsonResource
 {
@@ -16,12 +18,21 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $is_added_to_cart = false;
+        if($request->user_id)
+        {
+            if(UserCart::whereUserId($request->user_id)->whereProductId($this->id)->first())
+            {
+                $is_added_to_cart = true;
+            }
+        }
 
         return [
             "id" => $this->id,
             "user" => new UserResource($this->whenLoaded('user')),
             "category" => new CategoryResource($this->whenLoaded('category')),
             "name" => $this->name,
+            "is_added_to_cart" => $is_added_to_cart,
             "item_type"=>$this->item_type,
             "weight" => $this->weight,
             "price" => $this->price,
