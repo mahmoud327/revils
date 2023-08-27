@@ -12,8 +12,6 @@ class Coupon extends Model
 
     use HasFactory;
 
-
-
     protected $translationForeignKey = "coupon_id";
     public $translatedAttributes = ['name'];
     public $translationModel = 'App\Models\Core\Translation\Coupon';

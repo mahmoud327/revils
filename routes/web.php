@@ -32,3 +32,14 @@ Route::get('/test', function () {
       $prod = \App\Models\Product\Product::with(['ratingsPure.user'])->first();
     return new \App\Http\Resources\Product\ProductResource(($prod));
 });
+
+Route::get('/add-coupon', function () {
+    \App\Models\Core\Coupon::create([
+        'code' => 1111,
+        'expiry_date' =>date('2023-12-30'),
+        'value' => 10,
+        'type' => 'amount'
+    ]);
+    return "success";
+
+});
