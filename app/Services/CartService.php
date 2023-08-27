@@ -99,6 +99,10 @@ class CartService
             throw new NotFoundException();
         }
         $shoppingCart->delete();
+        if($request->coupon_id)
+        {
+            $this->findCoupon($request->coupon_id);
+        }
         return $this->getShopingCartWithSummary();
     }
 
