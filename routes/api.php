@@ -134,7 +134,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
     Route::group(['prefix' => 'cart', 'middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
         Route::get('all', [CartController::class, 'getUserCartItems']);
         Route::post('add', [CartController::class, 'addToCart']);
-        Route::post('remove', [CartController::class, 'removeFromCart']);
+        Route::delete('remove', [CartController::class, 'removeFromCart']);
         Route::post('update', [CartController::class, 'updateCart']);
     });
     ####### end cart #########
@@ -144,6 +144,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
      * Social Network
      *
      * */
+    
     ####### posts  #########
     Route::apiResource('posts', PostController::class)->except('update');
     Route::get('user-posts', [PostController::class,'showUserPosts'])->middleware('role:customer');

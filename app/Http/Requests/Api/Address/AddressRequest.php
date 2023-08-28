@@ -32,7 +32,7 @@ class AddressRequest extends FormRequest
             'state_id' => ['required', 'integer', 'exists:states,id'],
             'address' => ['required'],
             'address_type' => ['required', 'in:office,home,other'],
-            'zipcode' => ['required'],
+            'zipcode' => ['required','digits:5'],
             'note' => ['nullable'],
             'city_id' => ['required', 'integer', 'exists:cities,id'],
             'mobile' => ['digits:12'],

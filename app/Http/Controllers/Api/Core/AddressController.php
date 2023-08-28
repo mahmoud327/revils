@@ -15,14 +15,11 @@ class AddressController extends Controller
     public function __construct(public AddressRepositoryInterface $addressRepository)
     {
     }
-
     public function index(Request $request)
     {
         $address = AddressResource::collection($this->addressRepository->all(false, false));
         return responseSuccess($address);
     }
-
-
     public function store(AddressRequest $request)
     {
         try {
