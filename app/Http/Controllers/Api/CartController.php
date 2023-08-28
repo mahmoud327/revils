@@ -40,7 +40,8 @@ class CartController extends Controller
 
     public function updateCart(CartRequest $request)
     {
-        if (!$request->decrease && !$request->increase) {
+        if (!$request->decrease && !$request->increase)
+        {
             return responseError('decrease or increase required', 200);
         }
         $shoppingCart = $this->cartService->updateCart($request);

@@ -81,6 +81,10 @@ class CartService
     public function updateCart(CartRequest $request)
     {
         $shoppingCart = UserCart::whereId($request->cart_id)->whereUserId(Auth::id())->first();
+        if(!$shoppingCart)
+        {
+            throw new UnexpectedException('invalid cart item');
+        }
         if($request->increase)
         {
             $shoppingCart->update([
@@ -89,6 +93,10 @@ class CartService
         }
         if($request->decrease)
         {
+            if($shoppingCart->quantity == 1)
+            {
+                return false;
+            }
             $shoppingCart->update([
                 'quantity' => ($shoppingCart->quantity - 1)
             ]);
