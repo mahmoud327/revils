@@ -144,7 +144,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
      * Social Network
      *
      * */
-    
+
     ####### posts  #########
     Route::apiResource('posts', PostController::class)->except('update');
     Route::get('user-posts', [PostController::class,'showUserPosts'])->middleware('role:customer');

@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 use Multicaret\Acquaintances\Traits\CanBeRated;
 use Multicaret\Acquaintances\Traits\CanBeViewed;
 use Spatie\Activitylog\LogOptions;
@@ -83,10 +84,14 @@ class Product extends Model implements HasMedia
 
     public function getUserIsAddCartAttribute()
     {
-        return UserCart::query()
-            ->whereUserId(request()->user_id)
-            ->whereProductId($this->id)
-            ->exists();
+        if(auth()->check())
+        {
+           return  UserCart::query()
+                ->whereUserId(Auth::id())
+                ->whereProductId($this->id)
+                ->exists();
+        }
+        return false;
     }
 
     public function getSizesAttribute()

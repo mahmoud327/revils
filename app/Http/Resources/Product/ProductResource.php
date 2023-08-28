@@ -18,15 +18,6 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // $is_added_to_cart = false;
-        // if($request->user_id)
-        // {
-        //     if(UserCart::whereUserId($request->user_id)->whereProductId($this->id)->first())
-        //     {
-        //         $is_added_to_cart = true;
-        //     }
-        // }
-
         return [
             "id" => $this->id,
             "user" => new UserResource($this->whenLoaded('user')),
