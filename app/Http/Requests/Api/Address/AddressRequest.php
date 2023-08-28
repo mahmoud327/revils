@@ -35,16 +35,16 @@ class AddressRequest extends FormRequest
             'zipcode' => ['required'],
             'note' => ['nullable'],
             'city_id' => ['required', 'integer', 'exists:cities,id'],
+            'mobile' => ['digits:12'],
+
         ];
     }
-
     public function messages()
     {
         return [
             'required' => __('validation.required')
         ];
     }
-
     protected function failedValidation(Validator $validator)
     {
         $errors = array();

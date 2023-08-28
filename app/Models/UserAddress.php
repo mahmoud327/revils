@@ -19,6 +19,10 @@ class UserAddress extends Model
     {
         return $this->belongsTo(Country::class, 'country_id');
     }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     public function state(): BelongsTo
     {

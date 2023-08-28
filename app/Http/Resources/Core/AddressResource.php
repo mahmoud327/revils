@@ -20,6 +20,7 @@ class AddressResource extends JsonResource
             "id" => $this->id,
             "address" => $this->address,
             "country" => new CityResource($this->whenLoaded('country')),
+            "user" => new UserResource($this->whenLoaded('user')),
             "city" => new CountryResource($this->whenLoaded('city')),
             "state" => new StateResource($this->whenLoaded('state')),
             "note" => $this->note,

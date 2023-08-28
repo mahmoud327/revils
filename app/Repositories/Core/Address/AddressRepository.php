@@ -47,7 +47,7 @@ class AddressRepository extends BaisRepository implements AddressRepositoryInter
         try {
             $address = $this->model->findorfail($id);
             $address->update($data->all());
-            $address->load(['city', 'country', 'state']);
+            $address->load(['city', 'country', 'state','user']);
             return  $address;
         } catch (\Exception $e) {
 
