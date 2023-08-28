@@ -83,7 +83,7 @@ class CartService
         $shoppingCart = UserCart::whereId($request->cart_id)->whereUserId(Auth::id())->first();
         if(!$shoppingCart)
         {
-            throw new UnexpectedException('invalid cart item');
+            throw new UnexpectedException('invalid cart item or be removed');
         }
         if($request->increase)
         {
