@@ -25,6 +25,7 @@ class AddressRepository extends BaisRepository implements AddressRepositoryInter
     {
         return   $this->model
             ->whereUserId(auth()->id())
+            ->with(['city', 'country', 'state'])
             ->latest()
             ->get();
     }
@@ -33,7 +34,9 @@ class AddressRepository extends BaisRepository implements AddressRepositoryInter
     public function create($data): Model
     {
         try {
-            return  $this->model->create($data->all());
+            $address = $this->model->create($data->all());
+            $address->load(['city', 'country', 'state']);
+            return  $address;
         } catch (\Exception $e) {
 
             throw  new UnexpectedException($e->getMessage());
@@ -44,6 +47,7 @@ class AddressRepository extends BaisRepository implements AddressRepositoryInter
         try {
             $address = $this->model->findorfail($id);
             $address->update($data->all());
+            $address->load(['city', 'country', 'state','user']);
             return  $address;
         } catch (\Exception $e) {
 

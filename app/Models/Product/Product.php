@@ -10,6 +10,7 @@ use App\Enums\ProductStatusTextValueEnum;
 use App\Enums\BooleanEnum;
 use App\Http\Resources\Core\MediaCenterResource;
 use App\Models\Core\Category;
+use App\Models\UserCart;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -78,6 +79,14 @@ class Product extends Model implements HasMedia
     public function getViewsAttribute()
     {
         return $this->viewersCount();
+    }
+
+    public function getUserIsAddCartAttribute()
+    {
+        return UserCart::query()
+            ->whereUserId(request()->user_id)
+            ->whereProductId($this->id)
+            ->exists();
     }
 
     public function getSizesAttribute()
