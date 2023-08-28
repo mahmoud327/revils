@@ -48,7 +48,7 @@ class CartService
                 throw new StockAvailabilityException();
             }
             $shoppingCart->update([
-                'quantity' => ($shoppingCart->quantity + 1)
+                'quantity' => $request->quantity
             ]);
             return $this->getShopingCartWithSummary();
         } else {
