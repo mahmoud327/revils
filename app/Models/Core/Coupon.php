@@ -4,22 +4,22 @@ namespace App\Models\Core;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Translatable\HasTranslations;
 
 class Coupon extends Model
 {
-
-    use \Astrotomic\Translatable\Translatable;
+    use HasTranslations;
 
     use HasFactory;
+    use LogsActivity;
+
 
     protected $translationForeignKey = "coupon_id";
-    public $translatedAttributes = ['name'];
-    public $translationModel = 'App\Models\Core\Translation\Coupon';
-
+    public $translatable = ['name'];
 
     protected $guarded = ['id'];
-
-
 
 
     public function scopeVaild($q)
@@ -49,4 +49,13 @@ class Coupon extends Model
             ->whereCouponId($this->id)
             ->exists();
     }
+
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logAll();
+
+    }
+
 }

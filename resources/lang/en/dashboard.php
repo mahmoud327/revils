@@ -15,7 +15,15 @@ return [
     'roles' => [
         'roles' => 'roles',
         'choose any roles' => 'choose any roles',
+    ],
+    'coupons' => [
+        'coupons' => 'coupons',
+        'expiry date' => 'expiry date',
+        'type' => 'type',
+        'value' => 'discount',
 
+        'amount' => 'amount',
+        'percentage' => 'percentage',
     ],
     'user name' => 'user name',
     'first name' => 'first name',
