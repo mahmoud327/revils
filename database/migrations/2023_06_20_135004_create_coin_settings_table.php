@@ -17,7 +17,6 @@ return new class extends Migration
             $table->double('value');
             $table->date('date')->nullable();
             $table->enum('type', ['percentage', 'amount'])->nullable();
-
             $table->timestamps();
         });
 

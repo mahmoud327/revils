@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_coin_earns', function (Blueprint $table) {
+        Schema::create('coins', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->default(0);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignId('coin_id')->default(0);
-            $table->foreign('coin_id')->references('id')->on('coin_settings')->onDelete('cascade');
-
+            $table->bigInteger('coins')->default(0);
             $table->bigInteger('value')->default(0);
-            $table->date('date')->nullable();
-
             $table->timestamps();
         });
     }
@@ -30,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_coin_earns');
+        Schema::dropIfExists('coins');
     }
 };
