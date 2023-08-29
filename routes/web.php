@@ -21,8 +21,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test',function(){
-    return $products = Product::get();
-
+Route::get('coupon',function(){
+    \App\Models\Core\Coupon::create([
+        'code' => 1111,
+        'expiry_date' => date('2024-08-31'),
+        'value' => 5,
+        'type' => 'amount',
+    ]);
+    return 'created';
 });
 
