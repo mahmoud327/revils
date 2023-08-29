@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
+
     /**
      * Run the migrations.
      */
@@ -15,7 +15,6 @@ return new class extends Migration
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->json('name')->nullable();
             $table->date('expiry_date')->nullable();
             $table->double('value');
             $table->enum('type', ['percentage', 'amount'])->nullable();
