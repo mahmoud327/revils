@@ -18,13 +18,15 @@ use DB;
 
 class CartService
 {
-    protected $total_amount = null;
-
+    protected $subtotal = null;
     protected $total_after_discount = null;
-
+    protected $charge_amount = 30;
     protected $is_discount = false;
 
     protected $coupon = null;
+
+    protected $total_amount = null;
+
 
 
 
@@ -101,9 +103,9 @@ class CartService
                 'quantity' => ($shoppingCart->quantity - 1)
             ]);
         }
-        if($request->coupon_id)
+        if($request->coupon)
         {
-            $this->findCoupon($request->coupon_id);
+            $this->findCoupon($request->coupon);
         }
         return $this->getShopingCartWithSummary();
     }
@@ -174,6 +176,7 @@ class CartService
         {
             $this->total_after_discount = $this->total_amount;
             $data['cart'] = CartResource::collection($cartItems);
+            $data['coupon'] = $this->coupon;
             $data['order_summary']['total_amount'] = $this->total_amount;
             return $data;
         }
@@ -186,9 +189,9 @@ class CartService
         return $data;
     }
 
-    public function findCoupon($coupon_id)
+    public function findCoupon($coupon)
     {
-        $coupon = Coupon::findOrFail($coupon_id);
+        $coupon = Coupon::whereCoupon($coupon);
         $this->coupon = $coupon;
     }
 

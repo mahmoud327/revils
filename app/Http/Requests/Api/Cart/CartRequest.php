@@ -30,13 +30,15 @@ class CartRequest extends FormRequest
             return [
                 'product_id' => ['required','integer','exists:products,id'],
                 'quantity' => ['required','integer'],
+                'size' => ['required','string'],
+                'color' => ['required','string'],
             ];
         }else{
             return [
                 'cart_id' => ['required','integer','exists:user_carts,id'],
                 'decrease' => ['nullable','integer'],
                 'increase' => ['nullable','integer'],
-                'coupon_id' => ['nullable','integer','exists,coupons,id'],
+                'coupon' => ['nullable','string','exists,coupons,code'],
             ];
         }
     }

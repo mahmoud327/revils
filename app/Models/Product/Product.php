@@ -84,10 +84,10 @@ class Product extends Model implements HasMedia
 
     public function getUserIsAddCartAttribute()
     {
-        if(auth()->check())
+        if(Auth::guard('sanctum')->user())
         {
            return  UserCart::query()
-                ->whereUserId(Auth::id())
+                ->whereUserId(Auth::guard('sanctum')->id())
                 ->whereProductId($this->id)
                 ->exists();
         }

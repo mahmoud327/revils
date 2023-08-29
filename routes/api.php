@@ -22,8 +22,11 @@ use App\Http\Controllers\Api\SocialNetwork\PostController;
 use App\Http\Controllers\Api\SocialNetwork\UserFriendshipController;
 use App\Http\Controllers\Api\User\ImageController;
 use App\Http\Controllers\Api\User\UserController;
+use App\Models\UserCart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laravel\Sanctum\Sanctum;
 
 /*
 |--------------------------------------------------------------------------
@@ -171,6 +174,28 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
     ####### end followers #########
 
 });
+
+Route::get('/test', function () {
+    if(Auth::guard('sanctum')->user())
+    {
+        return  Auth::guard('sanctum')->id();
+        return  UserCart::query()
+            ->whereUserId(Auth::id())
+            ->whereProductId(1)
+            ->exists();
+    }
+    return "false";
+    return $user = Auth::guard('sanctum')->user();
+   return $token= request()->token();
+    return $madd = Sanctum::getAccessTokenFromRequestUsing(
+        function ($request) use ($token) {
+            return $token;
+        }
+    );
+
+
+});
+
 Route::get('/sms', function () {
 
     $curl = curl_init();
