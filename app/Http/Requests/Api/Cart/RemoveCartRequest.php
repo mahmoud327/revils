@@ -27,7 +27,8 @@ class RemoveCartRequest extends FormRequest
     {
             return [
                 'cart_id' => ['required','integer','exists:user_carts,id'],
-                'coupon_id' => ['nullable','integer','exists,coupons,id'],
+                'coupon' => ['nullable','string','exists:coupons,code'],
+                'coins' => ['nullable','integer'],
             ];
     }
 

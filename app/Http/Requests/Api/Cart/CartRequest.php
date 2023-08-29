@@ -30,15 +30,16 @@ class CartRequest extends FormRequest
             return [
                 'product_id' => ['required','integer','exists:products,id'],
                 'quantity' => ['required','integer'],
-                'size' => ['required','string'],
-                'color' => ['required','string'],
+                'size' => ['nullable','string'],
+                'color' => ['nullable','string'],
             ];
         }else{
             return [
-                'cart_id' => ['required','integer','exists:user_carts,id'],
-                'decrease' => ['nullable','integer'],
+                'cart_id' => ['nullable','integer','exists:user_carts,id'],
                 'increase' => ['nullable','integer'],
-                'coupon' => ['nullable','string','exists,coupons,code'],
+                'decrease' => ['nullable','integer'],
+                'coupon' => ['nullable','string','exists:coupons,code'],
+                'coins' => ['nullable','integer'],
             ];
         }
     }

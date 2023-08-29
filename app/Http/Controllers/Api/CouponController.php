@@ -17,28 +17,8 @@ class CouponController extends Controller
     {
     }
 
-    public function verifyCoupon(CouponRequest $request)
-    {
-        $coupon = $this->couponRepository->verifyCoupon($request);
 
-        if (!$coupon)
-        {
-            return responseError(__('lang.coupons.expired'), 402);
-        }
-
-        if ($coupon->userUsedCoupon)
-        {
-            return responseError(__('lang.coupons.used'), 402);
-        }
-        $cart_service = new CartService();
-        $cart_service->findCoupon($coupon->id);
-        $cart_service->getShopingCartWithSummary();
-        return $cart_service->getShopingCartWithSummary();
-        return responseSuccess($cart_service->getShopingCartWithSummary(), __('lang.coupons.valid'));
-
-    }
-
-    public function cancelCoupon(CouponRequest $request)
+/*    public function cancelCoupon(CouponRequest $request)
     {
         $coupon = $this->couponRepository->verifyCoupon($request);
 
@@ -54,5 +34,5 @@ class CouponController extends Controller
         //update total after discount
         $coupon = new CouponResource($coupon);
         return responseSuccess($coupon, __('lang.coupons.valid'));
-    }
+    }*/
 }

@@ -36,20 +36,5 @@ class UserCart extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    /*
-     * ----------------------------------------------------------------- *
-     * ---------------------------- Acessores --------------------------- *
-     * ----------------------------------------------------------------- *
-     */
-
-/*    public function getTotalAmountAttribute()
-    {
-        return getTotalAmount(auth()->user()->cartItems);
-    }*/
-
-/*    public function getTotalAmountAfterDiscountAttribute()
-    {
-        return getTotalAmountAfterDiscount($this->total_amount);
-    }*/
 
 }

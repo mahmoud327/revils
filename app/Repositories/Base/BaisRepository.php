@@ -24,6 +24,7 @@ class BaisRepository implements BaseRepositoryInterface
         return $this->model->latest()->get();
     }
 
+
     public function create($data) : Model
     {
         return $this->model->create($data);

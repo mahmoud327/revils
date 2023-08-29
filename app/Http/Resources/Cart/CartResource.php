@@ -21,7 +21,9 @@ class CartResource extends JsonResource
         return [
             "id" => $this->id,
             "quantity" => $this->quantity,
+            "amount_with_quantity" => ($this->product->price*$this->quantity),
             "user" =>  new UserResource($this->whenLoaded('user')),
+            "attributes" =>  unserialize($this->attributes),
             "product" =>  new ProductResource($this->whenLoaded('product')),
         ];
     }

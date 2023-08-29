@@ -10,14 +10,8 @@ use Spatie\Translatable\HasTranslations;
 
 class Coupon extends Model
 {
-    use HasTranslations;
-
     use HasFactory;
     use LogsActivity;
-
-
-    protected $translationForeignKey = "coupon_id";
-    public $translatable = ['name'];
 
     protected $guarded = ['id'];
 
@@ -39,7 +33,6 @@ class Coupon extends Model
         }
 
     }
-
 
 
     public function  getUserUsedCouponAttribute()

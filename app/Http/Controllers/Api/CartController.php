@@ -40,15 +40,15 @@ class CartController extends Controller
 
     public function updateCart(CartRequest $request)
     {
-        if (!$request->decrease && !$request->increase)
-        {
-            return responseError('decrease or increase required', 200);
+        try {
+            $shoppingCart = $this->cartService->updateCart($request);
+            if (!$shoppingCart) {
+                return responseError("cannot decrease", 401);
+            }
+            return responseSuccess($shoppingCart, 'updated successfully');
+        } catch (UnexpectedException $ex) {
+            return responseError($ex->getMessage(), $ex->getCode());
         }
-        $shoppingCart = $this->cartService->updateCart($request);
-        if (!$shoppingCart) {
-            return responseError("cannot decrease", 401);
-        }
-        return responseSuccess($shoppingCart, 'updated successfully');
     }
 
     public function removeFromCart(RemoveCartRequest $request)

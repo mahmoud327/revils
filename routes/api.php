@@ -94,6 +94,7 @@ Route::get('setting',SettingController::class);
 Route::apiResource('products', ProductController::class)->only(['index', 'show']);
 
 Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
+    Route::post('products/trends', [ProductController::class, 'trends']);
     Route::group(['prefix' => 'seller', 'middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
         Route::apiResource('products', ProductSellerController::class);
         Route::post('products/{product}/images/{image}/mark-featured', [ProductImageController::class, 'markFeatured']);
@@ -171,6 +172,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
     Route::post('unfollow-friend', [UserFriendshipController::class, 'unfollow']);
     Route::post('block-friend', [UserFriendshipController::class, 'blockFriend']);
     Route::post('unblock-friend', [UserFriendshipController::class, 'unblockFriend']);
+    Route::post('get-all-friends', [UserFriendshipController::class, 'getAllFriendships']);
     ####### end followers #########
 
 });

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\UserTypesEnum;
 use App\Models\Core\City;
+use App\Models\Core\Coins;
 use App\Models\Core\Country;
 use App\Models\Core\State;
 use App\Models\Order\Order;
@@ -93,9 +94,9 @@ class User extends Authenticatable implements HasMedia
      * ----------------------------------------------------------------- *
      */
 
-    public function userCoinEarn(): HasOne
+    public function coins(): HasOne
     {
-        return $this->hasOne(UserCoinEarn::class, 'user_id');
+        return $this->hasOne(Coins::class, 'user_id');
     }
 
 

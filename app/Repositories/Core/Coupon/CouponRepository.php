@@ -13,10 +13,10 @@ class CouponRepository extends BaisRepository implements CouponRepositoryInterfa
         parent::__construct($model);
     }
 
-    public function verifyCoupon($request)
+    public function verifyCoupon($coupon)
     {
           return $this->model->query()
-            ->whereCode($request->coupon)
+            ->whereCode($coupon)
             ->vaild()
             ->first();
     }

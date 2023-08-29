@@ -37,13 +37,6 @@ class Product extends Model implements HasMedia
     use CanBeViewed;
 
 
-
-    // protected $appends = [
-    //     'sizes',
-    //     'colors',
-    //     'images'
-    // ];
-
     public $with = ['media'];
 
 

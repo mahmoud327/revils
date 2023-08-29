@@ -86,9 +86,13 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
             ])
             ->findorfail($id);
 
-        if (auth()->guard('sanctum')->check()) {
+        if (auth()->guard('sanctum')->check())
+        {
             auth()->guard('sanctum')->user()
                 ->view($product);
+            $product->update([
+                'view_number' => $product->viewersCount(),
+            ]);
         }
         return $product;
     }
