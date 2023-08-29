@@ -41,7 +41,7 @@ class FilementServiceProvider extends ServiceProvider
         });
 
         \Reworck\FilamentSettings\FilamentSettings::setFormFields([
-        
+
             //phone
             TextInput::make('email')
                 ->label(trans('dashboard.settings.email')),
