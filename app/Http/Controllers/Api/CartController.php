@@ -29,7 +29,8 @@ class CartController extends Controller
     public function addToCart(CartRequest $request)
     {
         try {
-            return responseSuccess($this->cartService->addToCart($request), 'added successfully');
+            $data = $this->cartService->addToCart($request);
+            return responseSuccess($data, 'added successfully');
         } catch (UnexpectedException $ex) {
             return responseError($ex->getMessage(), $ex->getCode());
         }catch (StockAvailabilityException $ex) {
@@ -39,14 +40,15 @@ class CartController extends Controller
 
     public function updateCart(CartRequest $request)
     {
-        if (!$request->decrease && !$request->increase) {
+        if (!$request->decrease && !$request->increase)
+        {
             return responseError('decrease or increase required', 200);
         }
         $shoppingCart = $this->cartService->updateCart($request);
         if (!$shoppingCart) {
             return responseError("cannot decrease", 401);
         }
-        return responseSuccess(new CartResource($shoppingCart), 'updated successfully');
+        return responseSuccess($shoppingCart, 'updated successfully');
     }
 
     public function removeFromCart(RemoveCartRequest $request)

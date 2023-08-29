@@ -43,12 +43,17 @@ class CartService
         $authId = Auth::id();
         $product = Product::findOrFail($request->product_id);
         $shoppingCart = UserCart::whereUserId($authId)->whereProductId($request->product_id)->first();
-        if ($shoppingCart) {
-            if (!$this->checkProductStock($shoppingCart, $shoppingCart->quantity)) {
+        if ($shoppingCart)
+        {
+            if (!$this->checkProductStock($shoppingCart, $request->quantity))
+            {
+                throw new StockAvailabilityException();
+            }
+            if (!$this->checkProductStock($shoppingCart, ($shoppingCart->quantity+$request->quantity))) {
                 throw new StockAvailabilityException();
             }
             $shoppingCart->update([
-                'quantity' => ($shoppingCart->quantity + 1)
+                'quantity' => ($request->quantity+$shoppingCart->quantity)
             ]);
             return $this->getShopingCartWithSummary();
         } else {
@@ -56,10 +61,13 @@ class CartService
                 if (!$product->quantity) {
                     throw new StockAvailabilityException('Not available in the stock');
                 }
+                if ($product->quantity < $request->quantity) {
+                    throw new StockAvailabilityException('Not available in the stock');
+                }
                 UserCart::create([
                     'user_id' => $authId,
                     'product_id' => $product->id,
-                    'quantity' => 1,
+                    'quantity' => $request->quantity,
                     'attributes'  => serialize($product->attributes),
                 ]);
             } catch (\Exception $e) {
@@ -73,6 +81,10 @@ class CartService
     public function updateCart(CartRequest $request)
     {
         $shoppingCart = UserCart::whereId($request->cart_id)->whereUserId(Auth::id())->first();
+        if(!$shoppingCart)
+        {
+            throw new UnexpectedException('invalid cart item or be removed');
+        }
         if($request->increase)
         {
             $shoppingCart->update([
@@ -81,6 +93,10 @@ class CartService
         }
         if($request->decrease)
         {
+            if($shoppingCart->quantity == 1)
+            {
+                return false;
+            }
             $shoppingCart->update([
                 'quantity' => ($shoppingCart->quantity - 1)
             ]);
@@ -159,7 +175,7 @@ class CartService
             $this->total_after_discount = $this->total_amount;
             $data['cart'] = CartResource::collection($cartItems);
             $data['order_summary']['total_amount'] = $this->total_amount;
-             return $data;
+            return $data;
         }
         $this->is_discount = true;
         $this->calcTotalAmountAfterDiscount();
