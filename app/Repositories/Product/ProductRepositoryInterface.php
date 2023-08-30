@@ -4,4 +4,6 @@ namespace App\Repositories\Product;
 
 
 
-interface ProductRepositoryInterface{}
+interface ProductRepositoryInterface{
+    public function trends($paginate);
+}

@@ -37,6 +37,7 @@ class Product extends Model implements HasMedia
     use CanBeViewed;
 
 
+
     public $with = ['media'];
 
 
@@ -77,9 +78,8 @@ class Product extends Model implements HasMedia
 
     public function getUserIsAddCartAttribute()
     {
-        if(Auth::guard('sanctum')->user())
-        {
-           return  UserCart::query()
+        if (Auth::guard('sanctum')->user()) {
+            return  UserCart::query()
                 ->whereUserId(Auth::guard('sanctum')->id())
                 ->whereProductId($this->id)
                 ->exists();
@@ -87,21 +87,19 @@ class Product extends Model implements HasMedia
         return false;
     }
 
-    public function getSizesAttribute()
+    public function sizes()
     {
-        return $this->attributeValues()
-            ->whereHas('attribute', function ($q) {
-                $q->where('name->en', 'Size');
-            })
-            ->pluck('value');
+        return $this->belongsToMany(AttributeValue::class, 'product_attributes')
+            ->whereHas('attribute', function ($query) {
+                $query->where('name->en', 'Size');
+            });
     }
-    public function getColorsAttribute()
+    public function colors()
     {
-        return $this->attributeValues()
-            ->whereHas('attribute', function ($q) {
-                $q->where('name->en', 'Color');
-            })
-            ->pluck('value');
+        return $this->belongsToMany(AttributeValue::class, 'product_attributes')
+            ->whereHas('attribute', function ($query) {
+                $query->where('name->en', 'Color');
+            });
     }
     public function getStyleAttribute()
     {
