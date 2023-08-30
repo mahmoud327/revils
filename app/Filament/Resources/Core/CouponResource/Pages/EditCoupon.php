@@ -10,16 +10,10 @@ class EditCoupon extends EditRecord
 {
     protected static string $resource = CouponResource::class;
 
-
-    use EditRecord\Concerns\Translatable;
-
-
-
     protected function getActions(): array
     {
         return [
             Actions\DeleteAction::make(),
-            Actions\LocaleSwitcher::make(),
 
         ];
     }

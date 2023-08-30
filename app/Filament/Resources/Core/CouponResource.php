@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CouponResource extends Resource
 {
-    use Translatable;
 
     protected static ?string $model = Coupon::class;
 
@@ -27,10 +26,6 @@ class CouponResource extends Resource
     protected static ?string $navigationGroup = 'core';
 
 
-    public static function getTranslatableLocales(): array
-    {
-        return ['en', 'ar'];
-    }
     protected static function getNavigationLabel(): string
     {
         return trans('dashboard.coupons.coupons');
