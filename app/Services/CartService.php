@@ -12,6 +12,7 @@ use App\Models\Core\Coins;
 use App\Models\Product\Product;
 use App\Models\UserCart;
 use App\Repositories\Core\Coupon\CouponRepositoryInterface;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -30,8 +31,17 @@ class CartService
 
     public function __construct(protected CouponRepositoryInterface $couponRepository){}
 
-    public function getUserCartItems()
+    public function getUserCartItems(Request $request)
     {
+        if($request->coupon)
+        {
+            $this->findCoupon($request->coupon);
+        }
+
+        if($request->coins)
+        {
+            $this->findCoins();
+        }
         return  $this->getShopingCartWithSummary();
     }
 
@@ -168,12 +178,12 @@ class CartService
 
         if (!$coupon)
         {
-            throw new UnexpectedException(__('lang.coupons.expired'),401);
+            return $this->coins = null;
         }
 
         if ($coupon->userUsedCoupon)
         {
-            throw new UnexpectedException(__('lang.coupons.used'),401);
+            return $this->coins = null;
         }
         $this->coupon = $coupon;
     }
@@ -184,15 +194,14 @@ class CartService
 
         if(!$coins)
         {
-            throw new UnexpectedException('user has not coins',401);
+            return $this->coins=null;
         }
         if($coins->coins < 100)
         {
-            throw new UnexpectedException('user has not enough coins',401);
+            return $this->coins=null;
         }
 
         $this->coins = $coins;
-
     }
 
     public function getShopingCartWithSummary()

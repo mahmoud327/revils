@@ -136,7 +136,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
 
     ####### cart  #########
     Route::group(['prefix' => 'cart', 'middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
-        Route::get('all', [CartController::class, 'getUserCartItems']);
+        Route::post('all', [CartController::class, 'getUserCartItems']);
         Route::post('add', [CartController::class, 'addToCart']);
         Route::delete('remove', [CartController::class, 'removeFromCart']);
         Route::post('update', [CartController::class, 'updateCart']);

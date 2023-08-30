@@ -9,6 +9,7 @@ use App\Http\Requests\Api\Cart\CartRequest;
 use App\Http\Requests\Api\Cart\RemoveCartRequest;
 use App\Http\Resources\Cart\CartResource;
 use App\Services\CartService;
+use Illuminate\Http\Request;
 
 
 class CartController extends Controller
@@ -17,9 +18,9 @@ class CartController extends Controller
     {
     }
 
-    public function getUserCartItems()
+    public function getUserCartItems(Request $request)
     {
-        $userCartItems = $this->cartService->getUserCartItems();
+        $userCartItems = $this->cartService->getUserCartItems($request);
         if (!$userCartItems) {
             return responseSuccess('There is no items in your cart');
         }
