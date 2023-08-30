@@ -24,8 +24,6 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
                 'user', 'category',
                 'attributeValues',
                 'ratingsPure',
-                'sizes',
-                'colors',
                 "relatedProducts.user",
                 "relatedProducts.category",
                 'attributeValues.attribute'
@@ -80,8 +78,6 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
             ->with([
                 'user',
                 'attributes', 'category',
-                'sizes',
-                'colors',
                 'ratingsPure',
                 "relatedProducts.user",
                 "relatedProducts.category",
@@ -137,8 +133,6 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
         $products = $this->model->approved()
             ->with([
                 'user', 'category',
-                'sizes',
-                'colors',
                 'attributeValues',
                 'ratingsPure',
                 "relatedProducts.user",
