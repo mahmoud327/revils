@@ -21,15 +21,15 @@ class DatabaseSeeder extends Seeder
 
 
 
-        $this->call(SettingSeeder::class);
+        // $this->call(SettingSeeder::class);
          $this->call(RolesAndPermissionsSeeder::class);
-        $this->call(CountriesTableSeeder::class);
-         $this->call(StatesTableSeeder::class);
-        $this->call(CitiesTableSeeder::class);
-         $this->call(CategoryTableSeeder::class);
-         $this->call(AttributeSeeder::class);
-         $this->call(BusinessTypeSeeder::class);
-         $this->call(ProductSeeder::class);
+        // $this->call(CountriesTableSeeder::class);
+        //  $this->call(StatesTableSeeder::class);
+        // $this->call(CitiesTableSeeder::class);
+        //  $this->call(CategoryTableSeeder::class);
+        //  $this->call(AttributeSeeder::class);
+        //  $this->call(BusinessTypeSeeder::class);
+        //  $this->call(ProductSeeder::class);
         // // Product::factory()
         // //     ->count(10)->create();
     }
