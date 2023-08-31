@@ -48,14 +48,10 @@ class BusinessTypeResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-
                     Forms\Components\TextInput::make('name')
                         ->label('Name (Arabic)')
                         ->label(trans('dashboard.name'))
                         ->required(),
-
-
-
 
                 ])
                 //
