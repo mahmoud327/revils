@@ -76,6 +76,32 @@ class RolesAndPermissionsSeeder extends Seeder
         $attributevaluesPermission2 = Permission::create(['name' => 'delete attribute values']);
         // CREATE ROLES
 
+        $userPermission1 = Permission::create(['name' => 'create coupons']);
+        $userPermission2 = Permission::create(['name' => 'view coupons']);
+        $userPermission3 = Permission::create(['name' => 'delete coupons']);
+        $userPermission4 = Permission::create(['name' => 'update coupons']);
+
+        $userPermission1 = Permission::create(['name' => 'create products']);
+        $userPermission2 = Permission::create(['name' => 'view products']);
+        $userPermission3 = Permission::create(['name' => 'delete products']);
+        $userPermission4 = Permission::create(['name' => 'update products']);
+
+        $userPermission1 = Permission::create(['name' => 'create banners']);
+        $userPermission2 = Permission::create(['name' => 'view banners']);
+        $userPermission3 = Permission::create(['name' => 'delete banners']);
+        $userPermission4 = Permission::create(['name' => 'update banners']);
+
+        $userPermission1 = Permission::create(['name' => 'create activites']);
+        $userPermission2 = Permission::create(['name' => 'view activites']);
+        $userPermission3 = Permission::create(['name' => 'delete activites']);
+        $userPermission4 = Permission::create(['name' => 'update activites']);
+
+
+
+        $userPermission2 = Permission::create(['name' => 'view settings']);
+        $userPermission4 = Permission::create(['name' => 'update settings']);
+
+
         // ADMINS
         $statePermission1 = Permission::create(['name' => 'view states']);
         $statePermission2 = Permission::create(['name' => 'update state']);
@@ -88,72 +114,72 @@ class RolesAndPermissionsSeeder extends Seeder
         $cityPermission2 = Permission::create(['name' => 'delete city']);
         // CREATE ROLES
 
-        $superAdminRole = Role::create(['name' => 'super-admin'])->syncPermissions([
-            $userPermission1,
-            $userPermission2,
-            $userPermission3,
-            $userPermission4,
-            $rolePermission1,
-            $rolePermission2,
-            $rolePermission3,
-            $rolePermission4,
-            $permission1,
-            $permission2,
-            $permission3,
-            $permission4,
-            $adminPermission1,
-            $adminPermission2,
-            $userPermission1,
-            $countryPermission1,
-            $countryPermission2,
-            $statePermission1,
-            $statePermission2,
-            $cityPermission1,
-            $cityPermission2,
-            $attributevaluesPermission2,
-            $attributevaluesPermission1,
-            $attributesPermission2,
-            $attributesPermission1
+        // $superAdminRole = Role::create(['name' => 'super-admin'])->syncPermissions([
+        //     $userPermission1,
+        //     $userPermission2,
+        //     $userPermission3,
+        //     $userPermission4,
+        //     $rolePermission1,
+        //     $rolePermission2,
+        //     $rolePermission3,
+        //     $rolePermission4,
+        //     $permission1,
+        //     $permission2,
+        //     $permission3,
+        //     $permission4,
+        //     $adminPermission1,
+        //     $adminPermission2,
+        //     $userPermission1,
+        //     $countryPermission1,
+        //     $countryPermission2,
+        //     $statePermission1,
+        //     $statePermission2,
+        //     $cityPermission1,
+        //     $cityPermission2,
+        //     $attributevaluesPermission2,
+        //     $attributevaluesPermission1,
+        //     $attributesPermission2,
+        //     $attributesPermission1
 
 
-        ]);
-        $adminRole = Role::create(['name' => 'admin'])->syncPermissions([
-            $userPermission1,
-            $userPermission2,
-            $userPermission3,
-            $userPermission4,
-            $rolePermission1,
-            $rolePermission2,
-            $rolePermission3,
-            $rolePermission4,
-            $permission1,
-            $permission2,
-            $permission3,
-            $permission4,
-            $adminPermission1,
-            $adminPermission2,
-            $userPermission1,
-        ]);
-        $moderatorRole = Role::create(['name' => 'moderator'])->syncPermissions([
-            $userPermission2,
-            $rolePermission2,
-            $permission2,
-            $adminPermission1,
-        ]);
-        $developerRole = Role::create(['name' => 'developer'])->syncPermissions([
-            $adminPermission1,
-        ]);
+        // ]);
+        // $adminRole = Role::create(['name' => 'admin'])->syncPermissions([
+        //     $userPermission1,
+        //     $userPermission2,
+        //     $userPermission3,
+        //     $userPermission4,
+        //     $rolePermission1,
+        //     $rolePermission2,
+        //     $rolePermission3,
+        //     $rolePermission4,
+        //     $permission1,
+        //     $permission2,
+        //     $permission3,
+        //     $permission4,
+        //     $adminPermission1,
+        //     $adminPermission2,
+        //     $userPermission1,
+        // ]);
+        // $moderatorRole = Role::create(['name' => 'moderator'])->syncPermissions([
+        //     $userPermission2,
+        //     $rolePermission2,
+        //     $permission2,
+        //     $adminPermission1,
+        // ]);
+        // $developerRole = Role::create(['name' => 'developer'])->syncPermissions([
+        //     $adminPermission1,
+        // ]);
 
-        // CREATE ADMINS & USERS
-        User::create([
-            'name' => 'super admin',
-            'username' => 'super-admin',
-            'mobile' => '+9923443543',
-            'email' => 'super@admin.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ])->assignRole($superAdminRole);
+        // // CREATE ADMINS & USERS
+        // User::create([
+        //     'name' => 'super admin',
+        //     'username' => 'super-admin',
+        //     'mobile' => '+9923443543',
+        //     'email' => 'super@admin.com',
+        //     'email_verified_at' => now(),
+        //     'password' => Hash::make('password'),
+        //     'remember_token' => Str::random(10),
+        // ])->assignRole($superAdminRole);
 
 
     }

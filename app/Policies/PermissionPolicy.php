@@ -14,7 +14,7 @@ class PermissionPolicy
     public function viewAny(User $user): bool
     {
         //
-        if ($user->hasPermissionTo('view permission')) {
+        if ($user->hasPermissionTo('view permissions')) {
             return true;
         }
         return false;
