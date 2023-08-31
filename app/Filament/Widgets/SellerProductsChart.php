@@ -2,31 +2,30 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\User;
+use App\Models\Product\Product;
 use Carbon\Carbon;
 use Filament\Widgets\BarChartWidget;
 
-class UsersChart extends BarChartWidget
+class SellerProductsChart extends BarChartWidget
 {
     protected function getHeading(): string
     {
-        return trans('dashboard.sellers and customers');
+        return trans('dashboard.products.products');
     }
 
 
-
     protected function getData(): array {
-        $users = User::select('created_at')->get()->groupBy(function($users) {
-            return Carbon::parse($users->created_at)->format('F');
+        $products = auth()->user()->products()->select('created_at')->get()->groupBy(function($products) {
+            return Carbon::parse($products->created_at)->format('F');
         });
         $quantities = [];
-        foreach ($users as $user => $value) {
+        foreach ($products as $product => $value) {
             array_push($quantities, $value->count());
         }
         return [
             'datasets' => [
                 [
-                    'label' =>trans('dashboard.sellers and customers'),
+                    'label' =>trans('dashboard.products.products'),
                     'data' => $quantities,
                     'backgroundColor' => [
                         'rgba(255, 99, 132, 0.2)',
@@ -49,13 +48,12 @@ class UsersChart extends BarChartWidget
                     'borderWidth' => 1
                 ],
             ],
-            'labels' => $users->keys(),
+            'labels' => $products->keys(),
         ];
     }
-
     public static function canView(): bool
     {
-        return !auth()->user()->hasRole('seller');
+        return auth()->user()->hasRole('seller');
     }
 
 }

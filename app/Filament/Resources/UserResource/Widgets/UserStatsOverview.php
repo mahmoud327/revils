@@ -13,11 +13,14 @@ class UserStatsOverview extends BaseWidget
     {
         return [
             //
-            Card::make(trans('dashboard.products.products-pending'), Product::pending()->count()),
-            Card::make(trans('dashboard.products.products-approved'), Product::approved()->count()),
-            Card::make(trans('dashboard.products.products-rejected'), Product::rejected()->count()),
-            Card::make(trans('dashboard.sellers.sellers'), User::where('account_type', 1)->count()),
-            Card::make(trans('dashboard.customers.customers'), User::where('account_type', 0)->count()),
+            Card::make(trans('dashboard.products.products-pending'), auth()->user()->products()->pending()->count()),
+            Card::make(trans('dashboard.products.products-approved'), auth()->user()->products()->approved()->count()),
+            Card::make(trans('dashboard.products.products-rejected'), auth()->user()->products()->rejected()->count()),
+
         ];
+    }
+    public static function canView(): bool
+    {
+        return auth()->user()->hasRole('seller');
     }
 }

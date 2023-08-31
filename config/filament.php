@@ -1,5 +1,6 @@
 <?php
 
+use App\Filament\Resources\UserResource\Widgets\AdminStatsOverview;
 use App\Filament\Resources\UserResource\Widgets\UserStatsOverview;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -146,6 +147,7 @@ return [
             // Widgets\AccountWidget::class,
             // Widgets\FilamentInfoWidget::class,
             UserStatsOverview::class,
+            AdminStatsOverview::class,
         ],
     ],
 

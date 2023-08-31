@@ -51,5 +51,8 @@ class ProductsChart extends BarChartWidget
             'labels' => $products->keys(),
         ];
     }
-
+    public static function canView(): bool
+    {
+        return !auth()->user()->hasRole('seller');
+    }
 }
