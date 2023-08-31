@@ -24,6 +24,8 @@ class RolesAndPermissionsSeeder extends Seeder
         // Misc
 
         // USER MODEL
+
+
         $userPermission1 = Permission::create(['name' => 'view Business Types']);
         $userPermission2 = Permission::create(['name' => 'create Business Type']);
         $userPermission3 = Permission::create(['name' => 'update Business Type']);
@@ -153,6 +155,6 @@ class RolesAndPermissionsSeeder extends Seeder
             'remember_token' => Str::random(10),
         ])->assignRole($superAdminRole);
 
-        
+
     }
 }
