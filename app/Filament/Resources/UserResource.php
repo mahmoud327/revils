@@ -42,6 +42,12 @@ class UserResource extends Resource
                     ->label(trans('dashboard.user name'))
 
                     ->unique(ignoreRecord: true),
+
+                Forms\Components\TextInput::make('mobile')->required()
+                    ->label(trans('dashboard.mobile'))
+                    ->required()
+                    ->unique(ignoreRecord: true),
+
                 Forms\Components\TextInput::make('first_name')
                     ->label(trans('dashboard.first name'))
 
