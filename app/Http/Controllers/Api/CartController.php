@@ -7,10 +7,8 @@ use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Cart\CartRequest;
 use App\Http\Requests\Api\Cart\RemoveCartRequest;
-use App\Models\Core\Coupon;
 use App\Services\CartService;
 use Illuminate\Http\Request;
-use App\Repositories\Core\Coupon\CouponRepositoryInterface;
 
 
 

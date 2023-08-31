@@ -253,6 +253,7 @@ class CartService
         }else{
             $data['coins'] = $this->coins;
             $data['coins']['status'] = true;
+            $data['coins']['message'] = "Applied";
             $data['order_summary']['collected_coins'] = $this->coins->coins;
         }
 
