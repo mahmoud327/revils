@@ -20,8 +20,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SettingResource extends Resource
 {
-    use Translatable;
     protected static ?string $model = Setting::class;
+
     protected static ?string $navigationGroup = 'core';
 
 
@@ -32,7 +32,7 @@ class SettingResource extends Resource
     }
 
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-cog';
 
     public static function form(Form $form): Form
     {
@@ -42,35 +42,46 @@ class SettingResource extends Resource
                     ->schema([
                         //
                         TextInput::make('email')
-                            ->label(trans('dashboard.settings.email')),
-                        //phone
-                        TextInput::make('phone')
-                            ->label(trans('dashboard.settings.phone')),
-                        //
-                        TextInput::make('fb_link')
-                            ->label(trans('dashboard.settings.fb_link')),
+                        ->label(trans('dashboard.settings.email')),
+                    //phone
+                    TextInput::make('phone')
+                        ->label(trans('dashboard.settings.phone')),
+                    //
+                    TextInput::make('vat')
+                        ->label(trans('dashboard.settings.vat'))
+                        ->numeric(),
+                    //
+                    TextInput::make('shiping_price')
+                        ->label(trans('dashboard.settings.shiping price'))
+                        ->numeric(),
+                    //
+                    TextInput::make('vat')
+                        ->label(trans('dashboard.settings.vat'))
+                        ->numeric(),
+                    //
+                    TextInput::make('fb_link')
+                        ->label(trans('dashboard.settings.fb_link')),
 
-                        TextInput::make('skype_link')
-                            ->label(trans('dashboard.settings.skype_link')),
+                    TextInput::make('skype_link')
+                        ->label(trans('dashboard.settings.skype_link')),
 
-                        TextInput::make('tw_link')
-                            ->label(trans('dashboard.settings.tw_link')),
+                    TextInput::make('tw_link')
+                        ->label(trans('dashboard.settings.tw_link')),
 
-                        TextInput::make('linkedin_link')
-                            ->label(trans('dashboard.settings.linkedin_link')),
+                    TextInput::make('linkedin_link')
+                        ->label(trans('dashboard.settings.linkedin_link')),
 
-                        TextInput::make('whatsapp')
-                            ->label(trans('dashboard.settings.whatsapp')),
+                    TextInput::make('whatsapp')
+                        ->label(trans('dashboard.settings.whatsapp')),
 
-                        TextInput::make('inst_link')
-                            ->label(trans('dashboard.settings.inst_link')),
+                    TextInput::make('inst_link')
+                        ->label(trans('dashboard.settings.inst_link')),
 
-                        RichEditor::make('about_us')
-                            ->label(trans('dashboard.settings.about_us')),
+                    RichEditor::make('about_us')
+                        ->label(trans('dashboard.settings.about_us')),
 
-                        RichEditor::make('terms_condition')
-                            ->label(trans('dashboard.settings.terms_condition')),
-
+                    RichEditor::make('terms_condition')
+                        ->label(trans('dashboard.settings.terms_condition')),
                     ])
 
             ]);

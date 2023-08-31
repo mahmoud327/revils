@@ -47,6 +47,11 @@ class RolesAndPermissionsSeeder extends Seeder
         $permission2 = Permission::create(['name' => 'create permission']);
         $permission3 = Permission::create(['name' => 'update permission']);
         $permission4 = Permission::create(['name' => 'delet permission']);
+        // PERMISSION MODEL
+        $permission1 = Permission::create(['name' => 'view payments']);
+        $permission2 = Permission::create(['name' => 'create payments']);
+        $permission3 = Permission::create(['name' => 'update payments']);
+        $permission4 = Permission::create(['name' => 'delet payments']);
 
 
 
@@ -112,7 +117,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $cityPermission2 = Permission::create(['name' => 'update city']);
         $cityPermission2 = Permission::create(['name' => 'create city']);
         $cityPermission2 = Permission::create(['name' => 'delete city']);
-        // CREATE ROLES
+        // // CREATE ROLES
 
         $superAdminRole = Role::create(['name' => 'super-admin'])->syncPermissions([
             $userPermission1,

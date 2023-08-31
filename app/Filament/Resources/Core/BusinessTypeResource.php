@@ -35,19 +35,23 @@ class BusinessTypeResource extends Resource
     }
 
 
+    protected static function getNavigationLabel(): string
+    {
+        return trans('dashboard.business types');
+    }
+
+
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Card::make()->schema([
-
                     Forms\Components\TextInput::make('name')
                         ->label('Name (Arabic)')
+                        ->label(trans('dashboard.name'))
                         ->required(),
-
-
-
 
                 ])
                 //
@@ -61,7 +65,9 @@ class BusinessTypeResource extends Resource
             ->columns([
                 //
                 Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                ->label(trans('dashboard.name'))
+                ->sortable()->searchable(),
 
 
             ])

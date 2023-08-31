@@ -56,7 +56,7 @@ class ListProducts extends ListRecords
     protected function getTableQuery(): Builder
     {
         $products = (new Product)::query();
-        if (!auth()->user()->hasRole('seller')) {
+        if (auth()->user()->hasRole('seller')) {
             return $products->whereUserId(auth()->id())
                 ->latest();
         }

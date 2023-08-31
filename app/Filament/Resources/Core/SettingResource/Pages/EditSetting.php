@@ -10,17 +10,14 @@ class EditSetting extends EditRecord
 {
     protected static string $resource = SettingResource::class;
 
-    use EditRecord\Concerns\Translatable;
 
 
 
     protected function getActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
-            Actions\LocaleSwitcher::make(),
 
         ];
     }
-   
+
 }

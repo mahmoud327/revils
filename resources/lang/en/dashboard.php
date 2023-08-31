@@ -6,6 +6,7 @@ return [
     'activities' => 'activities',
     'permissions' => 'permissions',
     'active' => 'active',
+    'business types'=>'business types',
 
     'sellers and customers' => 'sellers and customers',
 
@@ -26,6 +27,8 @@ return [
         'percentage' => 'percentage',
     ],
     'user name' => 'user name',
+    'mobile' => 'mobile',
+    'new password' => 'new password',
     'first name' => 'first name',
     'last name' => 'last name',
     'email' => 'email',
@@ -111,6 +114,7 @@ return [
         'email' => 'email',
         'about_us' => 'about us',
         'vat' => 'vat %',
+        'shiping price' => 'shiping price',
 
         'phone' => 'phone',
         'address' => 'address',

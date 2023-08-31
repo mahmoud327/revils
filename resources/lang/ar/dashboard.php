@@ -8,6 +8,7 @@ return [
     'admins' => 'المشرفين',
     'activities' => 'سجل النشاطات',
     'active' => 'تفعيل',
+   'business types' => 'أنواع الأعمال',
 
 
     'roles' => [
@@ -23,10 +24,12 @@ return [
         'percentage' => 'نسبة',
     ],
     'user name' => 'اسم المستخدم',
+    'mobile' => 'رقم التليفون',
     'first name' => 'اسم الاول',
     'last name' => 'اسم الاخير',
     'email' => 'الايميل',
-    'password' => 'الايميل',
+    'new password' => 'كلمة سر جديدة',
+    'password' => 'الباسورد',
     'bio' => 'نبذه عن',
     'description' => 'وصف',
 
@@ -46,6 +49,7 @@ return [
     'settings' => [
         'settings' => 'الاعدادات',
         'email' => 'الايميل',
+        'shiping price' => 'مصاريف الشحن',
         'about_us' => 'من نحن',
         'phone' => 'رقم الموبايل',
         'address' => 'العنوان',
