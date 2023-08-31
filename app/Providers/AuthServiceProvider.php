@@ -29,8 +29,8 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         UserCart::class => CartPolicy::class,
-        Role::class => RolePolicy::class,
-        Permission::class => PermissionPolicy::class,
+        // Role::class => RolePolicy::class,
+        // Permission::class => PermissionPolicy::class,
         Activity::class => ActivityPolicy::class,
         // Setting::class => SettingPolicy::class,
 
