@@ -7,8 +7,11 @@ use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Cart\CartRequest;
 use App\Http\Requests\Api\Cart\RemoveCartRequest;
+use App\Models\Core\Coupon;
 use App\Services\CartService;
 use Illuminate\Http\Request;
+use App\Repositories\Core\Coupon\CouponRepositoryInterface;
+
 
 
 class CartController extends Controller
@@ -19,7 +22,13 @@ class CartController extends Controller
     {
         $userCartItems = $this->cartService->getUserCartItems($request);
         if (!$userCartItems) {
-            return responseSuccess([]);
+            $cart = new CartService();
+            $cart->setEmptyCart(value: true);
+            $data['cart'] = [];
+            $data['order_summary']['subtotal'] = 0;
+            $data['order_summary']['shipping_handling'] =0;
+            $data['order_summary']['total'] = 0;
+            return responseSuccess($data);
         }
         return responseSuccess($userCartItems);
     }
