@@ -16,4 +16,9 @@ class ListBusinessTypes extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+    protected function getTitle(): string
+    {
+        return trans('dashboard.business types');
+
+    }
 }

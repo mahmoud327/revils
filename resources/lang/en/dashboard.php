@@ -6,6 +6,7 @@ return [
     'activities' => 'activities',
     'permissions' => 'permissions',
     'active' => 'active',
+    'business types'=>'business types',
 
     'sellers and customers' => 'sellers and customers',
 

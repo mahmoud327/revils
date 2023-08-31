@@ -8,6 +8,7 @@ return [
     'admins' => 'المشرفين',
     'activities' => 'سجل النشاطات',
     'active' => 'تفعيل',
+   'business types' => 'أنواع الأعمال',
 
 
     'roles' => [
