@@ -232,6 +232,7 @@ class CartService
         }
         $this->calcSubTotal($cartItems);
         $this->calcTotal();
+
         $data['cart'] = CartResource::collection($cartItems);
         $data['coupon'] = $this->coupon;
         if($this->added_to_cart)
@@ -240,16 +241,22 @@ class CartService
             $data['order_summary']['collected_coins'] = 0;
         }else
         {
-            if(!$this->coins)
-            {
-                $data['coins'] = "you have not enough coins";
-                $data['order_summary']['collected_coins'] = 0;
-            }else{
-                $data['coins'] = $this->coins;
-                $data['order_summary']['collected_coins'] = $this->coins->coins;
-            }
+            if(is_null($this->coins))
+        {
+             $data['coins'] = $this->coins;
+            $data['order_summary']['collected_coins'] = 0;
+        }elseif(!$this->coins)
+        {
+            $data['coins']['status'] = false;
+            $data['coins']['message'] = "you have not enough coins";
+            $data['order_summary']['collected_coins'] = 0;
+        }else{
+            $data['coins'] = $this->coins;
+            $data['coins']['status'] = true;
+            $data['order_summary']['collected_coins'] = $this->coins->coins;
         }
 
+        }
 
         $data['order_summary']['subtotal'] = $this->subtotal;
         $data['order_summary']['shipping_handling'] = $this->shipping_amount;

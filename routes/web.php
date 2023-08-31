@@ -31,3 +31,14 @@ Route::get('coupon',function(){
     return 'created';
 });
 
+
+Route::get('coins',function(){
+    \App\Models\Core\Coins::create([
+        'user_id' => Auth::id(),
+        'coins' => 100,
+        'value' => 10,
+    ]);
+    return Auth::user();
+});
+
+
