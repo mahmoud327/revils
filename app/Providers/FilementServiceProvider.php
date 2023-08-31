@@ -31,51 +31,51 @@ class FilementServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        Filament::serving(function () {
-            Filament::registerNavigationItems([
-                NavigationItem::make('Settings')
-                    ->label(trans('dashboard.settings.settings'))
-                    ->url(route('filament.pages.settings'))
-                    ->icon('heroicon-o-cog'),
-            ]);
-        });
+        // Filament::serving(function () {
+        //     Filament::registerNavigationItems([
+        //         NavigationItem::make('Settings')
+        //             ->label(trans('dashboard.settings.settings'))
+        //             ->url(route('filament.pages.settings'))
+        //             ->icon('heroicon-o-cog'),
+        //     ]);
+        // });
 
-        \Reworck\FilamentSettings\FilamentSettings::setFormFields([
+        // \Reworck\FilamentSettings\FilamentSettings::setFormFields([
 
-            //phone
-            TextInput::make('email')
-                ->label(trans('dashboard.settings.email')),
-            //phone
-            TextInput::make('phone')
-                ->label(trans('dashboard.settings.phone')),
-            //
-            TextInput::make('vat')
-                ->label(trans('dashboard.settings.vat'))
-                ->numeric(),
-            //
-            TextInput::make('fb_link')
-                ->label(trans('dashboard.settings.fb_link')),
+        //     //phone
+        //     TextInput::make('email')
+        //         ->label(trans('dashboard.settings.email')),
+        //     //phone
+        //     TextInput::make('phone')
+        //         ->label(trans('dashboard.settings.phone')),
+        //     //
+        //     TextInput::make('vat')
+        //         ->label(trans('dashboard.settings.vat'))
+        //         ->numeric(),
+        //     //
+        //     TextInput::make('fb_link')
+        //         ->label(trans('dashboard.settings.fb_link')),
 
-            TextInput::make('skype_link')
-                ->label(trans('dashboard.settings.skype_link')),
+        //     TextInput::make('skype_link')
+        //         ->label(trans('dashboard.settings.skype_link')),
 
-            TextInput::make('tw_link')
-                ->label(trans('dashboard.settings.tw_link')),
+        //     TextInput::make('tw_link')
+        //         ->label(trans('dashboard.settings.tw_link')),
 
-            TextInput::make('linkedin_link')
-                ->label(trans('dashboard.settings.linkedin_link')),
+        //     TextInput::make('linkedin_link')
+        //         ->label(trans('dashboard.settings.linkedin_link')),
 
-            TextInput::make('whatsapp')
-                ->label(trans('dashboard.settings.whatsapp')),
+        //     TextInput::make('whatsapp')
+        //         ->label(trans('dashboard.settings.whatsapp')),
 
-            TextInput::make('inst_link')
-                ->label(trans('dashboard.settings.inst_link')),
+        //     TextInput::make('inst_link')
+        //         ->label(trans('dashboard.settings.inst_link')),
 
-            RichEditor::make('about_us')
-                ->label(trans('dashboard.settings.about_us')),
+        //     RichEditor::make('about_us')
+        //         ->label(trans('dashboard.settings.about_us')),
 
-            RichEditor::make('terms_condition')
-                ->label(trans('dashboard.settings.terms_condition')),
-        ]);
+        //     RichEditor::make('terms_condition')
+        //         ->label(trans('dashboard.settings.terms_condition')),
+        // ]);
     }
 }

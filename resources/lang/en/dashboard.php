@@ -111,6 +111,7 @@ return [
         'email' => 'email',
         'about_us' => 'about us',
         'vat' => 'vat %',
+        'shiping price' => 'shiping price',
 
         'phone' => 'phone',
         'address' => 'address',

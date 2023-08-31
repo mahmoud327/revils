@@ -40,8 +40,4 @@ class SettingPolicy
         }
         return false;
     }
-
-
-
-
 }

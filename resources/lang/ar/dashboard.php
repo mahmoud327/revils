@@ -46,6 +46,7 @@ return [
     'settings' => [
         'settings' => 'الاعدادات',
         'email' => 'الايميل',
+        'shiping price' => 'مصاريف الشحن',
         'about_us' => 'من نحن',
         'phone' => 'رقم الموبايل',
         'address' => 'العنوان',
