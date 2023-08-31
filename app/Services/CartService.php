@@ -9,9 +9,9 @@ use App\Http\Requests\Api\Cart\CartRequest;
 use App\Http\Requests\Api\Cart\RemoveCartRequest;
 use App\Http\Resources\Cart\CartResource;
 use App\Models\Core\Coins;
+use App\Models\Core\Coupon;
 use App\Models\Product\Product;
 use App\Models\UserCart;
-use App\Repositories\Core\Coupon\CouponRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +29,12 @@ class CartService
 
     protected $total_amount = null;
 
-    public function __construct(protected CouponRepositoryInterface $couponRepository){}
+    protected $empty_cart = false;
+
+    protected $added_to_cart = false;
+
+
+
 
     public function getUserCartItems(Request $request)
     {
@@ -43,6 +48,12 @@ class CartService
             $this->findCoins();
         }
         return  $this->getShopingCartWithSummary();
+    }
+
+    public function setEmptyCart($value)
+    {
+        $this->empty_cart = $value;
+
     }
 
     public function addToCart(CartRequest $request)
@@ -83,6 +94,7 @@ class CartService
                 throw new UnexpectedException($e->getMessage(), Response::HTTP_BAD_REQUEST);
             }
         }
+        $this->added_to_cart = true;
         return $this->getShopingCartWithSummary();
     }
 
@@ -171,10 +183,17 @@ class CartService
         $this->total_amount = $this->subtotal+$this->shipping_amount;
     }
 
+    public function verifyCoupon($coupon)
+    {
+        return Coupon::query()
+            ->whereCode($coupon)
+            ->vaild()
+            ->first();
+    }
 
     public function findCoupon($coupon)
     {
-        $coupon = $this->couponRepository->verifyCoupon($coupon);
+        $coupon = $this->verifyCoupon($coupon);
 
         if (!$coupon)
         {
@@ -215,14 +234,22 @@ class CartService
         $this->calcTotal();
         $data['cart'] = CartResource::collection($cartItems);
         $data['coupon'] = $this->coupon;
-        if(!$this->coins)
+        if($this->added_to_cart)
         {
-            $data['coins'] = "you have not enough coins";
+            $data['coins'] = null;
             $data['order_summary']['collected_coins'] = 0;
-        }else{
-            $data['coins'] = $this->coins;
-            $data['order_summary']['collected_coins'] = $this->coins->coins;
+        }else
+        {
+            if(!$this->coins)
+            {
+                $data['coins'] = "you have not enough coins";
+                $data['order_summary']['collected_coins'] = 0;
+            }else{
+                $data['coins'] = $this->coins;
+                $data['order_summary']['collected_coins'] = $this->coins->coins;
+            }
         }
+
 
         $data['order_summary']['subtotal'] = $this->subtotal;
         $data['order_summary']['shipping_handling'] = $this->shipping_amount;
