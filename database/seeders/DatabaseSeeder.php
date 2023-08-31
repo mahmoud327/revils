@@ -10,7 +10,6 @@ use App\Models\Product\Product;
 use Database\Factories\BusinessTypeFactory;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
-
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -18,9 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
-
-
         $this->call(SettingSeeder::class);
          $this->call(RolesAndPermissionsSeeder::class);
         $this->call(CountriesTableSeeder::class);

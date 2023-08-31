@@ -40,7 +40,7 @@ return [
         'customers' => 'customers',
         'userProfile' => [
             'userProfile' => 'userProfile',
-            'webiste' => 'webiste',
+            'website' => 'website',
             'phone' => 'phone',
             'mobile' => 'mobile',
             'street1' => 'street1',
