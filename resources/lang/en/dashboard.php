@@ -26,6 +26,7 @@ return [
         'percentage' => 'percentage',
     ],
     'user name' => 'user name',
+    'mobile' => 'mobile',
     'first name' => 'first name',
     'last name' => 'last name',
     'email' => 'email',

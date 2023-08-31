@@ -23,6 +23,7 @@ return [
         'percentage' => 'نسبة',
     ],
     'user name' => 'اسم المستخدم',
+    'mobile' => 'رقم التليفون',
     'first name' => 'اسم الاول',
     'last name' => 'اسم الاخير',
     'email' => 'الايميل',
