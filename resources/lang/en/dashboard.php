@@ -27,6 +27,7 @@ return [
     ],
     'user name' => 'user name',
     'mobile' => 'mobile',
+    'new password' => 'new password',
     'first name' => 'first name',
     'last name' => 'last name',
     'email' => 'email',
