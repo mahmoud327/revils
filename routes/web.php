@@ -33,12 +33,13 @@ Route::get('coupon',function(){
 
 
 Route::get('coins',function(){
+    $user = User::where('username','mada')->first();
     \App\Models\Core\Coins::create([
-        'user_id' => Auth::id(),
+        'user_id' =>$user->id,
         'coins' => 100,
         'value' => 10,
     ]);
-    return Auth::user();
+    return $user;
 });
 
 
