@@ -194,11 +194,11 @@ class CartService
 
         if(!$coins)
         {
-            return $this->coins=null;
+            return $this->coins = false;
         }
         if($coins->coins < 100)
         {
-            return $this->coins=null;
+            return $this->coins = false;
         }
 
         $this->coins = $coins;
@@ -215,7 +215,15 @@ class CartService
         $this->calcTotal();
         $data['cart'] = CartResource::collection($cartItems);
         $data['coupon'] = $this->coupon;
-        $data['coins'] = $this->coins;
+        if(!$this->coins)
+        {
+            $data['coins'] = "you have not enough coins";
+            $data['order_summary']['collected_coins'] = 0;
+        }else{
+            $data['coins'] = $this->coins;
+            $data['order_summary']['collected_coins'] = $this->coins->coins;
+        }
+
         $data['order_summary']['subtotal'] = $this->subtotal;
         $data['order_summary']['shipping_handling'] = $this->shipping_amount;
         $data['order_summary']['total'] = $this->total_amount;

@@ -7,22 +7,19 @@ use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Cart\CartRequest;
 use App\Http\Requests\Api\Cart\RemoveCartRequest;
-use App\Http\Resources\Cart\CartResource;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 
 
 class CartController extends Controller
 {
-    public function __construct(protected CartService $cartService)
-    {
-    }
+    public function __construct(protected CartService $cartService){}
 
     public function getUserCartItems(Request $request)
     {
         $userCartItems = $this->cartService->getUserCartItems($request);
         if (!$userCartItems) {
-            return responseSuccess('There is no items in your cart');
+            return responseSuccess([]);
         }
         return responseSuccess($userCartItems);
     }
