@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\Core\Coupon;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
-use Spatie\Permission\Models\Permission;
 
-class PermissionPolicy
+class CouponPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -14,22 +14,26 @@ class PermissionPolicy
     public function viewAny(User $user): bool
     {
         //
-        if ($user->hasPermissionTo('view permissions')) {
+        //
+        if ($user->hasPermissionTo('view coupons')) {
             return true;
         }
         return false;
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Permission $permission): bool
+    public function view(User $user, Coupon $coupon): bool
     {
         //
-        if ($user->hasPermissionTo('view permission')) {
+        //
+        if ($user->hasPermissionTo('view coupons')) {
             return true;
         }
         return false;
+        //
     }
 
     /**
@@ -38,18 +42,22 @@ class PermissionPolicy
     public function create(User $user): bool
     {
         //
-        if ($user->hasPermissionTo('create permission')) {
+        //
+        if ($user->hasPermissionTo('create coupons')) {
             return true;
         }
         return false;
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Permission $permission): bool
+    public function update(User $user, Coupon $coupon): bool
     {
-        if ($user->hasPermissionTo('update permission')) {
+        //
+        //
+        if ($user->hasPermissionTo('update coupons')) {
             return true;
         }
         return false;
@@ -59,12 +67,14 @@ class PermissionPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Permission $permission): bool
+    public function delete(User $user, Coupon $coupon): bool
     {
         //
-        if ($user->hasPermissionTo('delete permission')) {
+        //
+        if ($user->hasPermissionTo('delete coupons')) {
             return true;
         }
         return false;
+        //
     }
 }

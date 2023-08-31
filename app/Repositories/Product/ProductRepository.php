@@ -76,7 +76,8 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
     {
         $product = $this->model
             ->with([
-                'user', 'attributes', 'category',
+                'user',
+                'attributes', 'category',
                 'ratingsPure',
                 "relatedProducts.user",
                 "relatedProducts.category",
@@ -86,8 +87,7 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
             ])
             ->findorfail($id);
 
-        if (auth()->guard('sanctum')->check())
-        {
+        if (auth()->guard('sanctum')->check()) {
             auth()->guard('sanctum')->user()
                 ->view($product);
             $product->update([
@@ -126,5 +126,22 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
             DB::rollback();
             throw  new UnexpectedException($e->getMessage());
         }
+    }
+
+    public function trends($paginate)
+    {
+        $products = $this->model->approved()
+            ->with([
+                'user', 'category',
+                'attributeValues',
+                'ratingsPure',
+                "relatedProducts.user",
+                "relatedProducts.category",
+                'attributeValues.attribute'
+            ])->orderByDesc('view_number');
+        if ($paginate) {
+            return $products->paginate();
+        }
+        return $products->get();
     }
 }

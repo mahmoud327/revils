@@ -53,6 +53,6 @@ class UserController extends Controller
     }
     public function profileInfo()
     {
-        return responseSuccess(UserResource::make(auth()->user()->load(['businessProfile', 'userProfile','userCoinEarn'])));
+        return responseSuccess(UserResource::make(auth()->user()->load(['businessProfile', 'userProfile','coins'])));
     }
 }

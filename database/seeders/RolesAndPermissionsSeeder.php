@@ -24,6 +24,8 @@ class RolesAndPermissionsSeeder extends Seeder
         // Misc
 
         // USER MODEL
+
+
         $userPermission1 = Permission::create(['name' => 'view Business Types']);
         $userPermission2 = Permission::create(['name' => 'create Business Type']);
         $userPermission3 = Permission::create(['name' => 'update Business Type']);
@@ -73,6 +75,32 @@ class RolesAndPermissionsSeeder extends Seeder
         $attributevaluesPermission2 = Permission::create(['name' => 'create attribute values']);
         $attributevaluesPermission2 = Permission::create(['name' => 'delete attribute values']);
         // CREATE ROLES
+
+        $userPermission1 = Permission::create(['name' => 'create coupons']);
+        $userPermission2 = Permission::create(['name' => 'view coupons']);
+        $userPermission3 = Permission::create(['name' => 'delete coupons']);
+        $userPermission4 = Permission::create(['name' => 'update coupons']);
+
+        $userPermission1 = Permission::create(['name' => 'create products']);
+        $userPermission2 = Permission::create(['name' => 'view products']);
+        $userPermission3 = Permission::create(['name' => 'delete products']);
+        $userPermission4 = Permission::create(['name' => 'update products']);
+
+        $userPermission1 = Permission::create(['name' => 'create banners']);
+        $userPermission2 = Permission::create(['name' => 'view banners']);
+        $userPermission3 = Permission::create(['name' => 'delete banners']);
+        $userPermission4 = Permission::create(['name' => 'update banners']);
+
+        $userPermission1 = Permission::create(['name' => 'create activites']);
+        $userPermission2 = Permission::create(['name' => 'view activites']);
+        $userPermission3 = Permission::create(['name' => 'delete activites']);
+        $userPermission4 = Permission::create(['name' => 'update activites']);
+
+
+
+        $userPermission2 = Permission::create(['name' => 'view settings']);
+        $userPermission4 = Permission::create(['name' => 'update settings']);
+
 
         // ADMINS
         $statePermission1 = Permission::create(['name' => 'view states']);
@@ -153,6 +181,6 @@ class RolesAndPermissionsSeeder extends Seeder
             'remember_token' => Str::random(10),
         ])->assignRole($superAdminRole);
 
-        
+
     }
 }

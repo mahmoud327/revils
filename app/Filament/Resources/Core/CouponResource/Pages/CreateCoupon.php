@@ -11,12 +11,10 @@ class CreateCoupon extends CreateRecord
     protected static string $resource = CouponResource::class;
 
 
-    use CreateRecord\Concerns\Translatable;
 
     protected function getActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
             // ...
         ];
     }
@@ -27,5 +25,5 @@ class CreateCoupon extends CreateRecord
     }
 
 
-    
+
 }

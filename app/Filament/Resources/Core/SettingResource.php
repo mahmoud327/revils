@@ -24,7 +24,6 @@ class SettingResource extends Resource
     protected static ?string $model = Setting::class;
     protected static ?string $navigationGroup = 'core';
 
-    protected static bool $shouldRegisterNavigation = false;
 
 
     protected static function getNavigationLabel(): string

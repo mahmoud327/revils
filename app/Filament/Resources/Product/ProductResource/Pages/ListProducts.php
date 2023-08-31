@@ -24,28 +24,28 @@ class ListProducts extends ListRecords
                 ->handleBlankRows(true)
 
                 ->fields([
-                ImportField::make('name')
-                    ->required(),
+                    ImportField::make('name')
+                        ->required(),
 
-                ImportField::make('description')
-                    ->required(),
+                    ImportField::make('description')
+                        ->required(),
 
-                ImportField::make('user_id')
-                    ->required(),
-                ImportField::make('price'),
-                ImportField::make('weight'),
-                ImportField::make('unit'),
-                ImportField::make('is_liquid_shipping'),
-                ImportField::make('weight'),
-                ImportField::make('is_handcrafted'),
-                ImportField::make('status'),
-                ImportField::make('quantity'),
-                ImportField::make('category_id'),
+                    ImportField::make('user_id')
+                        ->required(),
+                    ImportField::make('price'),
+                    ImportField::make('weight'),
+                    ImportField::make('unit'),
+                    ImportField::make('is_liquid_shipping'),
+                    ImportField::make('weight'),
+                    ImportField::make('is_handcrafted'),
+                    ImportField::make('status'),
+                    ImportField::make('quantity'),
+                    ImportField::make('category_id'),
                     ImportField::make('item_type'),
 
                     // ImportField::make('user'),
-               // ImportField::make('attributes')->relationship('attributeValues'),
-            ]),
+                    // ImportField::make('attributes')->relationship('attributeValues'),
+                ]),
 
 
 
@@ -55,12 +55,15 @@ class ListProducts extends ListRecords
 
     protected function getTableQuery(): Builder
     {
-        return Product::query()
-            ->latest();
+        $products = (new Product)::query();
+        if (!auth()->user()->hasRole('seller')) {
+            return $products->whereUserId(auth()->id())
+                ->latest();
+        }
+        return $products->latest();
     }
     protected function getTitle(): string
     {
         return trans('dashboard.products.products');
-
     }
 }

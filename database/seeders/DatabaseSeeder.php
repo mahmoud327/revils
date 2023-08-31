@@ -9,6 +9,7 @@ use App\Models\Product\AttributeValue;
 use App\Models\Product\Product;
 use Database\Factories\BusinessTypeFactory;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,7 +20,8 @@ class DatabaseSeeder extends Seeder
     {
 
 
-        // $this->call(SettingSeeder::class);
+
+        $this->call(SettingSeeder::class);
          $this->call(RolesAndPermissionsSeeder::class);
         $this->call(CountriesTableSeeder::class);
          $this->call(StatesTableSeeder::class);
@@ -28,7 +30,7 @@ class DatabaseSeeder extends Seeder
          $this->call(AttributeSeeder::class);
          $this->call(BusinessTypeSeeder::class);
          $this->call(ProductSeeder::class);
-        // Product::factory()
-        //     ->count(10)->create();
+        // // Product::factory()
+        // //     ->count(10)->create();
     }
 }

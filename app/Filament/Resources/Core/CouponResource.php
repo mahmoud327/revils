@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CouponResource extends Resource
 {
-    use Translatable;
 
     protected static ?string $model = Coupon::class;
 
@@ -27,10 +26,6 @@ class CouponResource extends Resource
     protected static ?string $navigationGroup = 'core';
 
 
-    public static function getTranslatableLocales(): array
-    {
-        return ['en', 'ar'];
-    }
     protected static function getNavigationLabel(): string
     {
         return trans('dashboard.coupons.coupons');
@@ -45,10 +40,6 @@ class CouponResource extends Resource
             ->schema([
                 Card::make()->schema([
                     //
-                    Forms\Components\TextInput::make('name')
-                        ->label(trans('dashboard.name'))
-                        ->required()
-                        ->unique(ignoreRecord: true),
 
 
                     Forms\Components\TextInput::make('code')
@@ -82,11 +73,20 @@ class CouponResource extends Resource
         return $table
             ->columns([
                 //
-                Tables\Columns\TextColumn::make('name')
-                    ->label(trans('dashboard.name'))
-                    ->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('code')
                     ->label(trans('dashboard.code'))
+                    ->sortable()->searchable(),
+
+                Tables\Columns\TextColumn::make('type')
+                    ->label(trans('dashboard.coupons.type'))
+                    ->sortable()->searchable(),
+
+                Tables\Columns\TextColumn::make('value')
+                    ->label(trans('dashboard.coupons.value'))
+
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('expiry_date')
+                    ->label(trans('dashboard.coupons.expiry date'))
 
                     ->sortable()->searchable(),
 

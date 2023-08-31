@@ -206,7 +206,7 @@ class CartService
 
     public function getShopingCartWithSummary()
     {
-        $cartItems =  UserCart::with('product.attributes')->whereUserId(Auth::id())->get();
+        $cartItems =  UserCart::with('product.attributeValues')->whereUserId(Auth::id())->get();
         if($cartItems->isEmpty())
         {
             return false;
