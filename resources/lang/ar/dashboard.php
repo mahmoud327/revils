@@ -28,7 +28,7 @@ return [
     'last name' => 'اسم الاخير',
     'email' => 'الايميل',
     'new password' => 'كلمة سر جديدة',
-    'password' => 'الايميل',
+    'password' => 'الباسورد',
     'bio' => 'نبذه عن',
     'description' => 'وصف',
 

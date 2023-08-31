@@ -55,7 +55,10 @@ class SellerResource extends Resource
 
                     Forms\Components\TextInput::make('username')
                         ->required()->unique(ignoreRecord: true)
-                        ->label(trans('dashboard.user name')),
+                        ->label(trans('dashboard.name')),
+
+             
+
                     Forms\Components\TextInput::make('first_name')
                         ->label(trans('dashboard.first name'))
 

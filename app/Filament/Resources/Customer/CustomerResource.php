@@ -52,13 +52,16 @@ class CustomerResource extends Resource
                     Forms\Components\TextInput::make('username')->required()
                         ->label(trans('dashboard.user name'))
 
-                        ->unique(ignoreRecord: true),
+                        ->unique(ignoreRecord: true)
+                        ->required(),
+
+           
                     Forms\Components\TextInput::make('first_name')
                         ->label(trans('dashboard.first name'))
 
                         ->unique(ignoreRecord: true),
 
-                        Forms\Components\TextInput::make('mobile')->required()
+                    Forms\Components\TextInput::make('mobile')->required()
                         ->label(trans('dashboard.mobile'))
                         ->required()
                         ->unique(ignoreRecord: true),
@@ -134,7 +137,7 @@ class CustomerResource extends Resource
                         ]),
 
                     Repeater::make('userAddress')
-                    ->relationship('userAddress')
+                        ->relationship('userAddress')
 
                         ->schema([
                             TextInput::make('last_name'),
@@ -160,8 +163,7 @@ class CustomerResource extends Resource
                                     'home' => 'home',
                                     'office' => 'office',
                                     'other' => 'other',
-                                ])
-                               ,
+                                ]),
                         ])
                         ->columns(2)
                 ])
