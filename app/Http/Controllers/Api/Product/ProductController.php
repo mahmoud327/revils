@@ -20,8 +20,8 @@ class ProductController extends Controller
     }
     public function index(Request $request)
     {
-        $products = ProductResource::collection($this->productRepository->all(paginatePerPage: $request->perPage));
-        return responseSuccess($products);
+        $products = ProductResource::collection($this->productRepository->all(paginatePerPage: $request->page));
+        return responseSuccess($products,$this->buildPaginationMeta($products));
     }
     public function show($id)
     {
@@ -37,6 +37,6 @@ class ProductController extends Controller
     public function trends(Request $request)
     {
         $products = ProductResource::collection($this->productRepository->trends(paginate:$request->page));
-        return responseSuccess(ProductResource::collection($products));
+        return responseSuccess($products,$this->buildPaginationMeta($products));
     }
 }

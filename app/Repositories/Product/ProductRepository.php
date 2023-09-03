@@ -139,9 +139,6 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
                 "relatedProducts.category",
                 'attributeValues.attribute'
             ])->orderByDesc('view_number');
-        if ($paginate) {
-            return $products->paginate();
-        }
-        return $products->get();
+        return $products->paginate();
     }
 }
