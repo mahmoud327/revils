@@ -11,13 +11,17 @@ use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-function responseSuccess($data, ?string $message = "data loaded successfully", int $code = 200)
+function responseSuccess($data, $meta = null, ?string $message = "data loaded successfully", int $code = 200)
 {
-    return response()->json([
+    $response = [
         'status' => true,
         'message' => $message,
         'data' => $data
-    ], $code);
+    ];
+    if ($meta !== null) {
+        $response['meta'] = $meta;
+    }
+    return response()->json($response, $code);
 }
 
 function responseError(mixed $message, ?int $code)
@@ -112,13 +116,11 @@ if (!function_exists('uploadMedia')) {
 
         function getUserIdToSendNotification($object)
         {
-            if(is_object($object))
-            {
-                if(Auth::id()==$object->user_id)
-                {
+            if (is_object($object)) {
+                if (Auth::id() == $object->user_id) {
                     return false;
                 }
-                 return $object->user_id;
+                return $object->user_id;
             }
             return false;
         }

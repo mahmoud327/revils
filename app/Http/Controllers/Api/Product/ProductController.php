@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Product;
 use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Product\ProductResource;
+use App\Models\Product\Product;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
@@ -14,11 +15,13 @@ use Illuminate\Support\Facades\Log;
 class ProductController extends Controller
 {
     use PaginationTrait;
-    public function __construct(public ProductRepositoryInterface $productRepository){}
+    public function __construct(public ProductRepositoryInterface $productRepository)
+    {
+    }
     public function index(Request $request)
     {
-        $products = ProductResource::collection($this->productRepository->all(paginatePerPage: $request->perPage));
-        return responseSuccess($products);
+        $products = ProductResource::collection($this->productRepository->all(paginatePerPage: $request->page));
+        return responseSuccess($products,$this->buildPaginationMeta($products));
     }
     public function show($id)
     {
@@ -31,9 +34,9 @@ class ProductController extends Controller
         }
     }
 
-    public function trends($perPage=null)
+    public function trends(Request $request)
     {
-        $products = ProductResource::collection($this->productRepository->trends(paginatePerPage: $perPage));
-        return responseSuccess($products);
+        $products = ProductResource::collection($this->productRepository->trends(paginate:$request->page));
+        return responseSuccess($products,$this->buildPaginationMeta($products));
     }
 }

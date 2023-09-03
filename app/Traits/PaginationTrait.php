@@ -9,19 +9,16 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 trait PaginationTrait
 {
-    protected function paginateResourceCollection(ResourceCollection $resourceCollection)
+    protected function buildPaginationMeta($paginator)
     {
-        $perPage = request('per_page', 10);
-        return $resourceCollection->additional([
-            'meta' => [
-                'pagination' => [
-                    'total' => $resourceCollection->total(),
-                    'per_page' => $perPage,
-                    'current_page' => $resourceCollection->currentPage(),
-                    'last_page' => $resourceCollection->lastPage(),
-                    // You can include more pagination details if needed
-                ],
-            ],
-        ]);
+        return [
+            'current_page' => $paginator->currentPage(),
+            'from' => $paginator->firstItem(),
+            'last_page' => $paginator->lastPage(),
+            'path' => $paginator->resolveCurrentPath(),
+            'per_page' => $paginator->perPage(),
+            'to' => $paginator->lastItem(),
+            'total' => $paginator->total(),
+        ];
     }
 }

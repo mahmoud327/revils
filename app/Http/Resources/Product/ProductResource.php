@@ -24,7 +24,7 @@ class ProductResource extends JsonResource
             "category" => new CategoryResource($this->whenLoaded('category')),
             "name" => $this->name,
             "is_added_to_cart" => $this->UserIsAddCart,
-            "item_type"=>$this->item_type,
+            "item_type" => $this->item_type,
             "weight" => $this->weight,
             "price" => $this->price,
             "old_price" => $this->old_price,
@@ -38,8 +38,8 @@ class ProductResource extends JsonResource
             "images" => $this->images,
             "status" => $this->getStatus(),
             "reason" => $this->reason,
-            "rates"=>$this->rates,
-            "features"=>$this->features,
+            "rates" => $this->rates,
+            "features" => $this->features,
             "is_free_shipping" => $this->getIsFreeShipping(),
             "cash" => $this->cash,
             "is_batteries_shipping" => $this->getIsBatteriesShipping(),
@@ -47,8 +47,12 @@ class ProductResource extends JsonResource
             "is_liquid_shipping" => $this->getIsLiquidShipping(),
             "is_handcrafted" => $this->getIsHandcrafted(),
             "check_coin" => $this->check_coin,
-            'relatedProducts'=>ProductResource::collection($this->whenLoaded('relatedProducts')),
+            'relatedProducts' => ProductResource::collection($this->whenLoaded('relatedProducts')),
             'customerReviews' => RateResource::collection($this->whenLoaded('ratingsPure')),
+            
+
         ];
     }
+
+
 }
