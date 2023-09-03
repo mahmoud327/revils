@@ -94,7 +94,7 @@ Route::get('setting',SettingController::class);
 Route::apiResource('products', ProductController::class)->only(['index', 'show']);
 
 Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
-    Route::post('products/trends', [ProductController::class, 'trends']);
+    Route::get('trends/products/{perPage?}', [ProductController::class, 'trends']);
     Route::group(['prefix' => 'seller', 'middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
         Route::apiResource('products', ProductSellerController::class);
         Route::post('products/{product}/images/{image}/mark-featured', [ProductImageController::class, 'markFeatured']);

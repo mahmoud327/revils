@@ -241,7 +241,7 @@ class CartService
             $data['order_summary']['collected_coins'] = 0;
         }else
         {
-            if(is_null($this->coins))
+        if(is_null($this->coins))
         {
              $data['coins'] = $this->coins;
             $data['order_summary']['collected_coins'] = 0;

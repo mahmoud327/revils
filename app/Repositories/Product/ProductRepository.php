@@ -128,18 +128,19 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
         }
     }
 
-    public function trends($paginate)
+    public function trends(?int $paginatePerPage, bool $paginate = true): Collection | LengthAwarePaginator
     {
         $products = $this->model->approved()
             ->with([
                 'user', 'category',
                 'attributeValues',
                 'ratingsPure',
-                "relatedProducts.user",
-                "relatedProducts.category",
                 'attributeValues.attribute'
             ])->orderByDesc('view_number');
         if ($paginate) {
+            if ($paginatePerPage) {
+                return $products->paginate($paginatePerPage);
+            }
             return $products->paginate();
         }
         return $products->get();
