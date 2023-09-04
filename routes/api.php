@@ -86,12 +86,12 @@ Route::get('banners', [BannerController::class, 'index']);
 ####### end banners #########
 
 #######banners#########
-Route::get('setting',SettingController::class);
+Route::get('setting', SettingController::class);
 ####### end banners #########
 
 
 ####### product  #########
-Route::apiResource('products', ProductController::class)->only(['index','show']);
+Route::apiResource('products', ProductController::class)->only(['index', 'show']);
 
 Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
     Route::get('trends/products', [ProductController::class, 'trends']);
@@ -129,8 +129,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
     Route::group(['prefix' => 'user'], function () {
         Route::apiResource('orders', OrderController::class);
         Route::post('order/{id}/change-status', [OrderController::class, 'changeStatus']);
-        Route::apiResource('address',AddressController::class);
-
+        Route::apiResource('address', AddressController::class);
     });
     ####### end order #########
 
@@ -151,15 +150,19 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
 
     ####### posts  #########
     Route::apiResource('posts', PostController::class)->except('update');
-    Route::get('user-posts', [PostController::class,'showUserPosts'])->middleware('role:customer');
-    Route::post('posts/update/{post}', [PostController::class,'update']);
-    Route::post('like-unlike', [PostController::class,'likeOrUnlikePost'])->middleware('role:customer');
-    Route::post('favorite-unfavorite', [PostController::class,'favoriteOrUnfavorit'])->middleware('role:customer');
+    Route::get('user-posts', [PostController::class, 'showUserPosts'])->middleware('role:customer');
+    Route::post('posts/update/{post}', [PostController::class, 'update']);
+    Route::post('like-unlike', [PostController::class, 'likeOrUnlikePost'])->middleware('role:customer');
+    Route::post('favorite-unfavorite', [PostController::class, 'favoriteOrUnfavorit'])->middleware('role:customer');
     ##### comments ######
-    Route::post('post/add-comment', [PostController::class,'addCommentPost']);
-    Route::post('post/show-comment', [PostController::class,'showCommentPost']);
-    Route::put('post/update-comment', [PostController::class,'updateCommentPost']);
-    Route::delete('post/delete-comment', [PostController::class,'deleteCommentPost']);
+
+    Route::group(['prefix' => 'post'], function () {
+        Route::post('add-comment', [PostController::class, 'addCommentPost']);
+        Route::post('show-comment', [PostController::class, 'showCommentPost']);
+        Route::get('{post_id}/comments', [PostController::class, 'showPostComment']);
+        Route::put('update-comment', [PostController::class, 'updateCommentPost']);
+        Route::delete('delete-comment', [PostController::class, 'deleteCommentPost']);
+    });
     ##### end comments ######
 
     ####### end posts #########
@@ -178,8 +181,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
 });
 
 Route::get('/test', function () {
-    if(Auth::guard('sanctum')->user())
-    {
+    if (Auth::guard('sanctum')->user()) {
         return  Auth::guard('sanctum')->id();
         return  UserCart::query()
             ->whereUserId(Auth::id())
@@ -188,14 +190,12 @@ Route::get('/test', function () {
     }
     return "false";
     return $user = Auth::guard('sanctum')->user();
-   return $token= request()->token();
+    return $token = request()->token();
     return $madd = Sanctum::getAccessTokenFromRequestUsing(
         function ($request) use ($token) {
             return $token;
         }
     );
-
-
 });
 
 Route::get('/sms', function () {
