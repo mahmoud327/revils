@@ -63,20 +63,20 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
 
     public function update($id,$data)
     {
-                DB::beginTransaction();
-                $post = $this->model::findOrFail($id);
-                $post->update([
-                    'content' => $data->content,
-                    'user_id' => Auth::id(),
-                ]);
-                $post->tags()->sync($data->tag_ids);
-                if ($data->hasFile('image'))
-                {
-                    $post->clearMediaCollection();
-                    $post->addMedia($data->image)->toMediaCollection();
-                }
-                DB::commit();
-                return $post;
+        DB::beginTransaction();
+        $post = $this->model::findOrFail($id);
+        $post->update([
+            'content' => $data->content,
+            'user_id' => Auth::id(),
+        ]);
+        $post->tags()->sync($data->tag_ids);
+        if ($data->hasFile('image'))
+        {
+            $post->clearMediaCollection();
+            $post->addMedia($data->image)->toMediaCollection();
+        }
+        DB::commit();
+        return $post;
     }
 
 

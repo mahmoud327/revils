@@ -4,10 +4,8 @@ namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Core\CategoryResource;
 use App\Http\Resources\UserResource;
-use App\Models\UserCart;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Auth;
 
 class ProductResource extends JsonResource
 {

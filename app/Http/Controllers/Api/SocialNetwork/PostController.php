@@ -21,10 +21,12 @@ class PostController extends Controller
 {
     public function __construct(public PostRepositoryInterface $postRepository){}
 
-    public function index(Request $request)
+    public function index()
     {
-        $posts = PostResource::collection($this->postRepository->all(paginatePerPage: $request->perPage));
-        return responseSuccess($posts);
+        $posts = PostResource::collection($this->postRepository->all(paginatePerPage: null))->response()->getData(true);
+        $success['posts'] = $posts['data'];
+        $success['meta'] = $posts['meta'];
+        return responseSuccess($success);
     }
 
 
@@ -57,8 +59,10 @@ class PostController extends Controller
 
     public function showUserPosts()
     {
-        $posts = PostResource::collection(Auth::user()->posts()->with(['user','tags','comments.user','likers'])->withCount('likers')->get());
-        return responseSuccess($posts);
+        $posts = PostResource::collection(Auth::user()->posts()->with(['user','tags','comments.user','likers'])->withCount('likers')->paginate())->response()->getData(true);
+        $success['posts'] = $posts['data'];
+        $success['meta'] = $posts['meta'];
+        return responseSuccess($success);
     }
 
     public function likeOrUnlikePost(PostRequest $request)

@@ -16,7 +16,9 @@ class ProductController extends Controller
     public function index()
     {
         $products = ProductResource::collection($this->productRepository->all(paginatePerPage: null))->response()->getData(true);
-        return responseSuccess($products);
+        $success['products'] = $products['data'];
+        $success['meta'] = $products['meta'];
+        return responseSuccess($success);
     }
     public function show($id)
     {
@@ -32,6 +34,8 @@ class ProductController extends Controller
     public function trends(Request $request)
     {
         $products = ProductResource::collection($this->productRepository->trends(paginatePerPage:$request->page))->response()->getData(true);
-        return responseSuccess($products);
+        $success['products'] = $products['data'];
+        $success['meta'] = $products['meta'];
+        return responseSuccess($success);
     }
 }
