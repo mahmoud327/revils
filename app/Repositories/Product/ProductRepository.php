@@ -34,7 +34,7 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
             if ($paginatePerPage) {
                 return $products->paginate($paginatePerPage);
             }
-            return $products->paginate();
+            return $products->paginate(6);
         }
         return $products->get();
     }
@@ -77,12 +77,13 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
         $product = $this->model
             ->with([
                 'user',
-                'attributes', 'category',
+                'attributes',
+                'category',
                 'ratingsPure',
+                'relatedProducts',
                 "relatedProducts.user",
                 "relatedProducts.category",
                 'attributeValues.attribute',
-                'relatedProducts', 'user.businessProfile',
                 'user.businessProfile'
             ])
             ->findorfail($id);
@@ -128,17 +129,18 @@ class ProductRepository extends BaisRepository implements ProductRepositoryInter
         }
     }
 
-    public function trends($paginate)
+    public function trends(?int $paginatePerPage, bool $paginate = true): Collection | LengthAwarePaginator
     {
         $products = $this->model->approved()
             ->with([
-                'user', 'category',
-                'attributeValues',
-                'ratingsPure',
-                "relatedProducts.user",
-                "relatedProducts.category",
-                'attributeValues.attribute'
+                'category',
             ])->orderByDesc('view_number');
-        return $products->paginate();
+        if ($paginate) {
+            if ($paginatePerPage) {
+                return $products->paginate($paginatePerPage);
+            }
+            return $products->paginate(6);
+        }
+        return $products->get();
     }
 }

@@ -91,10 +91,10 @@ Route::get('setting',SettingController::class);
 
 
 ####### product  #########
-Route::apiResource('products', ProductController::class)->only(['index', 'show']);
+Route::apiResource('products', ProductController::class)->only(['index','show']);
 
 Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
-    Route::get('trends/products/{perPage?}', [ProductController::class, 'trends']);
+    Route::get('trends/products', [ProductController::class, 'trends']);
     Route::group(['prefix' => 'seller', 'middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
         Route::apiResource('products', ProductSellerController::class);
         Route::post('products/{product}/images/{image}/mark-featured', [ProductImageController::class, 'markFeatured']);

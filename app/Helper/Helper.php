@@ -1,27 +1,22 @@
 <?php
 
 use App\Models\Core\Coupon;
-use App\Models\Core\CouponUser;
 use App\Models\Product\Product;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Image\Image;
 use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
 use Spatie\MediaLibrary\HasMedia;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
-function responseSuccess($data, $meta = null, ?string $message = "data loaded successfully", int $code = 200)
+function responseSuccess($data, ?string $message = "data loaded successfully", int $code = 200)
 {
-    $response = [
-        'status' => true,
-        'message' => $message,
-        'data' => $data
-    ];
-    if ($meta !== null) {
-        $response['meta'] = $meta;
-    }
-    return response()->json($response, $code);
+    return response()->json([
+        [
+            'status' => true,
+            'message' => $message,
+            'data' => $data
+        ]
+    ], $code);
 }
 
 function responseError(mixed $message, ?int $code)

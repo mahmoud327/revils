@@ -49,10 +49,7 @@ class ProductResource extends JsonResource
             "check_coin" => $this->check_coin,
             'relatedProducts' => ProductResource::collection($this->whenLoaded('relatedProducts')),
             'customerReviews' => RateResource::collection($this->whenLoaded('ratingsPure')),
-            
-
         ];
     }
-
 
 }

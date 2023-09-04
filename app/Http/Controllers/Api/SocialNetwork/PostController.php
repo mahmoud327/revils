@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\SocialNetwork;
 
+use App\Exceptions\NotFoundException;
+use App\Exceptions\UnexpectedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\SocialNetwork\PostComments\CommentPostRequest;
 use App\Http\Requests\Api\SocialNetwork\PostComments\CommentRequest;
@@ -9,12 +11,10 @@ use App\Http\Requests\Api\SocialNetwork\PostComments\UpdateCommentRequest;
 use App\Http\Requests\Api\SocialNetwork\PostRequest;
 use App\Http\Resources\SocialNetwork\CommentResource;
 use App\Http\Resources\SocialNetwork\PostResource;
-use App\Models\User;
-use App\Notifications\SendFirebaseNotification;
 use App\Repositories\SocialNetwork\Post\PostRepositoryInterface;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Log;
 use RyanChandler\Comments\Models\Comment;
 
 class PostController extends Controller
@@ -36,8 +36,13 @@ class PostController extends Controller
 
     public function update(PostRequest $request, $id)
     {
-        $this->postRepository->update(id: $id, data: $request);
-        return responseSuccess([], trans('socialNetwork/post.messages.updated'));
+        try {
+            $this->postRepository->update(id: $id, data: $request);
+            return responseSuccess([], trans('socialNetwork/post.messages.updated'));
+        } catch (UnexpectedException $ex) {
+            Log::error($ex->getMessage());
+            return responseError('Something went wrong!', 402);
+        }
     }
 
     public function show($id)

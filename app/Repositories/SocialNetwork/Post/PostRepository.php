@@ -3,6 +3,7 @@
 
 namespace App\Repositories\SocialNetwork\Post;
 
+use App\Exceptions\NotFoundException;
 use App\Exceptions\UnexpectedException;
 use App\Models\SocialNetwork\Post;
 use App\Repositories\Base\BaisRepository;
@@ -62,7 +63,6 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
 
     public function update($id,$data)
     {
-            try {
                 DB::beginTransaction();
                 $post = $this->model::findOrFail($id);
                 $post->update([
@@ -70,17 +70,13 @@ class PostRepository extends BaisRepository implements PostRepositoryInterface
                     'user_id' => Auth::id(),
                 ]);
                 $post->tags()->sync($data->tag_ids);
-                if ($data->hasFile('image')) {
+                if ($data->hasFile('image'))
+                {
                     $post->clearMediaCollection();
                     $post->addMedia($data->image)->toMediaCollection();
                 }
                 DB::commit();
                 return $post;
-            }catch (\Exception $ex)
-            {
-                DB::rollback();
-                throw  new UnexpectedException($ex->getMessage());
-        }
     }
 
 

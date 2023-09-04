@@ -31,12 +31,22 @@ class PostRequest extends FormRequest
                 'post_id' => ['required','exists:posts,id'],
             ];
         }
+        if(request()->is('api/posts/update/*'))
+        {
+            return [
+                'content' => ['required','string','max:300'],
+                'tag_ids' => ['nullable','array'],
+                'tag_ids.*' => ['exists:users,id'],
+                'image' => ['nullable', 'mimes:png,jpg,jpeg','max:10240'],
+            ];
+        }
         return [
             'content' => ['required','string','max:300'],
             'tag_ids' => ['nullable','array'],
             'tag_ids.*' => ['exists:users,id'],
             'image' => ['required', 'mimes:png,jpg,jpeg','max:10240'],
         ];
+
     }
 
     public function messages()
