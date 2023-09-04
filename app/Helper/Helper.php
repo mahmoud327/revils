@@ -11,11 +11,9 @@ use Spatie\MediaLibrary\HasMedia;
 function responseSuccess($data, ?string $message = "data loaded successfully", int $code = 200)
 {
     return response()->json([
-        [
             'status' => true,
             'message' => $message,
             'data' => $data
-        ]
     ], $code);
 }
 
