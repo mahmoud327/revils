@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
-    public function __construct(public ProductRepositoryInterface $productRepository){}
+    public function __construct(public ProductRepositoryInterface $productRepository)
+    {
+    }
     public function index()
     {
         $products = ProductResource::collection($this->productRepository->all(paginatePerPage: null))->response()->getData(true);
@@ -33,7 +35,7 @@ class ProductController extends Controller
 
     public function trends(Request $request)
     {
-        $products = ProductResource::collection($this->productRepository->trends(paginatePerPage:$request->page))->response()->getData(true);
+        $products = ProductResource::collection($this->productRepository->trends(paginatePerPage: $request->page))->response()->getData(true);
         $success['products'] = $products['data'];
         $success['meta'] = $products['meta'];
         return responseSuccess($success);

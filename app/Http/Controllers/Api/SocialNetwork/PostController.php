@@ -95,6 +95,7 @@ class PostController extends Controller
     public function showCommentPost(CommentRequest $request)
     {
         $comment = Comment::whereId($request->comment_id)->whereUserId(Auth::id())->firstOrFail();
+        $comment->load('user');
         $data = new CommentResource($comment);
         return responseSuccess($data);
     }

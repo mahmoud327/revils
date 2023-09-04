@@ -34,7 +34,7 @@ class PostRequest extends FormRequest
         if(request()->is('api/posts/update/*'))
         {
             return [
-                'content' => ['required','string','max:300'],
+                'content' => ['nullable','string','max:300'],
                 'tag_ids' => ['nullable','array'],
                 'tag_ids.*' => ['exists:users,id'],
                 'image' => ['nullable', 'mimes:png,jpg,jpeg','max:10240'],
