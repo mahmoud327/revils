@@ -109,7 +109,7 @@ class PostController extends Controller
     public function showPostComment($post_id)
     {
         $post = Post::findorfail($post_id);
-        return responseSuccess(CommentResource::collection($post->comments()->get()));
+        return responseSuccess(CommentResource::collection($post->load('comments.user')->comments));
     }
 
     public function updateCommentPost(UpdateCommentRequest $request)
