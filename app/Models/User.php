@@ -35,7 +35,10 @@ use Spatie\QueryBuilder\QueryBuilder;
 class User extends Authenticatable implements HasMedia
 {
     use LogsActivity;
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use HasRoles;
     use Friendable;
     use CanLike;
     use InteractsWithMedia;
@@ -47,9 +50,9 @@ class User extends Authenticatable implements HasMedia
     protected $guarded = [];
 
 
-    const CUSTOMER = 'customer';
-    const SELLER = 'seller';
-    const Admin = 'admin';
+    public const CUSTOMER = 'customer';
+    public const SELLER = 'seller';
+    public const Admin = 'admin';
 
     protected $hidden = [
         'password',
@@ -152,7 +155,7 @@ class User extends Authenticatable implements HasMedia
 
     public function tagPosts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class, 'tags', 'post_id', 'user_id', 'id', 'id');
+        return $this->belongsToMany(Post::class, 'tags', 'user_id', 'post_id');
     }
 
     public function getActivitylogOptions(): LogOptions
@@ -177,6 +180,7 @@ class User extends Authenticatable implements HasMedia
 
     public function scopeFilter($query, $users)
     {
+
         return QueryBuilder::for($users)
             ->allowedFilters([
                 'id', 'first_name', 'last_name', 'username'

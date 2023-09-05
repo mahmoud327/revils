@@ -160,6 +160,7 @@ Route::group(['middleware' => ['ChangeLanguage', 'auth:sanctum']], function () {
         Route::post('add-comment', [PostController::class, 'addCommentPost']);
         Route::post('show-comment', [PostController::class, 'showCommentPost']);
         Route::get('{post_id}/comments', [PostController::class, 'showPostComment']);
+        Route::get('{post_id}/tagged-users', [PostController::class, 'taggedUser']);
         Route::put('update-comment', [PostController::class, 'updateCommentPost']);
         Route::delete('delete-comment', [PostController::class, 'deleteCommentPost']);
     });

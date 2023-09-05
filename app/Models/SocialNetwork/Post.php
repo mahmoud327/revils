@@ -11,6 +11,8 @@ use Multicaret\Acquaintances\Traits\CanBeLiked;
 use RyanChandler\Comments\Concerns\HasComments;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class Post extends Model implements HasMedia
 {
@@ -40,6 +42,8 @@ class Post extends Model implements HasMedia
     {
         $this->addMediaCollection('image');
     }
+
+
 
 
 }

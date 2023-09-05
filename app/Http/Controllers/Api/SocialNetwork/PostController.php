@@ -11,12 +11,15 @@ use App\Http\Requests\Api\SocialNetwork\PostComments\UpdateCommentRequest;
 use App\Http\Requests\Api\SocialNetwork\PostRequest;
 use App\Http\Resources\SocialNetwork\CommentResource;
 use App\Http\Resources\SocialNetwork\PostResource;
+use App\Http\Resources\UserResource;
 use App\Models\SocialNetwork\Post;
+use App\Models\User;
 use App\Repositories\SocialNetwork\Post\PostRepositoryInterface;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use RyanChandler\Comments\Models\Comment;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class PostController extends Controller
 {
@@ -123,5 +126,16 @@ class PostController extends Controller
         $comment = Comment::whereId($request->comment_id)->whereUserId(Auth::id())->firstOrFail();
         $comment->delete();
         return responseSuccess([], trans('comment deleted'));
+    }
+    public function taggedUser($post_id)
+    {
+        $users = QueryBuilder::for(User::class)
+            ->whereHas('tagPosts', function ($q) use ($post_id) {
+                $q->where('post_id', $post_id);
+            })
+            ->allowedFilters('username', 'first_name', 'last_name', 'email') // Use the allowed filter
+            ->get();
+
+        return responseSuccess(UserResource::collection($users));
     }
 }
