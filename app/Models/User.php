@@ -155,7 +155,7 @@ class User extends Authenticatable implements HasMedia
 
     public function tagPosts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class, 'tags', 'user_id', 'post_id');
+        return $this->belongsToMany(Post::class, 'tags', 'user_id' ,'post_id','id','id');
     }
 
     public function getActivitylogOptions(): LogOptions

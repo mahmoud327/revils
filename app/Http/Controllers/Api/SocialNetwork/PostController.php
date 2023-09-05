@@ -134,6 +134,7 @@ class PostController extends Controller
                 $q->where('post_id', $post_id);
             })
             ->allowedFilters('username', 'first_name', 'last_name', 'email') // Use the allowed filter
+            ->latest()
             ->get();
 
         return responseSuccess(UserResource::collection($users));
