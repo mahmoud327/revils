@@ -59,12 +59,11 @@ class PermissionPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Permission $permission): bool
-    {
-        //
-        if ($user->hasPermissionTo('delete permission')) {
-            return true;
-        }
-        return false;
-    }
+    // public function delete(User $user, Permission $permission): bool
+    // {
+    //     if ($user->hasPermissionTo('delete permission')) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 }

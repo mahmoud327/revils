@@ -52,16 +52,16 @@ class PaymentPolicy
         return false;
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Payment $category): bool
-    {
-        if ($user->hasPermissionTo('delete payments')) {
-            return true;
-        }
-        return false;
-    }
+    // /**
+    //  * Determine whether the user can delete the model.
+    //  */
+    // public function delete(User $user, Payment $category): bool
+    // {
+    //     if ($user->hasPermissionTo('delete payments')) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
 
 }
