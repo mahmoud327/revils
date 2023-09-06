@@ -7,7 +7,9 @@ use App\Filament\Resources\Core\PaymentResource\RelationManagers;
 use App\Models\Core\Payment;
 use Astrotomic\Translatable\Translatable;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Resources\Concerns\Translatable as ConcernsTranslatable;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -40,27 +42,35 @@ class PaymentResource extends Resource
         return $form
             ->schema([
 
-                Forms\Components\TextInput::make('payment_type')
-                    ->label(trans('dashboard.payments.payment_type'))
-                    ->required()
-                    ->unique(ignoreRecord: true),
+                Card::make()->schema([
 
-                Forms\Components\TextInput::make('card_type')
-                    ->label(trans('dashboard.payments.card_type'))
-                    ->required(),
+                    SpatieMediaLibraryFileUpload::make('image')
+                        ->label(trans('dashboard.products.max size'))
+                        ->collection('payments'),
 
-                Forms\Components\TextInput::make('card_digits')
-                    ->label(trans('dashboard.payments.card_digits'))
-                    ->numeric(),
+                    Forms\Components\TextInput::make('payment_type')
+                        ->label(trans('dashboard.payments.payment_type'))
+                        ->required()
+                        ->unique(ignoreRecord: true),
 
-                Forms\Components\TextInput::make('remarks')
-                    ->label(trans('dashboard.payments.remarks')),
+                    Forms\Components\TextInput::make('card_type')
+                        ->label(trans('dashboard.payments.card_type'))
+                        ->required(),
 
-                Forms\Components\TextInput::make('paid_on')
-                    ->label(trans('dashboard.payments.paid_on')),
+                    Forms\Components\TextInput::make('card_digits')
+                        ->label(trans('dashboard.payments.card_digits'))
+                        ->numeric(),
 
-                DatePicker::make('capture_date')
-                    ->label(trans('dashboard.payments.capture_date'))
+                    Forms\Components\TextInput::make('remarks')
+                        ->label(trans('dashboard.payments.remarks')),
+
+                    Forms\Components\TextInput::make('paid_on')
+                        ->label(trans('dashboard.payments.paid_on')),
+
+                    DatePicker::make('capture_date')
+                        ->label(trans('dashboard.payments.capture_date'))
+
+                ])
             ]);
     }
 

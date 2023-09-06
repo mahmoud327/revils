@@ -57,15 +57,7 @@ class UserFriendshipController extends Controller
     public function getAllFriendships(Request $request)
     {
            $userIds = Auth::user()->getAllFriendships()->pluck('id');
-           if($request->search)
-           {
-               $users =User::whereIn('id',$userIds)->where('username', 'LIKE', '%'.$request->search.'%')
-                   ->orWhere('email', 'LIKE', '%'.$request->search.'%')
-                   ->paginate();
-           }else
-           {
-               $users = User::whereIn('id',$userIds)->paginate();
-           }
+           $users = User::whereIn('id',$userIds)->get();
            if($users->isEmpty())
            {
                return responseError('there are no friends',401);

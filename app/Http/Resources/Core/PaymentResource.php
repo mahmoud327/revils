@@ -23,6 +23,8 @@ class PaymentResource extends JsonResource
             'remarks' => $this->remarks,
             'capture_date' => $this->capture_date,
             'paid_on' => $this->paid_on,
+            "image" => $this->image
+
 
         ];
     }
