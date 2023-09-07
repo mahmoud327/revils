@@ -8,6 +8,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserFriendshipController extends Controller
 {
@@ -16,56 +17,53 @@ class UserFriendshipController extends Controller
     {
         $recipient = User::find($request->user_id);
         Auth::user()->befriend($recipient);
-        return responseSuccess('','request send successfully');
+        return responseSuccess('', 'request send successfully');
     }
 
     public function acceptFollowRequest(FollowRequest $request)
     {
         $sender = User::find($request->user_id);
         Auth::user()->acceptFriendRequest($sender);
-        return responseSuccess('','accepted successfully');
+        return responseSuccess('', 'accepted successfully');
     }
 
     public function denyFollowRequest(FollowRequest $request)
     {
         $sender = User::find($request->user_id);
         Auth::user()->denyFriendRequest($sender);
-        return responseSuccess('','denied successfully');
+        return responseSuccess('', 'denied successfully');
     }
 
     public function unfollow(FollowRequest $request)
     {
         $friend = User::find($request->user_id);
         Auth::user()->unfriend($friend);
-        return responseSuccess('','unfollowing successfully');
+        return responseSuccess('', 'unfollowing successfully');
     }
 
     public function blockFriend(FollowRequest $request)
     {
         $friend = User::find($request->user_id);
         Auth::user()->blockFriend($friend);
-        return responseSuccess('','blocked successfully');
+        return responseSuccess('', 'blocked successfully');
     }
 
     public function unblockFriend(FollowRequest $request)
     {
         $friend = User::find($request->user_id);
         Auth::user()->unblockFriend($friend);
-        return responseSuccess('','unblocked successfully');
+        return responseSuccess('', 'unblocked successfully');
     }
 
     public function getAllFriendships(Request $request)
     {
-           $userIds = Auth::user()->getAllFriendships()->pluck('id');
-           $users = User::whereIn('id',$userIds)->get();
-           if($users->isEmpty())
-           {
-               return responseError('there are no friends',401);
-           }
+        $userIds = Auth::user()->getAllFriendships()->pluck('id');
+        $users = User::whereIn('id', $userIds)->latest();
+
+        $users = QueryBuilder::for($users)
+            ->allowedFilters('username', 'email', 'last_name', 'first_name')
+            ->get();
+
         return responseSuccess(UserResource::collection($users));
     }
-
-
-
-
 }

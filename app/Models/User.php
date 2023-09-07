@@ -155,7 +155,7 @@ class User extends Authenticatable implements HasMedia
 
     public function tagPosts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class, 'tags', 'user_id' ,'post_id','id','id');
+        return $this->belongsToMany(Post::class, 'tags', 'user_id', 'post_id', 'id', 'id');
     }
 
     public function getActivitylogOptions(): LogOptions
@@ -182,8 +182,7 @@ class User extends Authenticatable implements HasMedia
     {
 
         return QueryBuilder::for($users)
-            ->allowedFilters([
-                'id', 'first_name', 'last_name', 'username'
-            ]);
+            ->allowedSorts(['id'])
+            ->allowedFilters('username', 'email', 'last_name', 'first_name');
     }
 }
