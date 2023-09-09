@@ -53,6 +53,7 @@ class OrderRepository extends BaisRepository implements OrderRepositoryInterface
             if (isset($data->coupon_code)) {
                 $this->calculateCouponDiscount($data->coupon_code, $order);
             }
+       
 
             auth()->user()->cartItems()->delete();
             DB::commit();
@@ -115,6 +116,7 @@ class OrderRepository extends BaisRepository implements OrderRepositoryInterface
             ]);
         }
     }
+
     public function changeStatus($request, $id)
     {
         $order = $this->model->findorfail($id);
